@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Idle</title>
+  </head>
+  <body>
+    <div class="game-start">
+        <img
+          class="start-background"
+          src="/assets/start-background.png"
+          alt=""
+        />
+
+          <img src="/assets/descend-button.png" alt="" class="descend-button" />
+          
+        
+      </div>
+
+      <div class="character-select-container hidden">
+        <img class="character-select-womb" src="/assets/character-select-womb.png" alt="">
+        <select class="class-select" name="class" id="character-select">
+          <option value="">Choose...</option>
+          <option value="warrior">Warrior</option>
+          <option value="cleric">Cleric</option>
+          <option value="lancer">Lancer</option>
+          <option value="magician">Magician</option>
+        </select>
+        <p class="class-description"></p>
+        <img class="character-select-image" src="" alt="">
+        <button type="button" class="start-game-button">Delve</button>
+        </div>
+      </div>
+
+
+      <div class="main-game" hidden>
+        <img
+          src="./assets/character-warrior.png"
+          class="player-image"
+        />
+        <button class="attack-button">Attack</button>
+        <img src="./assets/character-cleric.png" class="enemy-image" />
+        <p class="enemy-health">Health: 10</p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

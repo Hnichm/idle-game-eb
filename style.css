@@ -1,0 +1,118 @@
+* {
+  border-spacing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  overflow: hidden;
+}
+
+.start-background {
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.descend-button {
+  position: absolute;
+  width: 240px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  top: 35rem;
+  left: 32.5rem;
+}
+
+.descend-button:hover {
+  cursor: pointer;
+}
+
+.descend-button:active {
+  opacity: 0.5;
+  width: 900px;
+}
+
+.character-select-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 0.25fr 0.25fr 1fr 0.25fr;
+  grid-template-areas:
+    ". womb-image ."
+    ". class-select-choice ."
+    ". class-description ."
+    ". character-select-image  ."
+    ". start-game-button .";
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-items: center;
+}
+
+.character-select-womb {
+  grid-area: womb-image;
+}
+
+.blurred-warrior {
+  filter: drop-shadow(0.1rem 0 1rem rgb(91, 5, 5)) blur(0.05rem);
+}
+
+.blurred-cleric {
+  filter: drop-shadow(0.1rem 0 1rem rgb(212, 193, 72)) blur(0.05rem);
+}
+
+.blurred-lancer {
+  filter: drop-shadow(0.1rem 0 1rem rgb(12, 54, 7)) blur(0.05rem);
+}
+
+.blurred-magician {
+  filter: drop-shadow(0.1rem 0 1rem rgb(2, 17, 90)) blur(0.05rem);
+}
+
+.class-select {
+  box-shadow: 1px 1px 1px 1px black;
+  grid-area: class-select-choice;
+}
+
+.class-description {
+  justify-self: center;
+  align-self: center;
+  text-shadow: 0.025rem 0.025rem 0.1rem rgb(116, 113, 113);
+  grid-area: class-description;
+}
+
+.character-select-image {
+  grid-area: character-select-image;
+}
+
+.start-game-button {
+  border: 2px solid rgb(82, 13, 13);
+  grid-area: start-game-button;
+}
+
+.start-game-button:hover {
+  cursor: pointer;
+  background-color: rgb(82, 13, 13);
+  color: white;
+}
+
+.player-image {
+  grid-area: player-image;
+}
+
+.enemy-image {
+  grid-area: enemy-image;
+}
+
+.attack-button {
+  display: inline;
+  grid-area: attack-button;
+}
+
+.attack-button:hover {
+  cursor: pointer;
+  background-color: wheat;
+}
+
+.enemy-health {
+  display: inline;
+  grid-area: enemy-health;
+}
