@@ -29,7 +29,7 @@ const classSelect = document.querySelector(".class-select");
 const classImagePaths = {
   warrior: "./assets/character-warrior.png",
   magician: "/assets/character-magician.png",
-  lancer: "/assets/character-lancer.png",
+  rogue: "/assets/character-rogue.png",
   cleric: "/assets/character-cleric.png",
 };
 
@@ -40,8 +40,8 @@ const classDescription = {
     "Each scar on his body maps a battle survived, a desperate gamble made in the face of overwhelming odds. His victories are forged not just from tactics learned, but from the ghosts of fallen allies whispering in his ear. He fights not out of hope, but a cold determination that there must always be one left standing to meet hell and fear.",
   magician:
     "His studies began with a noble goal - to understand the elements, bolstering the bastion's defenses with nature's might. But with each spell, each delve into forgotten lore, desperation bled into obsession.",
-  lancer:
-    "Found as a newborn cradled in his mother's corpse, a dark omen hanging over him, he learned to survive in the bastion's underbelly. He mastered not knightly combat, but the dirty tactics of ambush and assassination with his scavenged lance. His strikes are honed from a life spent exploiting any weakness. Each battle is not for glory, but a brutal bid to ensure there's always one more survivor - himself",
+  rogue:
+    "Found as a newborn cradled in his mother's corpse, a dark omen hanging over him, he learned to survive in the bastion's underbelly. He mastered not knightly combat, but the dirty tactics of ambush and assassination with his scavenged daggers. His strikes are honed from a life spent exploiting any weakness. Each battle is not for glory, but a brutal bid to ensure there's always one more survivor - himself",
   cleric:
     "The hymns that once sustained him now feel like a mockery. His prayers go unanswered as the bastion crumbles. Yet, with each horrific sight, each plea ignored by the heavens, his will hardens. He wields his faith not as a shield, but as a battered weapon. Perhaps the gods are gone, perhaps they turned their backs... but even if so, the darkness will find him unbroken.",
 };
@@ -65,7 +65,7 @@ function showElement(element) {
 const blurClasses = [
   "blurred-warrior",
   "blurred-cleric",
-  "blurred-lancer",
+  "blurred-rogue",
   "blurred-magician",
 ];
 
@@ -136,7 +136,7 @@ classSelect.addEventListener("change", () => {
       wombImage.classList.add(blurClasses[1]);
       previousClass = "cleric";
       break;
-    case "lancer":
+    case "rogue":
       clearBlurClasses();
       wombImage.classList.add(blurClasses[2]);
       previousClass = "lancer";
