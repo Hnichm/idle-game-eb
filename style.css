@@ -35,6 +35,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 0.25fr 0.25fr 1fr 0.25fr;
+  gap: 1.5rem;
   grid-template-areas:
     ". womb-image ."
     ". class-select-choice ."
@@ -45,6 +46,12 @@
   width: 100vw;
   align-items: center;
   justify-items: center;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 5%,
+    rgb(111, 110, 110) 90%
+  );
+  color: whitesmoke;
 }
 
 .character-select-womb {
@@ -70,6 +77,10 @@
 .class-select {
   box-shadow: 1px 1px 1px 1px black;
   grid-area: class-select-choice;
+}
+
+.class-select:hover {
+  
 }
 
 .class-description {
