@@ -110,6 +110,11 @@
     "player-stats player-skills combat-log";
   height: 100vh;
   width: 100vw;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.384) 35%,
+    rgba(254, 254, 254, 0.366) 100%
+  );
 }
 
 .player-stats-container {
