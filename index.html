@@ -35,15 +35,29 @@
       </div>
 
 
-      <div class="main-game" hidden>
-        <img
-          src="./assets/character-warrior.png"
-          class="player-image"
-        />
-        <button class="attack-button">Attack</button>
-        <img src="./assets/character-cleric.png" class="enemy-image" />
-        <p class="enemy-health">Health: 10</p>
-      </div>
+      <div class="main-game-container">
+       <div class="player-stats-container">
+        <div class="player-name">Name</div>
+        <div class="player-class">Class</div>
+        <div class="player-attack">Attack</div>
+        <div class="player-currency">Currency</div>
+       </div>
+
+       <div class="game-title-container">
+        <h1 class="game-title">Title</h1>
+       </div>
+
+       <div class="enemy-stats-container">
+        <div class="enemy-name">Enemey name</div>
+        <div class="enemy-currency">Enemy currency</div>
+       </div>
+
+       <div class="combat-area-container">
+        <img src="/assets/demon-skin-flayer.png" class="enemy-image"></img>
+        <img src="/assets/character-magician.png" class="player-image"></img>
+        <img src="assets/womb-of-death-inside-23.png" alt="" class="background-image">
+       </div>
+       <!-- <canvas></canvas> -->
     </div>
     <script src="script.js"></script>
   </body>

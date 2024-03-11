@@ -94,25 +94,61 @@
   color: white;
 }
 
+.main-game-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 0.25fr 2fr 0.25fr;
+  grid-template-areas:
+    "player-stats game-title enemy-stats "
+    "player-stats combat-area enemy-stats"
+    "player-stats player-skills combat-log";
+  height: 100vh;
+  width: 100vw;
+}
+
+.player-stats-container {
+  grid-area: player-stats;
+}
+
+.game-title-container {
+  grid-area: game-title;
+}
+
+.combat-area-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "background-image enemy-image enemy-image"
+    "player-image background-image background-image";
+}
+
 .player-image {
+  border: 1px solid blue;
   grid-area: player-image;
+  align-self: flex-end;
+  z-index: 2;
+  transform: translateX(24rem);
+  filter: brightness(2.5);
+}
+
+.background-image {
+  grid-area: background-image;
+  z-index: -1;
+  border: 1px solid green;
+  transform: translateX(-10rem) translateY(-30rem);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 35%,
+    rgb(254, 254, 254) 100%
+  );
 }
 
 .enemy-image {
   grid-area: enemy-image;
-}
-
-.attack-button {
-  display: inline;
-  grid-area: attack-button;
-}
-
-.attack-button:hover {
-  cursor: pointer;
-  background-color: wheat;
-}
-
-.enemy-health {
-  display: inline;
-  grid-area: enemy-health;
+  border: 1px solid red;
+  justify-self: center;
+  align-self: center;
+  transform: translateX(9rem);
+  z-index: 2;
 }

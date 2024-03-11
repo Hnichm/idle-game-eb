@@ -46,13 +46,9 @@ const classDescription = {
     "The hymns that once sustained him now feel like a mockery. His prayers go unanswered as the bastion crumbles. Yet, with each horrific sight, each plea ignored by the heavens, his will hardens. He wields his faith not as a shield, but as a battered weapon. Perhaps the gods are gone, perhaps they turned their backs... but even if so, the darkness will find him unbroken.",
 };
 
-let characterSelectImage = document.querySelector(".character-select-image");
+const characterSelectImage = document.querySelector(".character-select-image");
 
-const mainGame = document.querySelector(".main-game");
-
-let attackButton = document.querySelector(".attack-button");
-
-let enemyHealthDisplay = document.querySelector(".enemy-health");
+const mainGameContainer = document.querySelector(".main-game-container");
 
 function hideElement(element) {
   element.style.display = "none";
@@ -75,31 +71,15 @@ function clearBlurClasses() {
   }
 }
 
-function attack(target, attacker) {
-  target.health -= attacker.attackDamage;
-  console.log(target.health);
-}
-
-attackButton.addEventListener("click", function () {
-  if (player.canAttack) {
-    attack(enemy, player);
-    player.canAttack = false;
-    setTimeout(function () {
-      player.canAttack = true;
-    }, 1000 / player.attackSpeed);
-  }
-  return;
-});
-
 startGameButton.addEventListener("click", () => {
   if (!gameStarted) {
     hideElement(characterSelectContainer);
-    showElement(mainGame);
+    showElement(mainGameContainer);
     console.log("Game should start");
     gameStarted = true;
   } else {
     hideElement(characterSelectContainer);
-    showElement(mainGame);
+    showElement(mainGameContainer);
   }
 });
 
@@ -152,6 +132,6 @@ classSelect.addEventListener("change", () => {
   }
 });
 
-setInterval(function () {
-  enemyHealthDisplay.textContent = enemy.health;
-}, 100);
+// setInterval(function () {
+//   enemyHealthDisplay.textContent = enemy.health;
+// }, 100);
