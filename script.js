@@ -110,7 +110,7 @@ const blurClasses = [
   "blurred-magician",
 ];
 
-// C
+// *UI utility, clearing blur classes
 
 function clearBlurClasses() {
   for (const blurClass of blurClasses) {
@@ -118,14 +118,17 @@ function clearBlurClasses() {
   }
 }
 
+// *UI utility, changing button image
 descendButton.addEventListener("mouseover", () => {
   descendButton.src = "/assets/descend-buttonR.png";
 });
 
+// *UI utility, changing button image back to it's original state
 descendButton.addEventListener("mouseout", () => {
   descendButton.src = "/assets/descend-button.png";
 });
 
+// *UI utility, checking for click on the button and hiding the game start screen
 descendButton.addEventListener("click", () => {
   descendButton.src = "/assets/descend-buttonR.png";
   setTimeout(() => {
