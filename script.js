@@ -1,13 +1,17 @@
+// ! Delcaring player and enemy objects
+
 let player = {
   name: "Player",
   attackDamage: undefined,
   attackSpeed: undefined,
+  imagePath: "",
   canAttack: true,
 };
 
 let enemy = {
-  name: "Enemy",
-  health: 40,
+  name: "",
+  health: undefined,
+  imagePath: "",
 };
 
 const gameStart = document.querySelector(".game-start");
@@ -17,8 +21,6 @@ const descendButton = document.querySelector(".descend-button");
 const characterSelectContainer = document.querySelector(
   ".character-select-container"
 );
-
-// ! Character Select
 
 // ? Womb Image
 
