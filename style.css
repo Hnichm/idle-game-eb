@@ -78,11 +78,6 @@
   box-shadow: 1px 1px 1px 1px black;
   grid-area: class-select-choice;
 }
-
-.class-select:hover {
-  
-}
-
 .class-description {
   justify-self: center;
   align-self: center;

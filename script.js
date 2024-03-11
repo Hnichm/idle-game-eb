@@ -134,6 +134,8 @@ descendButton.addEventListener("click", () => {
   }, 1000);
 });
 
+// ! Start of character select
+
 description.textContent = "Choose your fate...";
 classSelect.value = "";
 startGameButton.disabled = true;
@@ -167,31 +169,6 @@ classSelect.addEventListener("change", () => {
     startGameButton.disabled = false;
     previousClass = selectedClass;
   }
-  // switch (selectedClass) {
-  //   case "warrior":
-  //     clearBlurClasses(); // Clear all blurs
-  //     wombImage.classList.add(blurClasses[0]);
-  //     previousClass = "warrior";
-  //     break;
-  //   case "cleric":
-  //     clearBlurClasses();
-  //     wombImage.classList.add(blurClasses[1]);
-  //     previousClass = "cleric";
-  //     break;
-  //   case "rogue":
-  //     clearBlurClasses();
-  //     wombImage.classList.add(blurClasses[2]);
-  //     previousClass = "lancer";
-  //     break;
-  //   case "magician":
-  //     clearBlurClasses();
-  //     wombImage.classList.add(blurClasses[3]);
-  //     previousClass = "magician";
-  //     break;
-  //   case "":
-  //     clearBlurClasses();
-  //     break;
-  // }
 });
 
 startGameButton.addEventListener("click", () => {
@@ -206,7 +183,3 @@ startGameButton.addEventListener("click", () => {
     showElement(mainGameContainer);
   }
 });
-
-// setInterval(function () {
-//   enemyHealthDisplay.textContent = enemy.health;
-// }, 100);
