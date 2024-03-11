@@ -31,7 +31,6 @@ const wombImage = document.querySelector(".character-select-womb");
 // * Delve button
 const startGameButton = document.querySelector(".start-game-button");
 let gameStarted = false;
-
 // * END Delve button
 
 // ! Class select
@@ -42,28 +41,28 @@ const classSelect = document.querySelector(".class-select");
 // !*! Class Properties
 const classProperties = {
   warrior: {
-    name: "",
+    name: "Jehu",
     imagePath: "./assets/character-warrior.png",
     description: `Each scar on his body maps a battle survived, a desperate gamble made in the face of overwhelming odds. His victories are forged not just from tactics learned, but from the ghosts of fallen allies whispering in his ear. He fights not out of hope, but a cold determination that there must always be one left standing to meet hell and fear.`,
     attackDamage: 10,
     attackSpeed: 1.5,
   },
   magician: {
-    name: "",
+    name: "Balaam",
     imagePath: "./assets/character-magician.png",
     description: `His studies began with a noble goal - to understand the elements, bolstering the bastion's defenses with nature's might. But with each spell, each delve into forgotten lore, desperation bled into obsession.`,
     attackDamage: 15,
     attackSpeed: 1.0,
   },
   rogue: {
-    name: "",
+    name: "Doeg",
     imagePath: "./assets/character-rogue.png",
     description: `Found as a newborn cradled in his mother's corpse, a dark omen hanging over him, he learned to survive in the bastion's underbelly. He mastered not knightly combat, but the dirty tactics of ambush and assassination with his scavenged daggers. His strikes are honed from a life spent exploiting any weakness. Each battle is not for glory, but a brutal bid to ensure there's always one more survivor - himself`,
     attackDamage: 7,
     attackSpeed: 2.0,
   },
   cleric: {
-    name: "",
+    name: "Urijah",
     imagePath: "./assets/character-cleric.png",
     description: `The hymns that once sustained him now feel like a mockery. His prayers go unanswered as the bastion crumbles. Yet, with each horrific sight, each plea ignored by the heavens, his will hardens. He wields his faith not as a shield, but as a battered weapon. Perhaps the gods are gone, perhaps they turned their backs... but even if so, the darkness will find him unbroken.`,
     attackDamage: 8,
@@ -188,3 +187,20 @@ startGameButton.addEventListener("click", () => {
     showElement(mainGameContainer);
   }
 });
+
+// ! END of character select
+
+// ! GAME LOGIC
+
+// ! LOGIC VARIABLES
+
+// *Player ui elements
+const playerName = document.querySelector(".player-name");
+const playerClass = document.querySelector(".player-class");
+const playerAttack = document.querySelector(".player-attack");
+const playerCurrency = document.querySelector(".player-currency");
+
+// *Enemy ui elements
+const enemyName = document.querySelector(".enemy-name");
+const enemyHealth = document.querySelector(".enemy-health");
+const enemyCurrency = document.querySelector(".enemy-currency");
