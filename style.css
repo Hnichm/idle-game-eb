@@ -119,10 +119,50 @@
 
 .player-stats-container {
   grid-area: player-stats;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  border: 5px solid tomato;
+  align-content: center;
+  justify-content: center;
 }
+
 
 .game-title-container {
   grid-area: game-title;
+}
+
+.player-skills-container {
+  grid-area: player-skills;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.384) 5%,
+    rgba(254, 254, 254, 0.366) 100%
+  );
+}
+
+.player-skill {
+  border-radius: 0.5rem;
+  box-shadow: 0.05rem 0.05rem 0.05rem black;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.384) 0%,
+    rgba(254, 254, 254, 0.366) 100%
+  );
+}
+
+.player-skill:hover {
+  cursor: pointer;
+  box-shadow: 0.05rem 0.05rem 0.05rem white;
+  background: linear-gradient(
+    to bottom,
+    rgba(254, 254, 254, 0.366) 0%,
+    rgba(0, 0, 0, 0.384) 100%
+  );
+  color: white;
 }
 
 .combat-area-container {
