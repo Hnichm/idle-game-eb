@@ -58,19 +58,19 @@
   grid-area: womb-image;
 }
 
-.blurred-warrior {
+.blurred-Warrior {
   filter: drop-shadow(0.1rem 0 1rem rgb(91, 5, 5)) blur(0.05rem);
 }
 
-.blurred-cleric {
+.blurred-Cleric {
   filter: drop-shadow(0.1rem 0 1rem rgb(212, 193, 72)) blur(0.05rem);
 }
 
-.blurred-rogue {
+.blurred-Rogue {
   filter: drop-shadow(0.1rem 0 1rem rgb(12, 54, 7)) blur(0.05rem);
 }
 
-.blurred-magician {
+.blurred-Magician {
   filter: drop-shadow(0.1rem 0 1rem rgb(2, 17, 90)) blur(0.05rem);
 }
 
@@ -112,8 +112,8 @@
   width: 100vw;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.384) 35%,
-    rgba(254, 254, 254, 0.366) 100%
+    rgba(0, 0, 0, 75%) 2%,
+    rgba(255, 255, 255, 0%) 100%
   );
 }
 
@@ -121,11 +121,9 @@
   grid-area: player-stats;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  border: 5px solid tomato;
   align-content: center;
   justify-content: center;
 }
-
 
 .game-title-container {
   grid-area: game-title;
@@ -137,21 +135,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 2rem;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.384) 5%,
-    rgba(254, 254, 254, 0.366) 100%
-  );
+  justify-content: center;
+  align-content: center;
 }
 
 .player-skill {
+  height: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0.05rem 0.05rem 0.05rem black;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.384) 0%,
-    rgba(254, 254, 254, 0.366) 100%
-  );
 }
 
 .player-skill:hover {
@@ -166,6 +157,7 @@
 }
 
 .combat-area-container {
+  border-radius: 1rem;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -188,11 +180,6 @@
   z-index: -1;
   border: 1px solid green;
   transform: translateX(-10rem) translateY(-30rem);
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1) 35%,
-    rgb(254, 254, 254) 100%
-  );
 }
 
 .enemy-image {
