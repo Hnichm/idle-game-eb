@@ -55,6 +55,24 @@ function getRandomMonster(floor) {
   return null;
 }
 
+function spawnEnemy() {
+  // Check if the player is not in combat
+  if (!player.inCombat) {
+    // Select a random monster for the current floor
+    const randomMonster = getRandomMonster(player.floor);
+    if (randomMonster) {
+      // Assign the selected monster to the enemy object
+      enemy = randomMonster;
+      // Update the enemy-related UI elements
+      enemyName.textContent = enemy.name;
+      enemyHealth.textContent = enemy.health;
+      enemyImage.src = enemy.imagePath;
+      // Set the player's inCombat status to true
+      player.inCombat = true;
+    }
+  }
+}
+
 // DOM Elements
 // ------------
 // The code selects various DOM elements using `querySelector` and assigns them to variables for later use.
@@ -249,20 +267,7 @@ const enemyCurrency = document.querySelector(".enemy-currency");
 function gameLoop() {
   // TODO: Separate into a monsterSpawn function, game loop looks messy right now.
   // Check if the player is not in combat
-  if (!player.inCombat) {
-    // Select a random monster for the current floor
-    const randomMonster = getRandomMonster(player.floor);
-    if (randomMonster) {
-      // Assign the selected monster to the enemy object
-      enemy = randomMonster;
-      // Update the enemy-related UI elements
-      enemyName.textContent = enemy.name;
-      enemyHealth.textContent = enemy.health;
-      enemyImage.src = enemy.imagePath;
-      // Set the player's inCombat status to true
-      player.inCombat = true;
-    }
-  }
+  spawnEnemy();
 }
 
 const gameLoopInterval = setInterval(gameLoop, 100);
