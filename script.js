@@ -22,6 +22,21 @@ let enemy = {
   imagePath: "",
 };
 
+function attackEnemy(attacker, target) {
+  if (
+    attacker.canAttack &&
+    attacker.attackDamage !== undefined &&
+    attacker.attackSpeed !== undefined
+  ) {
+    target.health -= attacker.attackDamage;
+    console.log(`${enemy.name} health: ${enemy.health}`);
+    attacker.canAttack = false;
+    setTimeout(() => {
+      attacker.canAttack = true;
+    }, attacker.attackSpeed * 1000);
+  }
+}
+
 function Monster(name, health, imagePath) {
   this.name = name;
   this.health = health;
@@ -265,9 +280,8 @@ const enemyCurrency = document.querySelector(".enemy-currency");
 // TODO: Add game logic
 
 function gameLoop() {
-  // TODO: Separate into a monsterSpawn function, game loop looks messy right now.
-  // Check if the player is not in combat
   spawnEnemy();
+  attackEnemy(player, enemy);
 }
 
 const gameLoopInterval = setInterval(gameLoop, 100);
