@@ -1,0 +1,69 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "html-tour",
+  "steps": [
+    {
+      "file": "index.html",
+      "selection": {
+        "start": {
+          "line": 10,
+          "character": 5
+        },
+        "end": {
+          "line": 10,
+          "character": 29
+        }
+      },
+      "description": "Container for splash screen of game"
+    },
+    {
+      "file": "index.html",
+      "selection": {
+        "start": {
+          "line": 11,
+          "character": 9
+        },
+        "end": {
+          "line": 18,
+          "character": 11
+        }
+      },
+      "description": "Images for game start splash screen."
+    },
+    {
+      "file": "index.html",
+      "description": "After the player presses the \"descend\" button, the character select screen appears and the splash screen is hidden. This is the character select container.",
+      "line": 22
+    },
+    {
+      "file": "index.html",
+      "description": "Out first IMG element holds the \"character-select-womb\" image and changes it's color when the character picks a different class. The options are sent to script.js and script.js will dynamically update the players class based on what they choose in the select menu.",
+      "line": 23
+    },
+    {
+      "file": "index.html",
+      "description": "Main game container, this holds all of the \"combat\" UI elements.",
+      "line": 38
+    },
+    {
+      "file": "index.html",
+      "description": "Player stats container, containing player-name, player-class, player-attack and player-currency",
+      "line": 39
+    },
+    {
+      "file": "index.html",
+      "description": "Enemy stats container, holds all enemy stat elements.",
+      "line": 50
+    },
+    {
+      "file": "index.html",
+      "description": "Player skills container, holds all player skill elements.",
+      "line": 56
+    },
+    {
+      "file": "index.html",
+      "description": "This is the combat area container, it holds all combat related elements (aka BG image, player image and enemy image, all of which update dynamically based on floor / RNG)",
+      "line": 62
+    }
+  ]
+}
