@@ -5,6 +5,7 @@
 // The code defines two objects: `player` and `enemy`, which represent the player and enemy characters in the game.
 // The `player` object has properties such as `name`, `attackDamage`, `attackSpeed`, `imagePath`, and `canAttack`.
 // The `enemy` object has properties like `name`, `health`, and `imagePath`.
+
 let player = {
   name: "Player",
   attackDamage: undefined,
@@ -34,6 +35,18 @@ function attackEnemy(attacker, target) {
     setTimeout(() => {
       attacker.canAttack = true;
     }, attacker.attackSpeed * 1000);
+  }
+}
+
+function checkEnemyHealth() {
+  if (enemy.health) {
+    if (enemy.health <= 0) {
+      enemyImage.setAttribute("hidden", true);
+      player.currency += 10;
+      enemy = null;
+      player.inCombat = false;
+      setTimeout(spawnEnemy, 3000);
+    }
   }
 }
 
@@ -82,6 +95,7 @@ function spawnEnemy() {
       enemyName.textContent = enemy.name;
       enemyHealth.textContent = enemy.health;
       enemyImage.src = enemy.imagePath;
+      enemyImage.removeAttribute("hidden");
       // Set the player's inCombat status to true
       player.inCombat = true;
     }
@@ -252,11 +266,12 @@ startGameButton.addEventListener("click", () => {
     showElement(mainGameContainer);
     console.log("Game should start");
     // Update player stats
-    playerName.textContent += player.name;
-    playerClass.textContent += classSelect.value;
-    playerAttack.textContent += player.attackDamage;
-    playerCurrency.textContent += player.currency;
+    playerName.textContent = player.name;
+    playerClass.textContent = classSelect.value;
+    playerAttack.textContent = player.attackDamage;
+    playerCurrency.textContent = player.currency;
     gameStarted = true;
+    startGameLoop();
   } else {
     hideElement(characterSelectContainer);
     showElement(mainGameContainer);
@@ -280,8 +295,18 @@ const enemyCurrency = document.querySelector(".enemy-currency");
 // TODO: Add game logic
 
 function gameLoop() {
-  spawnEnemy();
-  attackEnemy(player, enemy);
+  if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
+    if (enemy) {
+      attackEnemy(player, enemy);
+      checkEnemyHealth();
+    }
+  }
 }
 
-const gameLoopInterval = setInterval(gameLoop, 100);
+function startGameLoop() {
+  if (gameStarted) {
+    console.log("Starting game loop");
+    spawnEnemy();
+    gameLoopInterval = setInterval(gameLoop, 100);
+  }
+}

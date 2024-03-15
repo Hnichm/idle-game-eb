@@ -1,0 +1,29 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "javascript-tour",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "Welcome to my idle game!"
+    },
+    {
+      "file": "script.js",
+      "selection": {
+        "start": {
+          "line": 9,
+          "character": 1
+        },
+        "end": {
+          "line": 18,
+          "character": 3
+        }
+      },
+      "description": "Here, we declare the player object for future use."
+    },
+    {
+      "file": "script.js",
+      "description": "Here we declare enemy for future use",
+      "line": 20
+    }
+  ]
+}
