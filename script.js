@@ -38,6 +38,18 @@ function attackEnemy(attacker, target) {
   }
 }
 
+function checkEnemyHealth() {
+  if (enemy.health) {
+    if (enemy.health <= 0) {
+      enemyImage.setAttribute("hidden", true);
+      player.currency += 10;
+      enemy = null;
+      player.inCombat = false;
+      setTimeout(spawnEnemy, 3000);
+    }
+  }
+}
+
 function Monster(name, health, imagePath) {
   this.name = name;
   this.health = health;
@@ -83,6 +95,7 @@ function spawnEnemy() {
       enemyName.textContent = enemy.name;
       enemyHealth.textContent = enemy.health;
       enemyImage.src = enemy.imagePath;
+      enemyImage.removeAttribute("hidden");
       // Set the player's inCombat status to true
       player.inCombat = true;
     }
@@ -283,7 +296,10 @@ const enemyCurrency = document.querySelector(".enemy-currency");
 
 function gameLoop() {
   if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
-    attackEnemy(player, enemy);
+    if (enemy) {
+      attackEnemy(player, enemy);
+      checkEnemyHealth();
+    }
   }
 }
 
