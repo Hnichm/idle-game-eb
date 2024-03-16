@@ -162,6 +162,10 @@ function updateEnemyCurrency() {
   }
 }
 
+function updatePlayerCurrency() {
+  playerCurrency.textContent = `Currency: ${player.currency}`;
+}
+
 // DOM Elements
 // ------------
 // The code selects various DOM elements using `querySelector` and assigns them to variables for later use.
@@ -362,12 +366,14 @@ function gameLoop() {
   if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
     if (enemy) {
       updateEnemyCurrency();
+      updatePlayerCurrency();
       updateEnemyHealth();
       attackEnemy(player, enemy);
       checkEnemyHealth();
     }
     if (enemy === null) {
       updateEnemyCurrency();
+      updatePlayerCurrency();
       updateEnemyHealth();
       updateEnemyName();
     }
