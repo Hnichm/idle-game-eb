@@ -78,15 +78,21 @@ function spawnEnemy() {
   }
 }
 
+// This function is used to simulate an attack from one entity to another.
 function attackEnemy(attacker, target) {
+  // Check if the attacker can attack and has defined attack damage and speed
   if (
     attacker.canAttack &&
     attacker.attackDamage !== undefined &&
     attacker.attackSpeed !== undefined
   ) {
+    // Reduce the target's health by the attacker's damage
     target.health -= attacker.attackDamage;
-    console.log(`${enemy.name} health: ${enemy.health}`);
+    // Log the target's remaining health
+    console.log(`${target.name} health: ${target.health}`);
+    // Set the attacker's ability to attack to false
     attacker.canAttack = false;
+    // After a delay based on the attacker's attack speed, allow the attacker to attack again
     setTimeout(() => {
       attacker.canAttack = true;
     }, attacker.attackSpeed * 1000);
