@@ -21,45 +21,20 @@ let enemy = {
   name: "",
   health: undefined,
   imagePath: "",
+  currency: 0,
 };
 
-function attackEnemy(attacker, target) {
-  if (
-    attacker.canAttack &&
-    attacker.attackDamage !== undefined &&
-    attacker.attackSpeed !== undefined
-  ) {
-    target.health -= attacker.attackDamage;
-    console.log(`${enemy.name} health: ${enemy.health}`);
-    attacker.canAttack = false;
-    setTimeout(() => {
-      attacker.canAttack = true;
-    }, attacker.attackSpeed * 1000);
-  }
-}
-
-function checkEnemyHealth() {
-  if (enemy.health) {
-    if (enemy.health <= 0) {
-      enemyImage.setAttribute("hidden", true);
-      player.currency += 10;
-      enemy = null;
-      player.inCombat = false;
-      setTimeout(spawnEnemy, 3000);
-    }
-  }
-}
-
-function Monster(name, health, imagePath) {
+function Monster(name, health, imagePath, currency) {
   this.name = name;
   this.health = health;
   this.imagePath = imagePath;
+  this.currency = currency;
 }
 
 const floorMonsters = [
   [
-    new Monster("Skin-flayer", 100, "./assets/demon-skin-flayer.png"),
-    new Monster("Bone-Crusher", 200, "./assets/character-lancer.png"),
+    new Monster("Skin-flayer", 100, "./assets/demon-skin-flayer.png", 5),
+    new Monster("Bone-Crusher", 200, "./assets/character-lancer.png", 10),
   ],
 ];
 
@@ -73,7 +48,8 @@ function getRandomMonster(floor) {
       return new Monster(
         selectedMonster.name,
         selectedMonster.health,
-        selectedMonster.imagePath
+        selectedMonster.imagePath,
+        selectedMonster.currency
       );
     } else {
       console.error(`No monsters defined for floor ${floor}`);
@@ -98,6 +74,42 @@ function spawnEnemy() {
       enemyImage.removeAttribute("hidden");
       // Set the player's inCombat status to true
       player.inCombat = true;
+    }
+  }
+}
+
+function attackEnemy(attacker, target) {
+  if (
+    attacker.canAttack &&
+    attacker.attackDamage !== undefined &&
+    attacker.attackSpeed !== undefined
+  ) {
+    target.health -= attacker.attackDamage;
+    console.log(`${enemy.name} health: ${enemy.health}`);
+    attacker.canAttack = false;
+    setTimeout(() => {
+      attacker.canAttack = true;
+    }, attacker.attackSpeed * 1000);
+  }
+}
+
+function checkEnemyHealth() {
+  if (enemy.health) {
+    if (enemy.health <= 0) {
+      enemyImage.setAttribute("hidden", true);
+      player.currency += enemy.currency;
+      enemy = null;
+      player.inCombat = false;
+      setTimeout(spawnEnemy, 3000);
+    }
+  }
+}
+
+function updateEnemyHealth() {
+  if (enemy && enemy.health !== undefined) {
+    enemyHealth.textContent = enemy.health;
+    if (enemy.health <= 0) {
+      enemyHealth.textContent = 0;
     }
   }
 }
@@ -149,7 +161,7 @@ const classProperties = {
     imagePath: "./assets/character-rogue.png",
     description: `Found as a newborn cradled in his mother's corpse, a dark omen hanging over him, he learned to survive in the bastion's underbelly. He mastered not knightly combat, but the dirty tactics of ambush and assassination with his scavenged daggers. His strikes are honed from a life spent exploiting any weakness. Each battle is not for glory, but a brutal bid to ensure there's always one more survivor - himself`,
     attackDamage: 7,
-    attackSpeed: 2.0,
+    attackSpeed: 0.5,
   },
   Cleric: {
     name: "Urijah",
@@ -297,6 +309,7 @@ const enemyCurrency = document.querySelector(".enemy-currency");
 function gameLoop() {
   if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
     if (enemy) {
+      updateEnemyHealth();
       attackEnemy(player, enemy);
       checkEnemyHealth();
     }
