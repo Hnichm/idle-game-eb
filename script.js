@@ -105,12 +105,33 @@ function checkEnemyHealth() {
   }
 }
 
+function updateEnemyName() {
+  if (enemy && enemy.name !== undefined) {
+    enemyName.textContent = enemy.name;
+  }
+  if (enemy === null) {
+    enemyName.textContent = "No enemy";
+  }
+}
+
 function updateEnemyHealth() {
   if (enemy && enemy.health !== undefined) {
     enemyHealth.textContent = enemy.health;
     if (enemy.health <= 0) {
       enemyHealth.textContent = 0;
     }
+  }
+  if (!enemy) {
+    enemyHealth.textContent = 0;
+  }
+}
+
+function updateEnemyCurrency() {
+  if (enemy && enemy.currency !== undefined) {
+    enemyCurrency.textContent = `Currency: ${enemy.currency}`;
+  }
+  if (!enemy) {
+    enemyCurrency.textContent = `Currency: 0`;
   }
 }
 
@@ -147,7 +168,7 @@ const classProperties = {
     imagePath: "./assets/character-warrior.png",
     description: `Each scar on his body maps a battle survived, a desperate gamble made in the face of overwhelming odds. His victories are forged not just from tactics learned, but from the ghosts of fallen allies whispering in his ear. He fights not out of hope, but a cold determination that there must always be one left standing to meet hell and fear.`,
     attackDamage: 10,
-    attackSpeed: 1.5,
+    attackSpeed: 0.1,
   },
   Magician: {
     name: "Balaam",
@@ -309,9 +330,15 @@ const enemyCurrency = document.querySelector(".enemy-currency");
 function gameLoop() {
   if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
     if (enemy) {
+      updateEnemyCurrency();
       updateEnemyHealth();
       attackEnemy(player, enemy);
       checkEnemyHealth();
+    }
+    if (enemy === null) {
+      updateEnemyCurrency();
+      updateEnemyHealth();
+      updateEnemyName();
     }
   }
 }
@@ -320,6 +347,6 @@ function startGameLoop() {
   if (gameStarted) {
     console.log("Starting game loop");
     spawnEnemy();
-    gameLoopInterval = setInterval(gameLoop, 100);
+    gameLoopInterval = setInterval(gameLoop, 10);
   }
 }
