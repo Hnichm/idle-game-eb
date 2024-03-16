@@ -130,7 +130,13 @@ function updateTimer() {
 
 function resetPlayerTimer() {
   player.timer = player.maxTimer;
-};
+}
+
+// ! Future upgrade?
+function extendPlayerTimer(seconds) {
+  player.maxTimer += seconds;
+  player.timer += seconds;
+}
 
 function playerDeath() {
   // Handle player death logic
@@ -411,7 +417,7 @@ function gameLoop() {
       console.log(player.timer);
     }
     if (enemy === null) {
-      updateEnemyCurrency(); // Update the enemy's currency to 0 
+      updateEnemyCurrency(); // Update the enemy's currency to 0
       updatePlayerCurrency(); // Update the player's currency
       resetPlayerTimer(); // Reset the player's timer to its maximum value
       updateEnemyHealth(); // Update the enemy's health 0
