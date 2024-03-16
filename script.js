@@ -24,6 +24,9 @@ let enemy = {
   currency: 0,
 };
 
+// This is used for the updateEnemyName function later, this needs to be reworked eventually
+let enemyNamePopulated = false;
+
 function Monster(name, health, imagePath, currency) {
   this.name = name;
   this.health = health;
@@ -106,17 +109,35 @@ function checkEnemyHealth() {
       player.currency += enemy.currency;
       enemy = null;
       player.inCombat = false;
+      // TODO: Interlinked with updateEnemyName, need to find a better solution
+      enemyNamePopulated = false; // Reset enemyNamePopulated when the enemy is defeated
       setTimeout(spawnEnemy, 3000);
     }
   }
 }
 
+// TODO: Handle this function better, need to find a more elegant solution as opposed to this global variable being passed around..
 function updateEnemyName() {
+  const respawnNameList = [
+    "The womb pulsates...",
+    "The womb quivers...",
+    "The womb shudders...",
+    "The womb convulses...",
+    "The womb spasms violently...",
+    "The womb ripples...",
+    "The womb throbs...",
+    "The womb contracts...",
+    "The womb expands...",
+    "The womb swells...",
+  ];
+
   if (enemy && enemy.name !== undefined) {
     enemyName.textContent = enemy.name;
+    enemyNamePopulated = false;
   }
-  if (enemy === null) {
-    enemyName.textContent = "No enemy";
+  if (enemy === null && !enemyNamePopulated) {
+    enemyName.textContent = respawnNameList[rngArrayLength(respawnNameList)];
+    enemyNamePopulated = true;
   }
 }
 
@@ -238,6 +259,10 @@ function clearBlurClasses() {
   for (const blurClass of blurClasses) {
     wombImage.classList.remove(blurClass);
   }
+}
+
+function rngArrayLength(array) {
+  return Math.floor(Math.random() * array.length);
 }
 
 // Event Listeners
