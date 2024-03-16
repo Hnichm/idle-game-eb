@@ -3,8 +3,8 @@
 // Player and Enemy Objects
 // -------------------------
 // The code defines two objects: `player` and `enemy`, which represent the player and enemy characters in the game.
-// The `player` object has properties such as `name`, `attackDamage`, `attackSpeed`, `imagePath`, and `canAttack`.
-// The `enemy` object has properties like `name`, `health`, and `imagePath`.
+// The `player` object has properties such as `name`, `attackDamage`, `attackSpeed`, `imagePath`, and `canAttack`, etc.
+// The `enemy` object has properties like `name`, `health`, and `imagePath` as we use a timer for defeat.
 
 let player = {
   name: "Player",
@@ -15,6 +15,8 @@ let player = {
   imagePath: "",
   canAttack: true,
   inCombat: false,
+  timer: 30,
+  maxTimer: 30,
 };
 
 let enemy = {
@@ -114,6 +116,40 @@ function checkEnemyHealth() {
       setTimeout(spawnEnemy, 3000);
     }
   }
+}
+
+function updateTimer() {
+  if (player.inCombat && enemy) {
+    player.timer -= 0.01;
+  }
+  if (player.timer <= 0) {
+    //Player has run out of time
+    playerDeath();
+  }
+}
+
+function resetPlayerTimer() {
+  player.timer = player.maxTimer;
+};
+
+function playerDeath() {
+  // Handle player death logic
+  console.log("Player died!");
+  // Reset the player's timer to its maximum value
+  player.timer = player.maxTimer;
+  // Decrease the player's floor by 1 (or handle game over if on the first floor)
+  if (player.floor > 0) {
+    player.floor--;
+  } else {
+    // Game over logic
+    console.log("Game Over!");
+    // Reset player stats, show game over screen, etc.
+  }
+  // Reset the enemy
+  enemy = null;
+  player.inCombat = false;
+  // Spawn a new enemy after a delay
+  setTimeout(spawnEnemy, 3000);
 }
 
 // TODO: Handle this function better, need to find a more elegant solution as opposed to this global variable being passed around..
@@ -296,6 +332,7 @@ classSelect.value = "";
 startGameButton.disabled = true;
 
 // - `classSelect` change event: Updates the character select image, description, and player stats based on the selected class.
+// TODO: Comment this or refactor it to be more readable.
 classSelect.addEventListener("change", () => {
   const selectedClass = classSelect.value;
 
@@ -360,7 +397,7 @@ const enemyName = document.querySelector(".enemy-name");
 const enemyHealth = document.querySelector(".enemy-health");
 const enemyCurrency = document.querySelector(".enemy-currency");
 
-// TODO: Add game logic
+// TODO: Add more game logic
 
 function gameLoop() {
   if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
@@ -368,14 +405,17 @@ function gameLoop() {
       updateEnemyCurrency();
       updatePlayerCurrency();
       updateEnemyHealth();
+      updateTimer();
       attackEnemy(player, enemy);
       checkEnemyHealth();
+      console.log(player.timer);
     }
     if (enemy === null) {
-      updateEnemyCurrency();
-      updatePlayerCurrency();
-      updateEnemyHealth();
-      updateEnemyName();
+      updateEnemyCurrency(); // Update the enemy's currency to 0 
+      updatePlayerCurrency(); // Update the player's currency
+      resetPlayerTimer(); // Reset the player's timer to its maximum value
+      updateEnemyHealth(); // Update the enemy's health 0
+      updateEnemyName(); // Update the enemy's name from the respawnNameList
     }
   }
 }
