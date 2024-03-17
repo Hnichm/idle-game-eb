@@ -208,6 +208,10 @@ function updatePlayerCurrency() {
   playerCurrency.textContent = `Currency: ${player.currency}`;
 }
 
+function updatePlayerAttack() {
+  playerAttack.textContent = `Attack: ${player.attackDamage}`;
+}
+
 // DOM Elements
 // ------------
 // The code selects various DOM elements using `querySelector` and assigns them to variables for later use.
