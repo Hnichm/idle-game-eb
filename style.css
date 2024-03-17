@@ -159,11 +159,12 @@
 .combat-area-container {
   border-radius: 1rem;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 3fr 0.25fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
-    "background-image enemy-image enemy-image"
+    "background-image background-image enemy-image-container"
     "player-image background-image background-image";
+  overflow: hidden;
 }
 
 .player-image {
@@ -182,11 +183,19 @@
   transform: translateX(-10rem) translateY(-30rem);
 }
 
-.enemy-image {
-  grid-area: enemy-image;
-  border: 1px solid red;
+.enemy-image-container {
+  grid-area: enemy-image-container;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   justify-self: center;
   align-self: center;
-  transform: translateX(9rem);
+  transform: translateX(10.5rem);
   z-index: 2;
+  border: 10px solid yellow;
+}
+
+.enemy-image {
+  color: red;
+  border: 1px solid red;
 }
