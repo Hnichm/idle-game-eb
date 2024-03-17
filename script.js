@@ -209,9 +209,12 @@ function updatePlayerCurrency() {
 }
 
 function updatePlayerAttack() {
-  playerAttack.textContent = `Attack: ${player.attackDamage}`;
+  playerAttackDamage.textContent = `Attack: ${player.attackDamage}`;
 }
 
+function updatePlayerAttackSpeed() {
+  playerAttackSpeed.textContent = `Attack Speed: ${player.attackSpeed}`;
+}
 // DOM Elements
 // ------------
 // The code selects various DOM elements using `querySelector` and assigns them to variables for later use.
@@ -382,8 +385,8 @@ startGameButton.addEventListener("click", () => {
     console.log("Game should start");
     // Update player stats
     playerName.textContent = player.name;
-    playerClass.textContent = classSelect.value;
-    playerAttack.textContent = player.attackDamage;
+    playerAttackSpeed.textContent = player.attackSpeed;
+    playerAttackDamage.textContent = player.attackDamage;
     playerCurrency.textContent = player.currency;
     gameStarted = true;
     startGameLoop();
@@ -400,7 +403,8 @@ startGameButton.addEventListener("click", () => {
 // The code sets up variables for player and enemy UI elements, such as `playerName`, `playerClass`, `playerAttack`, `playerCurrency`, `enemyName`, `enemyHealth`, and `enemyCurrency`.
 const playerName = document.querySelector(".player-name");
 const playerClass = document.querySelector(".player-class");
-const playerAttack = document.querySelector(".player-attack");
+const playerAttackDamage = document.querySelector(".player-attack");
+const playerAttackSpeed = document.querySelector(".player-attack-speed");
 const playerCurrency = document.querySelector(".player-currency");
 
 const enemyName = document.querySelector(".enemy-name");
@@ -412,6 +416,8 @@ const enemyCurrency = document.querySelector(".enemy-currency");
 function gameLoop() {
   if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
     if (enemy) {
+      updatePlayerAttack();
+      updatePlayerAttackSpeed();
       updateEnemyCurrency();
       updatePlayerCurrency();
       updateEnemyHealth();
@@ -421,11 +427,14 @@ function gameLoop() {
       console.log(player.timer);
     }
     if (enemy === null) {
-      updateEnemyCurrency(); // Update the enemy's currency to 0
-      updatePlayerCurrency(); // Update the player's currency
+      // TODO: Encapsulate all DOM functions of this into a function
+      updatePlayerAttack(); // Update the player's attack damage. DOM
+      updatePlayerAttackSpeed(); // Update the player's attack speed. DOM
+      updateEnemyCurrency(); // Update the enemy's currency to 0. DOM
+      updatePlayerCurrency(); // Update the player's currency. DOM
       resetPlayerTimer(); // Reset the player's timer to its maximum value
-      updateEnemyHealth(); // Update the enemy's health 0
-      updateEnemyName(); // Update the enemy's name from the respawnNameList
+      updateEnemyHealth(); // Update the enemy's health 0. DOM
+      updateEnemyName(); // Update the enemy's name from the respawnNameList. DOM
     }
   }
 }
