@@ -93,6 +93,8 @@ function attackEnemy(attacker, target) {
   ) {
     // Reduce the target's health by the attacker's damage
     target.health -= attacker.attackDamage;
+    // Show the damage on the target's image
+    // TODO: Show damage numbers on the enemy image when attacked
     // Log the target's remaining health
     console.log(`${target.name} health: ${target.health}`);
     // Set the attacker's ability to attack to false
@@ -117,6 +119,8 @@ function checkEnemyHealth() {
     }
   }
 }
+
+// TODO: Add function which shows damage numbers on the enemy image when attacked
 
 function updateTimer() {
   if (player.inCombat && enemy) {
