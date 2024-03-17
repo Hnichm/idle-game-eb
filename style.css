@@ -107,7 +107,7 @@
   grid-template-areas:
     "player-stats game-title enemy-stats "
     "player-stats combat-area enemy-stats"
-    "player-stats player-skills combat-log";
+    "player-stats player-skills .";
   height: 100vh;
   width: 100vw;
   background: linear-gradient(
@@ -198,4 +198,10 @@
 .enemy-image {
   color: red;
   border: 1px solid red;
+}
+
+.enemy-stats-container {
+  grid-area: enemy-stats;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
 }

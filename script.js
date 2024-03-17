@@ -189,13 +189,13 @@ function updateEnemyName() {
 
 function updateEnemyHealth() {
   if (enemy && enemy.health !== undefined) {
-    enemyHealth.textContent = enemy.health;
+    enemyHealth.textContent = `Health: ${enemy.health}`;
     if (enemy.health <= 0) {
-      enemyHealth.textContent = 0;
+      enemyHealth.textContent = `Health: 0`;
     }
   }
   if (!enemy) {
-    enemyHealth.textContent = 0;
+    enemyHealth.textContent = `Health: 0`;
   }
 }
 
