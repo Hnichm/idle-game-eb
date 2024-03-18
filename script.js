@@ -408,17 +408,26 @@ startGameButton.disabled = true;
 
 // - `classSelect` change event: Updates the character select image, description, and player stats based on the selected class.
 // TODO: Comment this or refactor it to be more readable.
+// Add an event listener to the class selection dropdown
 classSelect.addEventListener("change", () => {
+  // Get the selected class from the dropdown
   const selectedClass = classSelect.value;
 
+  // If no class is selected
   if (selectedClass === "") {
+    // Remove the blur effect from the womb image
     wombImage.classList.remove(`blurred-${previousClass}`);
+    // Clear the character select image
     characterSelectImage.src = "";
+    // Set the description text
     description.textContent = "Choose your fate...";
+    // Disable the start game button
     startGameButton.disabled = true;
   }
 
+  // If a class is selected and it exists in the classProperties object
   if (selectedClass && classProperties[selectedClass]) {
+    // Destructure the properties of the selected class
     const {
       name,
       imagePath,
@@ -427,22 +436,27 @@ classSelect.addEventListener("change", () => {
       clickAttackDamage,
       clickAttackSpeed,
     } = classProperties[selectedClass];
+
+    // Set the description text to the selected class's description
     description.textContent = classProperties[selectedClass]["description"];
-    // Update the player image (character select and main game container)
+    // Update the character select and player images to the selected class's image
     characterSelectImage.src = imagePath;
     playerImage.src = imagePath;
 
-    // Update the player stats
+    // Update the player's stats to the selected class's stats
     player.name = name;
     player.attackDamage = attackDamage;
     player.attackSpeed = attackSpeed;
     player.clickAttackDamage = clickAttackDamage;
     player.clickAttackSpeed = clickAttackSpeed;
-    // Update other properties as needed
 
+    // Remove all blur classes from the womb image
     clearBlurClasses();
+    // Add a blur class to the womb image based on the selected class
     wombImage.classList.add(`blurred-${selectedClass}`);
+    // Enable the start game button
     startGameButton.disabled = false;
+    // Store the selected class for future reference
     previousClass = selectedClass;
   }
 });
