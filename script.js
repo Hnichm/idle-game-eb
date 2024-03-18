@@ -10,13 +10,18 @@ let player = {
   name: "Player",
   attackDamage: undefined,
   attackSpeed: undefined,
+  clickAttackDamage: undefined,
+  clickAttackSpeed: undefined,
   currency: 0,
   floor: 0,
   imagePath: "",
   canAttack: true,
+  canClickAttack: true,
   inCombat: false,
   timer: 30,
   maxTimer: 30,
+  clickTimer: undefined,
+  clickTimerMax: undefined,
 };
 
 let enemy = {
@@ -219,6 +224,18 @@ function updatePlayerAttack() {
 function updatePlayerAttackSpeed() {
   playerAttackSpeed.textContent = `Attack Speed: ${player.attackSpeed}`;
 }
+
+function updateEnemyContainer() {
+  if (player.canClickAttack) {
+    enemyImageContainer.style.cursor = "pointer";
+    enemyImageContainer.classList.add("click-attack-ready");
+  }
+  if (!player.canClickAttack) {
+    enemyImageContainer.style.cursor = "not-allowed";
+    enemyImageContainer.classList.remove("click-attack-ready");
+  }
+}
+
 // DOM Elements
 // ------------
 // The code selects various DOM elements using `querySelector` and assigns them to variables for later use.
@@ -231,6 +248,7 @@ const descendButton = document.querySelector(".descend-button");
 const characterSelectContainer = document.querySelector(
   ".character-select-container"
 );
+const enemyImageContainer = document.querySelector(".enemy-image-container");
 
 // - `wombImage`: the character select womb image element
 const wombImage = document.querySelector(".character-select-womb");
@@ -253,6 +271,8 @@ const classProperties = {
     description: `Each scar on his body maps a battle survived, a desperate gamble made in the face of overwhelming odds. His victories are forged not just from tactics learned, but from the ghosts of fallen allies whispering in his ear. He fights not out of hope, but a cold determination that there must always be one left standing to meet hell and fear.`,
     attackDamage: 10,
     attackSpeed: 0.1,
+    clickAttackDamage: 20,
+    clickAttackSpeed: 4,
   },
   Magician: {
     name: "Balaam",
@@ -260,6 +280,8 @@ const classProperties = {
     description: `His studies began with a noble goal - to understand the elements, bolstering the bastion's defenses with nature's might. But with each spell, each delve into forgotten lore, desperation bled into obsession.`,
     attackDamage: 15,
     attackSpeed: 1.0,
+    clickAttackDamage: 20,
+    clickAttackSpeed: 4,
   },
   Rogue: {
     name: "Doeg",
@@ -267,6 +289,8 @@ const classProperties = {
     description: `Found as a newborn cradled in his mother's corpse, a dark omen hanging over him, he learned to survive in the bastion's underbelly. He mastered not knightly combat, but the dirty tactics of ambush and assassination with his scavenged daggers. His strikes are honed from a life spent exploiting any weakness. Each battle is not for glory, but a brutal bid to ensure there's always one more survivor - himself`,
     attackDamage: 7,
     attackSpeed: 0.5,
+    clickAttackDamage: 14,
+    clickAttackSpeed: 2,
   },
   Cleric: {
     name: "Urijah",
@@ -274,6 +298,8 @@ const classProperties = {
     description: `The hymns that once sustained him now feel like a mockery. His prayers go unanswered as the bastion crumbles. Yet, with each horrific sight, each plea ignored by the heavens, his will hardens. He wields his faith not as a shield, but as a battered weapon. Perhaps the gods are gone, perhaps they turned their backs... but even if so, the darkness will find him unbroken.`,
     attackDamage: 8,
     attackSpeed: 1.0,
+    clickAttackDamage: 4,
+    clickAttackSpeed: 2,
   },
 };
 
@@ -343,6 +369,38 @@ descendButton.addEventListener("click", () => {
   }, 1000);
 });
 
+function clickAttackEnemy(attacker, target) {
+  // Check if the attacker has defined click attack damage and if a click attack is currently allowed
+  if (attacker.clickAttackDamage !== undefined && attacker.canClickAttack) {
+    // Reduce the target's health by the attacker's click attack damage
+    target.health -= attacker.clickAttackDamage;
+    // Show the damage on the target's image
+    console.log(
+      `Player click attack: ${attacker.clickAttackDamage} for ${player.clickAttackDamage} danage.`
+    );
+    // Log the target's remaining health
+    console.log(`${target.name} health: ${target.health}`);
+    // Disable click attacks
+    attacker.canClickAttack = false;
+    updateEnemyContainer();
+    // Re-enable click attacks after a delay based on the attacker's click attack speed
+    setTimeout(() => {
+      attacker.canClickAttack = true;
+      updateEnemyContainer();
+    }, attacker.clickAttackSpeed * 1000);
+  }
+}
+
+enemyImage.addEventListener("click", function () {
+  console.log("Enemy image clicked");
+  if (player.canClickAttack) {
+    console.log("Player can click attack");
+    clickAttackEnemy(player, enemy);
+  } else {
+    console.log("Player cannot click attack");
+  }
+});
+
 // Start of character select
 description.textContent = "Choose your fate...";
 classSelect.value = "";
@@ -361,8 +419,14 @@ classSelect.addEventListener("change", () => {
   }
 
   if (selectedClass && classProperties[selectedClass]) {
-    const { name, imagePath, attackDamage, attackSpeed } =
-      classProperties[selectedClass];
+    const {
+      name,
+      imagePath,
+      attackDamage,
+      attackSpeed,
+      clickAttackDamage,
+      clickAttackSpeed,
+    } = classProperties[selectedClass];
     description.textContent = classProperties[selectedClass]["description"];
     // Update the player image (character select and main game container)
     characterSelectImage.src = imagePath;
@@ -372,6 +436,8 @@ classSelect.addEventListener("change", () => {
     player.name = name;
     player.attackDamage = attackDamage;
     player.attackSpeed = attackSpeed;
+    player.clickAttackDamage = clickAttackDamage;
+    player.clickAttackSpeed = clickAttackSpeed;
     // Update other properties as needed
 
     clearBlurClasses();
@@ -428,7 +494,7 @@ function gameLoop() {
       updateTimer();
       attackEnemy(player, enemy);
       checkEnemyHealth();
-      console.log(player.timer);
+      updateEnemyContainer();
     }
     if (enemy === null) {
       // TODO: Encapsulate all DOM functions of this into a function
@@ -439,6 +505,7 @@ function gameLoop() {
       resetPlayerTimer(); // Reset the player's timer to its maximum value
       updateEnemyHealth(); // Update the enemy's health 0. DOM
       updateEnemyName(); // Update the enemy's name from the respawnNameList. DOM
+      updateEnemyContainer(); // Update the enemy container. DOM
     }
   }
 }
