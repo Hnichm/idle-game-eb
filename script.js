@@ -46,6 +46,10 @@ const floorMonsters = [
     new Monster("Skin-flayer", 100, "./assets/demon-skin-flayer.png", 5),
     new Monster("Bone-Crusher", 200, "./assets/character-lancer.png", 10),
   ],
+  [
+    new Monster("floor2Monster", 100, "./assets/demon-skin-flayer.png", 25),
+    new Monster("floor2Monster2", 200, "./assets/character-lancer.png", 50),
+  ],
 ];
 
 function getRandomMonster(floor) {
@@ -85,6 +89,19 @@ function spawnEnemy() {
       // Set the player's inCombat status to true
       player.inCombat = true;
     }
+  }
+}
+
+// TODO: Complete function
+function changeFloor(direction) {
+  if (player.inCombat) {
+    return;
+  }
+
+  if (direction === "ascend") {
+    player.floor++;
+  } else if (direction === "descend" && player.floor > 0) {
+    player.floor--;
   }
 }
 
@@ -235,6 +252,8 @@ function updateEnemyContainer() {
     enemyImageContainer.classList.remove("click-attack-ready");
   }
 }
+// TODO: Populate this function with all the DOM updates and call in game loop, for later.
+function updateDOM() {}
 
 // DOM Elements
 // ------------
@@ -259,6 +278,11 @@ let gameStarted = false;
 
 // - `classSelect`: the class select dropdown element
 const classSelect = document.querySelector(".class-select");
+
+// `ascendFloorButton`: the "ascend floor" button element
+// `descendFloorButton`: the "descend floor" button element
+const ascendFloorButton = document.querySelector(".ascend-floor-button");
+const descendFloorButton = document.querySelector(".descend-floor-button");
 
 // Class Properties
 // ----------------
@@ -367,6 +391,18 @@ descendButton.addEventListener("click", () => {
     hideElement(gameStart);
     showElement(characterSelectContainer);
   }, 1000);
+});
+
+// - `ascendFloorButton` click event: Calls the changeFloor function with "ascend" direction
+ascendFloorButton.addEventListener("click", () => {
+  changeFloor("ascend");
+  spawnEnemy();
+});
+
+// - `descendFloorButton` click event: Calls the changeFloor function with "descend" direction
+descendFloorButton.addEventListener("click", () => {
+  changeFloor("descend");
+  spawnEnemy();
 });
 
 function clickAttackEnemy(attacker, target) {
