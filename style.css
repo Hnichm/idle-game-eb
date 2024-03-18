@@ -105,7 +105,7 @@
   grid-template-columns: 1fr 4fr 1fr;
   grid-template-rows: 0.25fr 2fr 0.25fr;
   grid-template-areas:
-    "player-stats game-title enemy-stats "
+    "player-stats game-title game-title "
     "player-stats combat-area enemy-stats"
     "player-stats player-skills .";
   height: 100vh;
@@ -175,6 +175,47 @@
   transform: translateX(24rem);
   filter: brightness(2.5);
 }
+
+.click-attack-ready {
+  animation: click-attack 1s infinite;
+}
+
+/* TODO: Make an actual animation for when click attack is ready. */
+/* @keyframes click-attack {
+  0% {
+    filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0.222));
+  }
+  10% {
+    filter: drop-shadow(0 0 1px rgba(255, 0, 0, 0.222));
+  }
+  20% {
+    filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.222));
+  }
+  30% {
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.222));
+  }
+  40% {
+    filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.222));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.222));
+  }
+  60% {
+    filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.222));
+  }
+  70% {
+    filter: drop-shadow(0 0 7px rgba(255, 0, 0, 0.222));
+  }
+  80% {
+    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.222));
+  }
+  90% {
+    filter: drop-shadow(0 0 9px rgba(255, 0, 0, 0.222));
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.222));
+  }
+} */
 
 .background-image {
   grid-area: background-image;
