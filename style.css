@@ -181,41 +181,41 @@
 }
 
 /* TODO: Make an actual animation for when click attack is ready. */
-/* @keyframes click-attack {
+@keyframes click-attack {
   0% {
-    filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0.493));
   }
   10% {
-    filter: drop-shadow(0 0 1px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 1px rgba(255, 174, 0, 0.675));
   }
   20% {
-    filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 2px rgba(255, 242, 0, 0.764));
   }
   30% {
-    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 3px rgba(91, 202, 6, 0.804));
   }
   40% {
-    filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 4px rgba(0, 255, 213, 0.701));
   }
   50% {
-    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.41));
   }
   60% {
-    filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 6px rgba(157, 0, 255, 0.468));
   }
   70% {
-    filter: drop-shadow(0 0 7px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 7px rgba(251, 0, 255, 0.53));
   }
   80% {
-    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 8px rgba(255, 0, 149, 0.595));
   }
   90% {
-    filter: drop-shadow(0 0 9px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 9px rgba(255, 0, 68, 0.612));
   }
   100% {
-    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.222));
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.553));
   }
-} */
+}
 
 .background-image {
   grid-area: background-image;
@@ -233,13 +233,13 @@
   align-self: center;
   transform: translateX(10.5rem);
   z-index: 2;
-  border: 10px solid yellow;
+  /* border: 10px solid yellow; */
 }
 
 .enemy-image {
   color: red;
-  border: 1px solid red;
-}
+  /* border: 1px solid red; */
+} 
 
 .enemy-stats-container {
   grid-area: enemy-stats;
