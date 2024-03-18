@@ -31,6 +31,8 @@
   width: 900px;
 }
 
+
+
 .character-select-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -159,7 +161,7 @@
 .combat-area-container {
   border-radius: 1rem;
   display: grid;
-  grid-template-columns: 1fr 3fr 0.25fr;
+  grid-template-columns: 0.25fr 10fr 0.25fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "background-image background-image enemy-image-container"
@@ -173,7 +175,6 @@
   align-self: flex-end;
   z-index: 2;
   transform: translateX(24rem);
-  filter: brightness(2.5);
 }
 
 .click-attack-ready {
@@ -238,11 +239,12 @@
 
 .enemy-image {
   color: red;
-  /* border: 1px solid red; */
-} 
+}
 
 .enemy-stats-container {
   grid-area: enemy-stats;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  align-content: center;
 }
