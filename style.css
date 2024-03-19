@@ -31,8 +31,6 @@
   width: 900px;
 }
 
-
-
 .character-select-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -178,43 +176,43 @@
 }
 
 .click-attack-ready {
-  animation: click-attack 1s infinite;
+  animation: click-attack 3s infinite;
 }
 
 /* TODO: Make an actual animation for when click attack is ready. */
 @keyframes click-attack {
   0% {
-    filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0.493));
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0.493));
   }
   10% {
-    filter: drop-shadow(0 0 1px rgba(255, 174, 0, 0.675));
+    filter: drop-shadow(0 0 1px rgba(166, 166, 166, 0.675));
   }
   20% {
-    filter: drop-shadow(0 0 2px rgba(255, 242, 0, 0.764));
+    filter: drop-shadow(0 0 2px rgba(124, 124, 124, 0.764));
   }
   30% {
-    filter: drop-shadow(0 0 3px rgba(91, 202, 6, 0.804));
+    filter: drop-shadow(0 0 3px rgba(103, 103, 103, 0.804));
   }
   40% {
-    filter: drop-shadow(0 0 4px rgba(0, 255, 213, 0.701));
+    filter: drop-shadow(0 0 4px rgba(88, 88, 88, 0.701));
   }
   50% {
-    filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.41));
+    filter: drop-shadow(0 0 5px rgba(73, 73, 73, 0.41));
   }
   60% {
-    filter: drop-shadow(0 0 6px rgba(157, 0, 255, 0.468));
+    filter: drop-shadow(0 0 6px rgba(49, 49, 49, 0.468));
   }
   70% {
-    filter: drop-shadow(0 0 7px rgba(251, 0, 255, 0.53));
+    filter: drop-shadow(0 0 7px rgba(40, 40, 40, 0.53));
   }
   80% {
-    filter: drop-shadow(0 0 8px rgba(255, 0, 149, 0.595));
+    filter: drop-shadow(0 0 8px rgba(29, 29, 29, 0.595));
   }
   90% {
-    filter: drop-shadow(0 0 9px rgba(255, 0, 68, 0.612));
+    filter: drop-shadow(0 0 9px rgba(20, 20, 20, 0.612));
   }
   100% {
-    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.553));
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.553));
   }
 }
 
@@ -247,4 +245,33 @@
   grid-template-rows: 1fr 1fr 1fr 1fr;
   justify-content: center;
   align-content: center;
+}
+
+.floor-selection-container {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr 0.5fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "ascend-button . descend-button ."
+    ". . . .";
+}
+
+.floor-button {
+  border-radius: 0.25rem;
+  box-shadow: 0 0.15rem 0 black;
+}
+
+.floor-button:hover {
+  border-radius: 0.25rem;
+  box-shadow: 0 0.25rem 0.1rem black;
+  color: white;
+  background-color: rgba(82, 13, 13, 0.85);
+}
+
+.ascend-floor-button {
+  grid-area: ascend-button;
+}
+
+.descend-floor-button {
+  grid-area: descend-button;
 }
