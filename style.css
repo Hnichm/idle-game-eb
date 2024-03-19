@@ -127,6 +127,20 @@
 
 .game-title-container {
   grid-area: game-title;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "game-title . ."
+    "player-timer . .";
+}
+
+.game-title {
+  grid-area: game-title;
+}
+
+.player-timer {
+  grid-area: player-timer;
 }
 
 .player-skills-container {
@@ -163,56 +177,145 @@
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "background-image background-image enemy-image-container"
-    "player-image background-image background-image";
+    "player-image-container background-image background-image";
   overflow: hidden;
 }
 
-.player-image {
-  border: 1px solid blue;
-  grid-area: player-image;
+.player-image-container {
+  grid-area: player-image-container;
   align-self: flex-end;
-  z-index: 2;
   transform: translateX(24rem);
+  z-index: 2;
 }
 
 .click-attack-ready {
   animation: click-attack 3s infinite;
 }
 
+.auto-attack-hit {
+  animation: auto-attack 0.2s normal;
+}
+
+.auto-attack-dash {
+  animation: player-dash-shadow 0.2s normal;
+}
+
 /* TODO: Make an actual animation for when click attack is ready. */
 @keyframes click-attack {
   0% {
-    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0.493));
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 1));
+  }
+  5% {
+    filter: drop-shadow(0 0 2px rgba(235, 235, 235, 0.95));
   }
   10% {
-    filter: drop-shadow(0 0 1px rgba(166, 166, 166, 0.675));
+    filter: drop-shadow(0 0 3px rgba(215, 215, 215, 0.9));
+  }
+  15% {
+    filter: drop-shadow(0 0 3px rgba(195, 195, 195, 0.85));
   }
   20% {
-    filter: drop-shadow(0 0 2px rgba(124, 124, 124, 0.764));
+    filter: drop-shadow(0 0 4px rgba(175, 175, 175, 0.8));
+  }
+  25% {
+    filter: drop-shadow(0 0 4px rgba(155, 155, 155, 0.75));
   }
   30% {
-    filter: drop-shadow(0 0 3px rgba(103, 103, 103, 0.804));
+    filter: drop-shadow(0 0 5px rgba(135, 135, 135, 0.7));
+  }
+  35% {
+    filter: drop-shadow(0 0 5px rgba(115, 115, 115, 0.65));
   }
   40% {
-    filter: drop-shadow(0 0 4px rgba(88, 88, 88, 0.701));
+    filter: drop-shadow(0 0 8px rgba(95, 95, 95, 0.6));
+  }
+  45% {
+    filter: drop-shadow(0 0 9px rgba(75, 75, 75, 0.55));
   }
   50% {
-    filter: drop-shadow(0 0 5px rgba(73, 73, 73, 0.41));
+    filter: drop-shadow(0 0 10px rgba(55, 55, 55, 0.5));
+  }
+  55% {
+    filter: drop-shadow(0 0 10px rgba(35, 35, 35, 0.45));
   }
   60% {
-    filter: drop-shadow(0 0 6px rgba(49, 49, 49, 0.468));
+    filter: drop-shadow(0 0 11px rgba(15, 15, 15, 0.4));
+  }
+  65% {
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.35));
   }
   70% {
-    filter: drop-shadow(0 0 7px rgba(40, 40, 40, 0.53));
+    filter: drop-shadow(0 0 13px rgba(0, 0, 0, 0.3));
+  }
+  75% {
+    filter: drop-shadow(0 0 14px rgba(0, 0, 0, 0.25));
   }
   80% {
-    filter: drop-shadow(0 0 8px rgba(29, 29, 29, 0.595));
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.2));
+  }
+  85% {
+    filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.15));
   }
   90% {
-    filter: drop-shadow(0 0 9px rgba(20, 20, 20, 0.612));
+    filter: drop-shadow(0 0 17px rgba(0, 0, 0, 0.1));
+  }
+  95% {
+    filter: drop-shadow(0 0 18px rgba(0, 0, 0, 0.05));
   }
   100% {
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.553));
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0));
+  }
+}
+
+@keyframes auto-attack {
+  0% {
+    filter: drop-shadow(0 0 1px rgba(5, 0, 0, 1));
+  }
+  10% {
+    filter: drop-shadow(0 0 2px rgba(20, 0, 0, 0.9));
+  }
+  20% {
+    filter: drop-shadow(0 0 3px rgba(35, 0, 0, 0.8));
+  }
+  30% {
+    filter: drop-shadow(0 0 4px rgba(50, 0, 0, 0.7));
+  }
+  40% {
+    filter: drop-shadow(0 0 5px rgba(65, 0, 0, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(80, 0, 0, 0.5));
+  }
+  60% {
+    filter: drop-shadow(0 0 7px rgba(95, 0, 0, 0.4));
+  }
+  70% {
+    filter: drop-shadow(0 0 8px rgba(110, 0, 0, 0.3));
+  }
+  80% {
+    filter: drop-shadow(0 0 9px rgba(125, 0, 0, 0.2));
+  }
+  90% {
+    filter: drop-shadow(0 0 10px rgba(140, 0, 0, 0.1));
+  }
+  100% {
+    filter: drop-shadow(0 0 11px rgba(155, 0, 0, 0));
+  }
+}
+
+/* TODO: Fun colors to remind to change */
+@keyframes player-dash-shadow {
+  0% {
+    transform: translateY(-0.5rem);
+    filter: drop-shadow(-0.05rem 0.05rem 0.1rem rgb(255, 0, 0));
+  }
+  50% {
+    transform: translateY(+0.4rem);
+    filter: drop-shadow(-0.1rem 0.1rem 0.2rem rgb(200, 255, 0));
+  }
+  100% {
+    transform: translateY(+0.1rem);
+    filter: drop-shadow(0 0.05rem 0.1rem rgb(255, 0, 187));
   }
 }
 
