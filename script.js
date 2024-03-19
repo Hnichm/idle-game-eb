@@ -262,7 +262,16 @@ function updateEnemyContainer() {
   }
 }
 // TODO: Populate this function with all the DOM updates and call in game loop, for later.
-function updateDOM() {}
+function updateDOM() {
+  updateEnemyName();
+  updateEnemyHealth();
+  updateEnemyCurrency();
+  updatePlayerCurrency();
+  updatePlayerAttack();
+  updatePlayerAttackSpeed();
+  updateEnemyContainer();
+  updatePlayerTimer();
+}
 
 // DOM animation functions (?)
 function playerAutoAttackDash() {
@@ -562,28 +571,30 @@ const enemyCurrency = document.querySelector(".enemy-currency");
 function gameLoop() {
   if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
     if (enemy) {
-      updatePlayerAttack();
-      updatePlayerAttackSpeed();
-      updateEnemyCurrency();
-      updatePlayerCurrency();
-      updateEnemyHealth();
+      updateDOM();
+      // updatePlayerAttack();
+      // updatePlayerAttackSpeed();
+      // updateEnemyCurrency();
+      // updatePlayerCurrency();
+      // updateEnemyHealth();
       updateTimer();
       attackEnemy(player, enemy);
       checkEnemyHealth();
-      updateEnemyContainer();
-      updatePlayerTimer();
+      // updateEnemyContainer();
+      // updatePlayerTimer();
     }
     if (enemy === null) {
       // TODO: Encapsulate all DOM functions of this into a function
-      updatePlayerAttack(); // Update the player's attack damage. DOM
-      updatePlayerAttackSpeed(); // Update the player's attack speed. DOM
-      updateEnemyCurrency(); // Update the enemy's currency to 0. DOM
-      updatePlayerCurrency(); // Update the player's currency. DOM
+      updateDOM();
+      // updatePlayerAttack(); // Update the player's attack damage. DOM
+      // updatePlayerAttackSpeed(); // Update the player's attack speed. DOM
+      // updateEnemyCurrency(); // Update the enemy's currency to 0. DOM
+      // updatePlayerCurrency(); // Update the player's currency. DOM
       resetPlayerTimer(); // Reset the player's timer to its maximum value
-      updateEnemyHealth(); // Update the enemy's health 0. DOM
-      updateEnemyName(); // Update the enemy's name from the respawnNameList. DOM
-      updateEnemyContainer(); // Update the enemy container. DOM
-      updatePlayerTimer(); // Update the player's timer. DOM
+      // updateEnemyHealth(); // Update the enemy's health 0. DOM
+      // updateEnemyName(); // Update the enemy's name from the respawnNameList. DOM
+      // updateEnemyContainer(); // Update the enemy container. DOM
+      // updatePlayerTimer(); // Update the player's timer. DOM
     }
   }
 }
