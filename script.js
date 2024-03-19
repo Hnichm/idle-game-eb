@@ -98,9 +98,9 @@ function changeFloor(direction) {
     return;
   }
 
-  if (direction === "ascend") {
+  if (direction === "ascend" && !player.inCombat) {
     player.floor++;
-  } else if (direction === "descend" && player.floor > 0) {
+  } else if (direction === "descend" && player.floor > 0 && !player.inCombat) {
     player.floor--;
   }
 }
@@ -115,6 +115,10 @@ function attackEnemy(attacker, target) {
   ) {
     // Reduce the target's health by the attacker's damage
     target.health -= attacker.attackDamage;
+    // Add css class to player image to display auto attack
+    playerAutoAttackDash();
+    // Add css class to enemy image to display auto attack hit
+    enemyAutoAttacked();
     // Show the damage on the target's image
     // TODO: Show damage numbers on the enemy image when attacked
     // Log the target's remaining health
@@ -184,6 +188,7 @@ function playerDeath() {
   setTimeout(spawnEnemy, 3000);
 }
 
+// DOM functions (?)
 // TODO: Handle this function better, need to find a more elegant solution as opposed to this global variable being passed around..
 function updateEnemyName() {
   const respawnNameList = [
@@ -230,6 +235,10 @@ function updateEnemyCurrency() {
   }
 }
 
+function updatePlayerTimer() {
+  playerTimer.textContent = `Death: ${player.timer.toFixed(2)}`;
+}
+
 function updatePlayerCurrency() {
   playerCurrency.textContent = `Currency: ${player.currency}`;
 }
@@ -255,6 +264,21 @@ function updateEnemyContainer() {
 // TODO: Populate this function with all the DOM updates and call in game loop, for later.
 function updateDOM() {}
 
+// DOM animation functions (?)
+function playerAutoAttackDash() {
+  playerImage.classList.add("auto-attack-dash");
+  setTimeout(() => {
+    playerImage.classList.remove("auto-attack-dash");
+  }, 210);
+}
+
+function enemyAutoAttacked() {
+  enemyImageContainer.classList.add("auto-attack-hit");
+  setTimeout(() => {
+    enemyImageContainer.classList.remove("auto-attack-hit");
+  }, 210);
+}
+
 // DOM Elements
 // ------------
 // The code selects various DOM elements using `querySelector` and assigns them to variables for later use.
@@ -268,6 +292,7 @@ const characterSelectContainer = document.querySelector(
   ".character-select-container"
 );
 const enemyImageContainer = document.querySelector(".enemy-image-container");
+const playerImageContainer = document.querySelector(".player-image-container");
 
 // - `wombImage`: the character select womb image element
 const wombImage = document.querySelector(".character-select-womb");
@@ -526,6 +551,7 @@ const playerClass = document.querySelector(".player-class");
 const playerAttackDamage = document.querySelector(".player-attack");
 const playerAttackSpeed = document.querySelector(".player-attack-speed");
 const playerCurrency = document.querySelector(".player-currency");
+const playerTimer = document.querySelector(".player-timer");
 
 const enemyName = document.querySelector(".enemy-name");
 const enemyHealth = document.querySelector(".enemy-health");
@@ -545,6 +571,7 @@ function gameLoop() {
       attackEnemy(player, enemy);
       checkEnemyHealth();
       updateEnemyContainer();
+      updatePlayerTimer();
     }
     if (enemy === null) {
       // TODO: Encapsulate all DOM functions of this into a function
@@ -556,6 +583,7 @@ function gameLoop() {
       updateEnemyHealth(); // Update the enemy's health 0. DOM
       updateEnemyName(); // Update the enemy's name from the respawnNameList. DOM
       updateEnemyContainer(); // Update the enemy container. DOM
+      updatePlayerTimer(); // Update the player's timer. DOM
     }
   }
 }
