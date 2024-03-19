@@ -182,6 +182,8 @@
 }
 
 .player-image-container {
+  /* Overflow is set to visible so when we call the auto-attack-dash animation, the player image isn't cut off */
+  overflow: visible;
   grid-area: player-image-container;
   align-self: flex-end;
   transform: translateX(24rem);
@@ -306,15 +308,15 @@
 /* TODO: Fun colors to remind to change */
 @keyframes player-dash-shadow {
   0% {
-    transform: translateY(-0.5rem);
+    transform: translateY(-0.35rem);
     filter: drop-shadow(-0.05rem 0.05rem 0.1rem rgb(255, 0, 0));
   }
   50% {
-    transform: translateY(+0.4rem);
+    transform: translateY(-0.15rem);
     filter: drop-shadow(-0.1rem 0.1rem 0.2rem rgb(200, 255, 0));
   }
   100% {
-    transform: translateY(+0.1rem);
+    transform: translateY(+0.5rem);
     filter: drop-shadow(0 0.05rem 0.1rem rgb(255, 0, 187));
   }
 }
