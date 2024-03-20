@@ -329,6 +329,8 @@
 }
 
 .enemy-image-container {
+  overflow: visible;
+  position: relative;
   grid-area: enemy-image-container;
   display: flex;
   justify-content: center;
@@ -380,3 +382,51 @@
 .descend-floor-button {
   grid-area: descend-button;
 }
+
+.floating-damage-number {
+  position: absolute;
+  font-size: 25px;
+  color: red;
+  pointer-events: none;
+  z-index: 20;
+  animation: damageNumberAnimation 1.5s ease-out forwards;
+  transform-origin: center;
+  left: 50%;
+  top: 50%;
+  /*
+  --------------------
+  |        NOTE      |
+  --------------------
+  The following two variables are used to animate the floating damage number. They are set in the JavaScript file. (230 - 245)
+   */
+  --float-x: 0;
+  --float-y: 0;
+}
+
+@keyframes damageNumberAnimation {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--float-x)), -50%) translateY(var(--float-y));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--float-x)), -50%) translateY(calc(var(--float-y) * 0.5));
+  }
+}
+/* .floating-damage-number {
+  position: absolute;
+  font-size: 25px;
+  color: red;
+  pointer-events: none;
+  z-index: 20;
+  animation: damageNumberAnimation 1s ease-out forwards;
+  transform-origin: center;
+  left: 50%;
+  top: 50%;
+} * /
+
+
