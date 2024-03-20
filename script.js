@@ -227,13 +227,15 @@ function updateEnemyHealth() {
   }
 }
 
-function showFloatingDamageNumber(damage, container) {
+function showFloatingDamageNumber(damage, container, isClickAttack = false) {
   const floatingDamageNumber = document.createElement("span");
   floatingDamageNumber.textContent = damage;
-  floatingDamageNumber.classList.add("floating-damage-number");
+  floatingDamageNumber.classList.add(
+    isClickAttack ? "floating-click-damage-number" : "floating-damage-number"
+  );
 
-  const randomX = (Math.random() - 0.5) * 50; // Random horizontal movement between -25 and 25 pixels
-  const randomY = Math.random() * -100 - 50; // Random vertical movement between -50 and -150 pixels
+  const randomX = (Math.random() - 0.5) * 50;
+  const randomY = Math.random() * -100 - 50;
 
   floatingDamageNumber.style.setProperty("--float-x", `${randomX}px`);
   floatingDamageNumber.style.setProperty("--float-y", `${randomY}px`);
@@ -462,6 +464,12 @@ function clickAttackEnemy(attacker, target) {
   if (attacker.clickAttackDamage !== undefined && attacker.canClickAttack) {
     // Reduce the target's health by the attacker's click attack damage
     target.health -= attacker.clickAttackDamage;
+    // Add css class to player image to display click attack
+    showFloatingDamageNumber(
+      attacker.clickAttackDamage,
+      enemyImageContainer,
+      true
+    );
     // Show the damage on the target's image
     console.log(
       `Player click attack: ${attacker.clickAttackDamage} for ${player.clickAttackDamage} danage.`
