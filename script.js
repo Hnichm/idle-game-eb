@@ -120,13 +120,14 @@ function attackEnemy(attacker, target) {
     // Add css class to enemy image to display auto attack hit
     enemyAutoAttacked();
     // Show the damage on the target's image
-    // TODO: Show damage numbers on the enemy image when attacked
+    showFloatingDamageNumber(attacker.attackDamage, enemyImageContainer);
     // Log the target's remaining health
     console.log(`${target.name} health: ${target.health}`);
     // Set the attacker's ability to attack to false
     attacker.canAttack = false;
     // After a delay based on the attacker's attack speed, allow the attacker to attack again
     setTimeout(() => {
+      // Set the attacker's ability to attack to true
       attacker.canAttack = true;
     }, attacker.attackSpeed * 1000);
   }
@@ -224,6 +225,23 @@ function updateEnemyHealth() {
   if (!enemy) {
     enemyHealth.textContent = `Health: 0`;
   }
+}
+
+function showFloatingDamageNumber(damage, container) {
+  const floatingDamageNumber = document.createElement("span");
+  floatingDamageNumber.textContent = damage;
+  floatingDamageNumber.classList.add("floating-damage-number");
+
+  const randomX = (Math.random() - 0.5) * 50; // Random horizontal movement between -25 and 25 pixels
+  const randomY = Math.random() * -100 - 50; // Random vertical movement between -50 and -150 pixels
+
+  floatingDamageNumber.style.setProperty("--float-x", `${randomX}px`);
+  floatingDamageNumber.style.setProperty("--float-y", `${randomY}px`);
+
+  container.appendChild(floatingDamageNumber);
+  setTimeout(() => {
+    floatingDamageNumber.remove();
+  }, 1000);
 }
 
 function updateEnemyCurrency() {
