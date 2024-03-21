@@ -136,10 +136,8 @@ function attackEnemy(attacker, target) {
 function checkEnemyHealth() {
   if (enemy.health) {
     if (enemy.health <= 0) {
-      enemyImage.setAttribute("hidden", true);
-      player.currency += enemy.currency;
-      enemy = null;
-      player.inCombat = false;
+      addCurrency();
+      enemyDeath();
       // TODO: Interlinked with updateEnemyName, need to find a better solution
       enemyNamePopulated = false; // Reset enemyNamePopulated when the enemy is defeated
       setTimeout(spawnEnemy, 3000);
@@ -147,7 +145,19 @@ function checkEnemyHealth() {
   }
 }
 
-// TODO: Add function which shows damage numbers on the enemy image when attacked
+function enemyDeath() {
+  if (enemy.health <= 0) {
+    enemyImage.setAttribute("hidden", true);
+    enemy = null;
+    player.inCombat = false;
+  }
+}
+
+function addCurrency() {
+  player.currency += enemy.currency;
+}
+
+function addTotalCurrency() {}
 
 function updateTimer() {
   if (player.inCombat && enemy) {
