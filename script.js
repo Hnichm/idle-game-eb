@@ -291,6 +291,18 @@ function updateEnemyContainer() {
     enemyImageContainer.classList.remove("click-attack-ready");
   }
 }
+
+function hideUpgradesChildren() {
+  upgradesChildren.forEach((child) => {
+    child.setAttribute("hidden", true);
+  });
+}
+
+function showUpgradesChildren() {
+  upgradesChildren.forEach((child) => {
+    child.removeAttribute("hidden");
+  });
+}
 // TODO: Populate this function with all the DOM updates and call in game loop, for later.
 function updateDOM() {
   updateEnemyName();
@@ -409,8 +421,14 @@ const mainGameContainer = document.querySelector(".main-game-container");
 
 // Utility Functions
 // -----------------
-// - `hideElement(element)`: Hides the specified element by setting its `display` style to `"none"`.
+
+// - `hideElement(element)`: Hides the specified element by setting its `hidden` attribute to true.
 function hideElement(element) {
+  element.setAttribute("hidden", true);
+}
+
+// - `hideDisplay(element)`: Hides the specified element by setting its `display` style to "none".
+function hideDisplay(element) {
   element.style.display = "none";
 }
 
@@ -454,7 +472,7 @@ descendButton.addEventListener("mouseout", () => {
 descendButton.addEventListener("click", () => {
   descendButton.src = "/assets/descend-buttonR.png";
   setTimeout(() => {
-    hideElement(gameStart);
+    hideDisplay(gameStart);
     showElement(characterSelectContainer);
   }, 1000);
 });
@@ -471,6 +489,7 @@ descendFloorButton.addEventListener("click", () => {
   spawnEnemy();
 });
 
+// Performs a click attack on the target enemy using the attacker's click attack damage.
 function clickAttackEnemy(attacker, target) {
   // Check if the attacker has defined click attack damage and if a click attack is currently allowed
   if (attacker.clickAttackDamage !== undefined && attacker.canClickAttack) {
@@ -499,6 +518,7 @@ function clickAttackEnemy(attacker, target) {
   }
 }
 
+// Event listener for the enemy image click event (player click attack)
 enemyImage.addEventListener("click", function () {
   console.log("Enemy image clicked");
   if (player.canClickAttack) {
@@ -509,17 +529,21 @@ enemyImage.addEventListener("click", function () {
   }
 });
 
+// Event listener for the player upgrade button click event
 playerUpgradeButton.addEventListener("click", () => {
-  console.log("Player upgrades button clicked");
-  document
-    .querySelector(".player-stats-container")
-    .setAttribute("hidden", true);
-  playerName.setAttribute("hidden", true);
-  playerAttackDamage.setAttribute("hidden", true);
-  playerAttackSpeed.setAttribute("hidden", true);
-  playerCurrency.setAttribute("hidden", true);
+  // Hide player name, attack damage, attack speed, and currency elements
+  hideElement(playerName);
+  hideElement(playerAttackDamage);
+  hideElement(playerAttackSpeed);
+  hideElement(playerCurrency);
+
+  // Remove the "hidden" attribute from the player upgrades container
   playerUpgradesContainer.removeAttribute("hidden");
+
+  // Show the upgrades children elements
+  showUpgradesChildren();
 });
+
 // Start of character select
 description.textContent = "Choose your fate...";
 classSelect.value = "";
@@ -583,7 +607,7 @@ classSelect.addEventListener("change", () => {
 // - `startGameButton` click event: Hides the character select container and shows the main game container when clicked.
 startGameButton.addEventListener("click", () => {
   if (!gameStarted) {
-    hideElement(characterSelectContainer);
+    hideDisplay(characterSelectContainer);
     showElement(mainGameContainer);
     console.log("Game should start");
     // Update player stats
@@ -594,7 +618,7 @@ startGameButton.addEventListener("click", () => {
     gameStarted = true;
     startGameLoop();
   } else {
-    hideElement(characterSelectContainer);
+    hideDisplay(characterSelectContainer);
     showElement(mainGameContainer);
   }
 });
@@ -613,10 +637,19 @@ const playerTimer = document.querySelector(".player-timer");
 const playerUpgradesContainer = document.querySelector(
   ".player-upgrades-container"
 );
+const upgradesCategoryButtons = document.querySelector(
+  ".upgrade-category-buttons"
+);
 const upgradeOptionsContainer = document.querySelector(
   ".upgrade-options-container"
 );
 const backButton = document.querySelector(".back-button");
+
+const upgradesChildren = [
+  upgradesCategoryButtons,
+  upgradeOptionsContainer,
+  backButton,
+];
 
 const enemyName = document.querySelector(".enemy-name");
 const enemyHealth = document.querySelector(".enemy-health");
@@ -628,29 +661,14 @@ function gameLoop() {
   if (player.attackDamage !== undefined && player.attackSpeed !== undefined) {
     if (enemy) {
       updateDOM();
-      // updatePlayerAttack();
-      // updatePlayerAttackSpeed();
-      // updateEnemyCurrency();
-      // updatePlayerCurrency();
-      // updateEnemyHealth();
       updateTimer();
       attackEnemy(player, enemy);
       checkEnemyHealth();
-      // updateEnemyContainer();
-      // updatePlayerTimer();
     }
     if (enemy === null) {
       // TODO: Encapsulate all DOM functions of this into a function
       updateDOM();
-      // updatePlayerAttack(); // Update the player's attack damage. DOM
-      // updatePlayerAttackSpeed(); // Update the player's attack speed. DOM
-      // updateEnemyCurrency(); // Update the enemy's currency to 0. DOM
-      // updatePlayerCurrency(); // Update the player's currency. DOM
       resetPlayerTimer(); // Reset the player's timer to its maximum value
-      // updateEnemyHealth(); // Update the enemy's health 0. DOM
-      // updateEnemyName(); // Update the enemy's name from the respawnNameList. DOM
-      // updateEnemyContainer(); // Update the enemy container. DOM
-      // updatePlayerTimer(); // Update the player's timer. DOM
     }
   }
 }
@@ -658,6 +676,7 @@ function gameLoop() {
 function startGameLoop() {
   if (gameStarted) {
     console.log("Starting game loop");
+    hideUpgradesChildren();
     spawnEnemy();
     gameLoopInterval = setInterval(gameLoop, 10);
   }
