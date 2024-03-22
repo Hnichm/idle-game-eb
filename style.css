@@ -143,15 +143,6 @@
   grid-area: player-timer;
 }
 
-.player-upgrades-container {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #222;
-  color: #fff;
-}
-
 .player-skills-container {
   grid-area: player-skills;
   border-radius: 1rem;
