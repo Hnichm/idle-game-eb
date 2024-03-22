@@ -347,6 +347,8 @@ const classSelect = document.querySelector(".class-select");
 // `descendFloorButton`: the "descend floor" button element
 const ascendFloorButton = document.querySelector(".ascend-floor-button");
 const descendFloorButton = document.querySelector(".descend-floor-button");
+// `playerUpgradeButton`: the player upgrades toggle button element
+const playerUpgradeButton = document.querySelector(".player-upgrades-toggle");
 
 // Class Properties
 // ----------------
@@ -507,6 +509,17 @@ enemyImage.addEventListener("click", function () {
   }
 });
 
+playerUpgradeButton.addEventListener("click", () => {
+  console.log("Player upgrades button clicked");
+  document
+    .querySelector(".player-stats-container")
+    .setAttribute("hidden", true);
+  playerName.setAttribute("hidden", true);
+  playerAttackDamage.setAttribute("hidden", true);
+  playerAttackSpeed.setAttribute("hidden", true);
+  playerCurrency.setAttribute("hidden", true);
+  playerUpgradesContainer.removeAttribute("hidden");
+});
 // Start of character select
 description.textContent = "Choose your fate...";
 classSelect.value = "";
@@ -597,6 +610,13 @@ const playerAttackDamage = document.querySelector(".player-attack");
 const playerAttackSpeed = document.querySelector(".player-attack-speed");
 const playerCurrency = document.querySelector(".player-currency");
 const playerTimer = document.querySelector(".player-timer");
+const playerUpgradesContainer = document.querySelector(
+  ".player-upgrades-container"
+);
+const upgradeOptionsContainer = document.querySelector(
+  ".upgrade-options-container"
+);
+const backButton = document.querySelector(".back-button");
 
 const enemyName = document.querySelector(".enemy-name");
 const enemyHealth = document.querySelector(".enemy-health");
