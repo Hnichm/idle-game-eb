@@ -24,12 +24,41 @@ let player = {
   clickTimerMax: undefined,
 };
 
+// DOM Elements for Player
+const playerName = document.querySelector(".player-name");
+const playerClass = document.querySelector(".player-class");
+const playerAttackDamage = document.querySelector(".player-attack");
+const playerAttackSpeed = document.querySelector(".player-attack-speed");
+const playerCurrency = document.querySelector(".player-currency");
+const playerTimer = document.querySelector(".player-timer");
+const playerUpgradesContainer = document.querySelector(
+  ".player-upgrades-container"
+);
+const upgradesCategoryButtons = document.querySelector(
+  ".upgrade-category-buttons"
+);
+const upgradeOptionsContainer = document.querySelector(
+  ".upgrade-options-container"
+);
+const backButton = document.querySelector(".back-button");
+
+const upgradesChildren = [
+  upgradesCategoryButtons,
+  upgradeOptionsContainer,
+  backButton,
+];
+
 let enemy = {
   name: "",
   health: undefined,
   imagePath: "",
   currency: 0,
 };
+
+// DOM Elements for Enemy
+const enemyName = document.querySelector(".enemy-name");
+const enemyHealth = document.querySelector(".enemy-health");
+const enemyCurrency = document.querySelector(".enemy-currency");
 
 // This is used for the updateEnemyName function later, this needs to be reworked eventually
 let enemyNamePopulated = false;
@@ -544,6 +573,17 @@ playerUpgradeButton.addEventListener("click", () => {
   showUpgradesChildren();
 });
 
+backButton.addEventListener("click", () => {
+  // Hide the player upgrades container
+  playerUpgradesContainer.setAttribute("hidden", true);
+
+  // Show the player name, attack damage, attack speed, and currency elements
+  showElement(playerName);
+  showElement(playerAttackDamage);
+  showElement(playerAttackSpeed);
+  showElement(playerCurrency);
+});
+
 // Start of character select
 description.textContent = "Choose your fate...";
 classSelect.value = "";
@@ -627,34 +667,6 @@ startGameButton.addEventListener("click", () => {
 
 // Game Logic
 // ----------
-// The code sets up variables for player and enemy UI elements, such as `playerName`, `playerClass`, `playerAttack`, `playerCurrency`, `enemyName`, `enemyHealth`, and `enemyCurrency`.
-const playerName = document.querySelector(".player-name");
-const playerClass = document.querySelector(".player-class");
-const playerAttackDamage = document.querySelector(".player-attack");
-const playerAttackSpeed = document.querySelector(".player-attack-speed");
-const playerCurrency = document.querySelector(".player-currency");
-const playerTimer = document.querySelector(".player-timer");
-const playerUpgradesContainer = document.querySelector(
-  ".player-upgrades-container"
-);
-const upgradesCategoryButtons = document.querySelector(
-  ".upgrade-category-buttons"
-);
-const upgradeOptionsContainer = document.querySelector(
-  ".upgrade-options-container"
-);
-const backButton = document.querySelector(".back-button");
-
-const upgradesChildren = [
-  upgradesCategoryButtons,
-  upgradeOptionsContainer,
-  backButton,
-];
-
-const enemyName = document.querySelector(".enemy-name");
-const enemyHealth = document.querySelector(".enemy-health");
-const enemyCurrency = document.querySelector(".enemy-currency");
-
 // TODO: Add more game logic
 
 function gameLoop() {
