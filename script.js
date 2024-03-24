@@ -357,6 +357,10 @@ function enemyAutoAttacked() {
   setTimeout(() => {
     enemyImageContainer.classList.remove("auto-attack-hit");
   }, 210);
+  enemyImage.classList.add("enemy-image-take-damage");
+  setTimeout(() => {
+    enemyImage.classList.remove("enemy-image-take-damage");
+  }, 210);
 }
 
 // DOM Elements
@@ -678,7 +682,6 @@ function gameLoop() {
       checkEnemyHealth();
     }
     if (enemy === null) {
-      // TODO: Encapsulate all DOM functions of this into a function
       updateDOM();
       resetPlayerTimer(); // Reset the player's timer to its maximum value
     }
