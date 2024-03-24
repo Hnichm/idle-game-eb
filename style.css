@@ -78,6 +78,7 @@
   box-shadow: 1px 1px 1px 1px black;
   grid-area: class-select-choice;
 }
+
 .class-description {
   justify-self: center;
   align-self: center;
@@ -358,6 +359,22 @@
   color: red;
 }
 
+.enemy-image-take-damage {
+  animation: enemy-image-take-damage 0.2s normal;
+}
+
+@keyframes enemy-image-take-damage {
+  0% {
+    transform: translateY(-0.25rem) translateX(0.05rem);
+  }
+  50% {
+    transform: translateY(-0.5rem) translateX(0.75rem);
+  }
+  100% {
+    transform: translateY(-0.75rem) translateX(0.1rem);
+  }
+}
+
 .enemy-stats-container {
   grid-area: enemy-stats;
   display: grid;
@@ -374,7 +391,6 @@
     "ascend-button . descend-button ."
     ". . . .";
 }
-
 
 .ascend-floor-button {
   grid-area: ascend-button;
