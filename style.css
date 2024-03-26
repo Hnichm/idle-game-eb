@@ -180,6 +180,62 @@
   color: white;
 }
 
+.opening-cinematic-container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+}
+
+.opening-cinematic-background {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "enter-womb";
+}
+
+.enter-womb {
+  grid-area: enter-womb;
+  position: absolute;
+  justify-self: center;
+  align-self: center;
+  width: 25rem;
+  height: 25rem;
+  border-radius: 200px;
+  transform: translateX(-12rem) translateY(8rem);
+}
+
+.enter-womb:hover {
+  cursor: pointer;
+  animation: enter-womb-fade-in 1s linear infinite;
+}
+
+@keyframes enter-womb-fade-in {
+  0% {
+    background-color: rgba(25, 0, 0, 0.05);
+  }
+  50% {
+    background-color: rgba(125, 0, 0, 0.2);
+  }
+  100% {
+    background-color: rgba(25, 0, 0, 0.05);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 5s linear;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .main-game-container {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
@@ -278,7 +334,7 @@
   overflow: visible;
   grid-area: player-image-container;
   align-self: flex-end;
-  transform: translateX(24rem);
+  transform: translateX(17.5rem) translateY(-5rem);
   z-index: 2;
 }
 
@@ -375,16 +431,16 @@
     filter: drop-shadow(0 0 4px rgba(50, 0, 0, 0.7));
   }
   40% {
-    filter: drop-shadow(0 0 5px rgba(65, 0, 0, 0.6));
+    filter: drop-shadow(0 0 5px rgba(96, 1, 1, 0.651));
   }
   50% {
-    filter: drop-shadow(0 0 6px rgba(80, 0, 0, 0.5));
+    filter: drop-shadow(0 0 6px rgba(124, 1, 1, 0.69));
   }
   60% {
-    filter: drop-shadow(0 0 7px rgba(95, 0, 0, 0.4));
+    filter: drop-shadow(0 0 7px rgba(135, 0, 0, 0.73));
   }
   70% {
-    filter: drop-shadow(0 0 8px rgba(110, 0, 0, 0.3));
+    filter: drop-shadow(0 0 8px rgba(140, 0, 0, 0.65));
   }
   80% {
     filter: drop-shadow(0 0 9px rgba(125, 0, 0, 0.2));
@@ -400,16 +456,16 @@
 /* TODO: Fun colors to remind to change */
 @keyframes player-dash-shadow {
   0% {
-    transform: translateY(-0.35rem);
-    filter: drop-shadow(-0.05rem 0.05rem 0.1rem rgb(255, 0, 0));
+    transform: translateY(-0.45rem);
+    filter: drop-shadow(-0.05rem 0.05rem 0.1rem rgb(52, 51, 51));
   }
   50% {
-    transform: translateY(-0.15rem);
-    filter: drop-shadow(-0.1rem 0.1rem 0.2rem rgb(200, 255, 0));
+    transform: translateY(-0.55rem) translateX(0.25rem);
+    filter: drop-shadow(-0.1rem 0.1rem 0.2rem rgb(167, 167, 165));
   }
   100% {
     transform: translateY(+0.5rem);
-    filter: drop-shadow(0 0.05rem 0.1rem rgb(255, 0, 187));
+    filter: drop-shadow(0 0.05rem 0.1rem rgb(34, 34, 34));
   }
 }
 
@@ -429,7 +485,7 @@
   align-items: center;
   justify-self: center;
   align-self: center;
-  transform: translateX(10.5rem);
+  transform: translateX(3rem) translateY(-5rem);
   z-index: 2;
   /* border: 10px solid yellow; */
 }
