@@ -198,6 +198,13 @@ function updateTimer() {
   }
 }
 
+function updatePlayerStats() {
+  playerName.textContent = player.name;
+  playerAttackSpeed.textContent = player.attackSpeed;
+  playerAttackDamage.textContent = player.attackDamage;
+  playerCurrency.textContent = player.currency;
+}
+
 function resetPlayerTimer() {
   player.timer = player.maxTimer;
 }
@@ -363,6 +370,20 @@ function enemyAutoAttacked() {
   }, 210);
 }
 
+// Used for after the opening cinematic, draws transparent div over the womb image for player to truly begin their delve
+// TODO: Aff an event listener to this function to begin the game loop
+function enterWombElement() {
+  openingCinematicBackground.classList.add("fade-in");
+  // Show the enter womb button after 5 seconds
+  setTimeout(function () {
+    enterWomb.removeAttribute("hidden");
+    enterWomb.classList.add("enter-womb:hover");
+    enterWomb.addEventListener("click", function () {
+      gameStarted = true;
+    });
+  }, 5000);
+}
+
 // DOM Elements
 // ------------
 // The code selects various DOM elements using `querySelector` and assigns them to variables for later use.
@@ -375,6 +396,15 @@ const descendButton = document.querySelector(".descend-button");
 const characterSelectContainer = document.querySelector(
   ".character-select-container"
 );
+const openingCinematicContainer = document.querySelector(
+  ".opening-cinematic-container"
+);
+const openingCinematicContainerDark = document.querySelector(
+  ".opening-cinematic-container-dark"
+);
+const openingCinematicBackground = document.querySelector(
+  ".opening-cinematic-background"
+);
 const enemyImageContainer = document.querySelector(".enemy-image-container");
 const playerImageContainer = document.querySelector(".player-image-container");
 
@@ -383,10 +413,14 @@ const wombImage = document.querySelector(".character-select-womb");
 
 // - `startGameButton`: the "start game" button element
 const startGameButton = document.querySelector(".start-game-button");
+// ! Important variable for game loop
 let gameStarted = false;
 
 // - `classSelect`: the class select dropdown element
 const classSelect = document.querySelector(".class-select");
+
+// `enterWomb`: the enter womb button element
+const enterWomb = document.querySelector(".enter-womb");
 
 // `ascendFloorButton`: the "ascend floor" button element
 // `descendFloorButton`: the "descend floor" button element
@@ -654,19 +688,20 @@ classSelect.addEventListener("change", () => {
 // - `startGameButton` click event: Hides the character select container and shows the main game container when clicked.
 startGameButton.addEventListener("click", () => {
   if (!gameStarted) {
+    // begin opening cinematic
     hideDisplay(characterSelectContainer);
-    showElement(mainGameContainer);
-    console.log("Game should start");
+    hideElement(enterWomb);
+    enterWombElement();
+    // showElement(mainGameContainer);
     // Update player stats
-    playerName.textContent = player.name;
-    playerAttackSpeed.textContent = player.attackSpeed;
-    playerAttackDamage.textContent = player.attackDamage;
-    playerCurrency.textContent = player.currency;
-    gameStarted = true;
+    updatePlayerStats();
+
+    // Start the game loop
     startGameLoop();
   } else {
     hideDisplay(characterSelectContainer);
-    showElement(mainGameContainer);
+    // showElement(mainGameContainer);
+    document.querySelector(".enter-womb").setAttribute("hidden", true);
   }
 });
 
