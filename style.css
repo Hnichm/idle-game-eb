@@ -56,26 +56,105 @@
 
 .character-select-womb {
   grid-area: womb-image;
+  animation: womb-pulse 3s infinite;
+}
+
+@keyframes womb-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.blurred {
+  filter: drop-shadow(0.1rem 0 1rem rgb(255, 254, 254)) blur(0.05rem);
+  animation: womb-pulse 5s infinite, womb-color-change 5s infinite;
+}
+
+@keyframes womb-color-change {
+  0% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(80, 80, 80)) blur(0.05rem);
+  }
+  50% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(255, 255, 255)) blur(0.05rem);
+  }
+  100% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(80, 80, 80)) blur(0.05rem);
+  }
 }
 
 .blurred-Warrior {
-  filter: drop-shadow(0.1rem 0 1rem rgb(91, 5, 5)) blur(0.05rem);
+  animation: womb-pulse 5s infinite, womb-color-change-warrior 5s infinite;
+}
+
+@keyframes womb-color-change-warrior {
+  0% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(118, 2, 2)) blur(0.05rem);
+  }
+  50% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(221, 19, 19)) blur(0.05rem);
+  }
+  100% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(119, 2, 2)) blur(0.05rem);
+  }
 }
 
 .blurred-Cleric {
-  filter: drop-shadow(0.1rem 0 1rem rgb(212, 193, 72)) blur(0.05rem);
+  animation: womb-pulse 5s infinite, womb-color-change-cleric 5s infinite;
+}
+
+@keyframes womb-color-change-cleric {
+  0% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(100, 91, 34)) blur(0.05rem);
+  }
+  50% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(246, 222, 68)) blur(0.05rem);
+  }
+  100% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(99, 90, 33)) blur(0.05rem);
+  }
 }
 
 .blurred-Rogue {
-  filter: drop-shadow(0.1rem 0 1rem rgb(12, 54, 7)) blur(0.05rem);
+  animation: womb-pulse 5s infinite, womb-color-change-rogue 5s infinite;
+}
+
+@keyframes womb-color-change-rogue {
+  0% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(0, 100, 0)) blur(0.05rem);
+  }
+  50% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(0, 200, 0)) blur(0.05rem);
+  }
+  100% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(0, 100, 0)) blur(0.05rem);
+  }
 }
 
 .blurred-Magician {
-  filter: drop-shadow(0.1rem 0 1rem rgb(2, 17, 90)) blur(0.05rem);
+  filter: drop-shadow(0.1rem 0 1rem rgb(5, 37, 196)) blur(0.05rem);
+  animation: womb-pulse 5s infinite, womb-color-change-magician 5s infinite;
+}
+
+@keyframes womb-color-change-magician {
+  0% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(3, 23, 122)) blur(0.05rem);
+  }
+  50% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(33, 66, 230)) blur(0.05rem);
+  }
+  100% {
+    filter: drop-shadow(0.1rem 0 1rem rgb(3, 23, 122)) blur(0.05rem);
+  }
 }
 
 .class-select {
-  box-shadow: 1px 1px 1px 1px black;
+  box-shadow: 2px 2px 2px 2px black;
   grid-area: class-select-choice;
 }
 
@@ -368,10 +447,10 @@
     transform: translateY(-0.25rem) translateX(0.05rem);
   }
   50% {
-    transform: translateY(-0.5rem) translateX(0.75rem);
+    transform: translateY(-0.5rem) translateX(0.075rem);
   }
   100% {
-    transform: translateY(-0.75rem) translateX(0.1rem);
+    transform: translateY(-0.95rem) translateX(0.125rem);
   }
 }
 

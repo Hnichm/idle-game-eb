@@ -577,6 +577,7 @@ playerUpgradeButton.addEventListener("click", () => {
   showUpgradesChildren();
 });
 
+// Event listener for the back button click event
 backButton.addEventListener("click", () => {
   // Hide the player upgrades container
   playerUpgradesContainer.setAttribute("hidden", true);
@@ -590,6 +591,7 @@ backButton.addEventListener("click", () => {
 
 // Start of character select
 description.textContent = "Choose your fate...";
+wombImage.classList.add("blurred");
 classSelect.value = "";
 startGameButton.disabled = true;
 
@@ -604,6 +606,7 @@ classSelect.addEventListener("change", () => {
   if (selectedClass === "") {
     // Remove the blur effect from the womb image
     wombImage.classList.remove(`blurred-${previousClass}`);
+    wombImage.classList.add(`blurred`);
     // Clear the character select image
     characterSelectImage.src = "";
     // Set the description text
