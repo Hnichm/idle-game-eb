@@ -324,8 +324,8 @@
   grid-template-columns: 0.25fr 10fr 0.25fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
-    "background-image background-image enemy-image-container"
-    "player-image-container background-image background-image";
+    "background-image background-image  enemy-image-container"
+    "player-image-container background-image  background-image";
   overflow: hidden;
 }
 
@@ -336,6 +336,7 @@
   align-self: flex-end;
   transform: translateX(17.5rem) translateY(-5rem);
   z-index: 2;
+  max-width: 110px;
 }
 
 .click-attack-ready {
@@ -472,8 +473,9 @@
 .background-image {
   grid-area: background-image;
   z-index: -1;
-  border: 1px solid green;
-  transform: translateX(-10rem) translateY(-30rem);
+  max-width: auto;
+  max-height: auto;
+  transform: translateX(-5rem) translateY(-25rem);
 }
 
 .enemy-image-container {
