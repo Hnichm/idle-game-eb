@@ -371,16 +371,13 @@ function enemyAutoAttacked() {
 }
 
 // Used for after the opening cinematic, draws transparent div over the womb image for player to truly begin their delve
-// TODO: Aff an event listener to this function to begin the game loop
+// TODO: Add an event listener to this function to begin the game loop
 function enterWombElement() {
   openingCinematicBackground.classList.add("fade-in");
   // Show the enter womb button after 5 seconds
   setTimeout(function () {
     enterWomb.removeAttribute("hidden");
     enterWomb.classList.add("enter-womb:hover");
-    enterWomb.addEventListener("click", function () {
-      gameStarted = true;
-    });
   }, 5000);
 }
 
@@ -685,24 +682,27 @@ classSelect.addEventListener("change", () => {
   }
 });
 
-// - `startGameButton` click event: Hides the character select container and shows the main game container when clicked.
+// - `startGameButton` click event: Hides the character select container and shows the opening 'cinematic'
 startGameButton.addEventListener("click", () => {
   if (!gameStarted) {
     // begin opening cinematic
     hideDisplay(characterSelectContainer);
-    hideElement(enterWomb);
-    enterWombElement();
-    // showElement(mainGameContainer);
-    // Update player stats
-    updatePlayerStats();
 
-    // Start the game loop
-    startGameLoop();
+    // Update player stats;
+    updatePlayerStats();
+    enterWombElement();
   } else {
     hideDisplay(characterSelectContainer);
-    // showElement(mainGameContainer);
-    document.querySelector(".enter-womb").setAttribute("hidden", true);
   }
+});
+
+// - `enterWomb` click event: Hides the character select container and shows the main game container when clicked.
+// ! THIS IS THE START OF THE GAME
+enterWomb.addEventListener("click", () => {
+  hideDisplay(characterSelectContainer);
+  hideDisplay(openingCinematicContainer);
+  gameStarted = true;
+  startGameLoop();
 });
 
 // END of character select
