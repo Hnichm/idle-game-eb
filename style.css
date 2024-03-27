@@ -470,6 +470,7 @@
   }
 }
 
+/* TODO UPDATE PLAYER IMAGE AND ENEMY IMAGE TRANSFORMS */
 .background-image {
   grid-area: background-image;
   z-index: -1;
