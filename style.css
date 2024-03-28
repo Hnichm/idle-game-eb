@@ -334,7 +334,7 @@
   overflow: visible;
   grid-area: player-image-container;
   align-self: flex-end;
-  transform: translateX(17.5rem) translateY(-5rem);
+  transform: translateX(27rem) translateY(-5rem);
   z-index: 2;
   max-width: 110px;
 }
@@ -470,7 +470,6 @@
   }
 }
 
-/* TODO UPDATE PLAYER IMAGE AND ENEMY IMAGE TRANSFORMS */
 .background-image {
   grid-area: background-image;
   z-index: -1;
@@ -488,7 +487,7 @@
   align-items: center;
   justify-self: center;
   align-self: center;
-  transform: translateX(3rem) translateY(-5rem);
+  transform: translateX(9rem) translateY(-3rem);
   z-index: 2;
   /* border: 10px solid yellow; */
 }
