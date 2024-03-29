@@ -261,6 +261,38 @@
   justify-content: center;
 }
 
+.upgrade-category-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1rem;
+  grid-template-areas:
+    "attack-upgrade-button auto-attack-upgrade-button defense-upgrade-button"
+    "abilities-upgrade-button . ."
+    ". . ."
+    ". back-button .";
+}
+
+.attack-upgrade-button {
+  grid-area: attack-upgrade-button;
+}
+
+.auto-attack-upgrade-button {
+  grid-area: auto-attack-upgrade-button;
+}
+
+.defense-upgrade-button {
+  grid-area: defense-upgrade-button;
+}
+
+.abilities-upgrade-button {
+  grid-area: abilities-upgrade-button;
+}
+
+.back-button {
+  grid-area: back-button;
+}
+
 .button-shadow {
   border-radius: 0.15rem;
   box-shadow: 0 0.15rem 0.05rem black;
