@@ -612,6 +612,7 @@ playerUpgradeButton.addEventListener("click", () => {
   hideElement(playerAttackDamage);
   hideElement(playerAttackSpeed);
   hideElement(playerCurrency);
+  hideElement(playerUpgradeButton);
 
   // Remove the "hidden" attribute from the player upgrades container
   playerUpgradesContainer.removeAttribute("hidden");
@@ -630,6 +631,7 @@ backButton.addEventListener("click", () => {
   showElement(playerAttackDamage);
   showElement(playerAttackSpeed);
   showElement(playerCurrency);
+  showElement(playerUpgradeButton);
 });
 
 // Start of character select
