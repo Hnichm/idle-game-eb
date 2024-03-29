@@ -20,6 +20,8 @@ let player = {
   inCombat: false,
   timer: 30,
   maxTimer: 30,
+  timerPaused: false,
+  timerRemainingTime: 0,
   clickTimer: undefined,
   clickTimerMax: undefined,
 };
@@ -189,13 +191,23 @@ function addCurrency() {
 function addTotalCurrency() {}
 
 function updateTimer() {
-  if (player.inCombat && enemy) {
+  if (!player.timerPaused && player.inCombat && enemy) {
     player.timer -= 0.01;
   }
   if (player.timer <= 0) {
     //Player has run out of time
     playerDeath();
   }
+}
+
+function pauseTimer() {
+  player.timerPaused = true;
+  player.timerRemainingTime = player.timer;
+}
+
+function resumeTimer() {
+  player.timerPaused = false;
+  player.timer = player.timerRemainingTime;
 }
 
 function updatePlayerStats() {
