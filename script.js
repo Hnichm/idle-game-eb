@@ -42,6 +42,14 @@ const upgradesCategoryButtons = document.querySelector(
 const upgradeOptionsContainer = document.querySelector(
   ".upgrade-options-container"
 );
+const attackUpgradeButton = document.querySelector(".attack-upgrade-button");
+const autoAttackUpgradeButton = document.querySelector(
+  ".auto-attack-upgrade-button"
+);
+const defenseUpgradeButton = document.querySelector(".defense-upgrade-button");
+const abilitiesUpgradeButton = document.querySelector(
+  ".abilities-upgrade-button"
+);
 const backButton = document.querySelector(".back-button");
 
 const upgradesChildren = [
