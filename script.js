@@ -42,6 +42,7 @@ const upgradesCategoryButtons = document.querySelector(
 const upgradeOptionsContainer = document.querySelector(
   ".upgrade-options-container"
 );
+// TODO: Add event listeners for each upgrade button
 const attackUpgradeButton = document.querySelector(".attack-upgrade-button");
 const autoAttackUpgradeButton = document.querySelector(
   ".auto-attack-upgrade-button"
