@@ -253,6 +253,13 @@
   );
 }
 
+.player-upgrades {
+  display: grid;
+  border: 1px solid red;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
 .player-stats-container {
   grid-area: player-stats;
   display: grid;
