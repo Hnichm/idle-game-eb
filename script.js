@@ -33,6 +33,7 @@ const playerAttackDamage = document.querySelector(".player-attack");
 const playerAttackSpeed = document.querySelector(".player-attack-speed");
 const playerCurrency = document.querySelector(".player-currency");
 const playerTimer = document.querySelector(".player-timer");
+const playerUpgrades = document.querySelector(".player-upgrades");
 const playerUpgradesContainer = document.querySelector(
   ".player-upgrades-container"
 );
@@ -604,7 +605,7 @@ function clickAttackEnemy(attacker, target) {
 }
 
 // Event listener for the enemy image click event (player click attack)
-enemyImage.addEventListener("click", function () {
+enemyImage.addEventListener("click", () => {
   console.log("Enemy image clicked");
   if (player.canClickAttack) {
     console.log("Player can click attack");
@@ -622,12 +623,18 @@ playerUpgradeButton.addEventListener("click", () => {
   hideElement(playerAttackSpeed);
   hideElement(playerCurrency);
   hideElement(playerUpgradeButton);
+  hideElement(playerUpgrades);
 
   // Remove the "hidden" attribute from the player upgrades container
   playerUpgradesContainer.removeAttribute("hidden");
 
   // Show the upgrades children elements
   showUpgradesChildren();
+});
+
+// Event listener for the attack upgrade button click event
+attackUpgradeButton.addEventListener("click", () => {
+  
 });
 
 // Event listener for the back button click event
@@ -641,6 +648,7 @@ backButton.addEventListener("click", () => {
   showElement(playerAttackSpeed);
   showElement(playerCurrency);
   showElement(playerUpgradeButton);
+  showElement(playerUpgrades);
 });
 
 // Start of character select
