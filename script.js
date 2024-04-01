@@ -52,6 +52,7 @@ const defenseUpgradeButton = document.querySelector(".defense-upgrade-button");
 const abilitiesUpgradeButton = document.querySelector(
   ".abilities-upgrade-button"
 );
+const upgradesBackButton = document.querySelector(".upgrades-back-button");
 const backButton = document.querySelector(".back-button");
 
 const upgradesChildren = [
@@ -368,11 +369,24 @@ function showSelectedUpgrade(container) {
   hideDisplay(upgradesCategoryButtons);
   hideDisplay(upgradeOptionsContainer);
   hideDisplay(playerUpgradesContainer);
-  showElement(selectedUpgradeSelector);
-  [...selectedUpgradeSelector.children].forEach((child) => {
-    child.removeAttribute("hidden");
-  });
+  showElement(backButton);
+  // showElement(selectedUpgradeSelector);
+
+  if (selectedUpgradeSelector.hasAttribute("hidden")) {
+    showElement(selectedUpgradeSelector);
+    [...selectedUpgradeSelector.children].forEach((child) => {
+      child.removeAttribute("hidden");
+    });
+  } else {
+    // This can be for the back button
+    hideDisplay(selectedUpgradeSelector);
+    [...selectedUpgradeSelector.children].forEach((child) => {
+      child.setAttributeAttribute("hidden");
+    });
+  }
 }
+
+// TODO: Add hideSelectedUpgrade function
 
 // TODO: Populate this function with all the DOM updates and call in game loop, for later.
 function updateDOM() {
@@ -650,6 +664,9 @@ playerUpgradeButton.addEventListener("click", () => {
 attackUpgradeButton.addEventListener("click", () => {
   showSelectedUpgrade("attack");
 });
+
+// Event listener for the upgrades back button click event
+// TODO: Add event listener for back button within the upgrades using the future hideSelectedUpgrade function
 
 // Event listener for the back button click event
 backButton.addEventListener("click", () => {
