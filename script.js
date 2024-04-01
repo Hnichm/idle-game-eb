@@ -361,6 +361,23 @@ function showUpgradesChildren() {
     child.removeAttribute("hidden");
   });
 }
+
+function showSelectedUpgrade(container) {
+  const selectedUpgradeString = `.${container}-upgrades`;
+  const selectedUpgradeSelector = document.querySelector(selectedUpgradeString);
+  hideDisplay(upgradesCategoryButtons);
+  hideDisplay(upgradeOptionsContainer);
+  showElement(selectedUpgradeSelector);
+  // find all children of selectedupgradeselector and remove hidden attribute
+  // console.log(selectedUpgradeSelector);
+  // console.log(selectedUpgradeSelector.children);
+  // for (let i = 0; i < selectedUpgradeSelector.children.length; i++) {
+  //   selectedUpgradeSelector.children[i].removeAttribute("hidden");
+  // }
+  [...selectedUpgradeSelector.children].forEach((child) => {
+    child.removeAttribute("hidden");
+  });
+}
 // TODO: Populate this function with all the DOM updates and call in game loop, for later.
 function updateDOM() {
   updateEnemyName();
@@ -394,13 +411,14 @@ function enemyAutoAttacked() {
 
 // Used for after the opening cinematic, draws transparent div over the womb image for player to truly begin their delve
 // TODO: Add an event listener to this function to begin the game loop
+const wombIntroTimer = 1000;
 function enterWombElement() {
   openingCinematicBackground.classList.add("fade-in");
   // Show the enter womb button after 5 seconds
   setTimeout(function () {
     enterWomb.removeAttribute("hidden");
     enterWomb.classList.add("enter-womb:hover");
-  }, 5000);
+  }, wombIntroTimer);
 }
 
 // DOM Elements
@@ -520,7 +538,7 @@ function hideDisplay(element) {
 
 // - `showElement(element)`: Shows the specified element by removing the `hidden` attribute.
 function showElement(element) {
-  element.removeAttribute("hidden");
+  element.setAttribute("hidden", false);
 }
 
 // Blur womb image for character select
@@ -634,7 +652,7 @@ playerUpgradeButton.addEventListener("click", () => {
 
 // Event listener for the attack upgrade button click event
 attackUpgradeButton.addEventListener("click", () => {
-  
+  showSelectedUpgrade("attack");
 });
 
 // Event listener for the back button click event
