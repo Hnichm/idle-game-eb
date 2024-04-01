@@ -367,17 +367,13 @@ function showSelectedUpgrade(container) {
   const selectedUpgradeSelector = document.querySelector(selectedUpgradeString);
   hideDisplay(upgradesCategoryButtons);
   hideDisplay(upgradeOptionsContainer);
+  hideDisplay(playerUpgradesContainer);
   showElement(selectedUpgradeSelector);
-  // find all children of selectedupgradeselector and remove hidden attribute
-  // console.log(selectedUpgradeSelector);
-  // console.log(selectedUpgradeSelector.children);
-  // for (let i = 0; i < selectedUpgradeSelector.children.length; i++) {
-  //   selectedUpgradeSelector.children[i].removeAttribute("hidden");
-  // }
   [...selectedUpgradeSelector.children].forEach((child) => {
     child.removeAttribute("hidden");
   });
 }
+
 // TODO: Populate this function with all the DOM updates and call in game loop, for later.
 function updateDOM() {
   updateEnemyName();
