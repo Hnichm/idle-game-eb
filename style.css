@@ -224,7 +224,7 @@
 }
 
 .fade-in {
-  animation: fadeIn 5s linear;
+  animation: fadeIn 1s linear;
 }
 
 @keyframes fadeIn {
@@ -282,6 +282,13 @@
 
 .attack-upgrade-button {
   grid-area: attack-upgrade-button;
+}
+
+.attack-upgrades {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
 }
 
 .auto-attack-upgrade-button {
