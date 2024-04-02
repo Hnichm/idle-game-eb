@@ -363,29 +363,6 @@ function showUpgradesChildren() {
   });
 }
 
-function showSelectedUpgrade(container) {
-  const selectedUpgradeString = `.${container}-upgrades`;
-  const selectedUpgradeSelector = document.querySelector(selectedUpgradeString);
-  hideDisplay(upgradesCategoryButtons);
-  hideDisplay(upgradeOptionsContainer);
-  hideDisplay(playerUpgradesContainer);
-  showElement(backButton);
-  // showElement(selectedUpgradeSelector);
-
-  if (selectedUpgradeSelector.hasAttribute("hidden")) {
-    showElement(selectedUpgradeSelector);
-    [...selectedUpgradeSelector.children].forEach((child) => {
-      child.removeAttribute("hidden");
-    });
-  } else {
-    // This can be for the back button
-    hideDisplay(selectedUpgradeSelector);
-    [...selectedUpgradeSelector.children].forEach((child) => {
-      child.setAttributeAttribute("hidden");
-    });
-  }
-}
-
 // TODO: Add hideSelectedUpgrade function
 
 // TODO: Populate this function with all the DOM updates and call in game loop, for later.
@@ -548,7 +525,7 @@ function hideDisplay(element) {
 
 // - `showElement(element)`: Shows the specified element by removing the `hidden` attribute.
 function showElement(element) {
-  element.setAttribute("hidden", false);
+  element.removeAttribute("hidden");
 }
 
 // Blur womb image for character select
@@ -659,14 +636,6 @@ playerUpgradeButton.addEventListener("click", () => {
   // Show the upgrades children elements
   showUpgradesChildren();
 });
-
-// Event listener for the attack upgrade button click event
-attackUpgradeButton.addEventListener("click", () => {
-  showSelectedUpgrade("attack");
-});
-
-// Event listener for the upgrades back button click event
-// TODO: Add event listener for back button within the upgrades using the future hideSelectedUpgrade function
 
 // Event listener for the back button click event
 backButton.addEventListener("click", () => {
