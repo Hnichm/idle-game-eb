@@ -284,6 +284,10 @@
   grid-area: attack-upgrade-button;
 }
 
+.disabled-attack-upgrades {
+  display: none;
+}
+
 .attack-upgrades {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -295,12 +299,39 @@
   grid-area: auto-attack-upgrade-button;
 }
 
+.auto-attack-upgrades {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+}
+
 .defense-upgrade-button {
   grid-area: defense-upgrade-button;
 }
 
+.defense-upgrades {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+}
+
 .abilities-upgrade-button {
   grid-area: abilities-upgrade-button;
+}
+
+.abilities-upgrades {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.upgrade-player-currency {
+  align-self: center;
+  justify-self: center;
+  font-size: 1.5rem;
 }
 
 .back-button {
