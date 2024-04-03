@@ -12,6 +12,7 @@ let player = {
   attackSpeed: undefined,
   clickAttackDamage: undefined,
   clickAttackSpeed: undefined,
+  class: undefined,
   currency: 0,
   floor: 0,
   imagePath: "",
@@ -24,7 +25,48 @@ let player = {
   timerRemainingTime: 0,
   clickTimer: undefined,
   clickTimerMax: undefined,
+  upgradeLevels: {
+    clickDamage: 1,
+    clickSpeed: 1,
+    autoDamage: 1,
+    autoSpeed: 1,
+    timer: 1,
+    timerReduction: 1,
+    abilityOne: 1,
+    abilityTwo: 1,
+    abilityThree: 1,
+  },
+  upgradeCosts: {},
 };
+
+// Upgrade costs
+function setPlayerAttackUpgradeCosts() {
+  let cost = 0;
+  if (player.class === "Warrior") {
+    cost = 12 * player.upgradeLevels.clickDamage;
+  } else if (player.class === "Magician") {
+    cost = 16 * player.upgradeLevels.clickDamage;
+  } else if (player.class === "Rogue") {
+    cost = 4 * player.upgradeLevels.clickDamage;
+  } else if (player.class === "Cleric") {
+    cost = 8 * player.upgradeLevels.clickDamage;
+  }
+  player.upgradeCosts.clickDamage = cost;
+  return cost;
+}
+
+// Upgrade values
+function setPlayerAttackUpgradeValue() {
+  if (player.class === "Warrior") {
+    player.clickAttackDamage += 5 * player.upgradeLevels.clickDamage;
+  } else if (player.class === "Magician") {
+    player.clickAttackDamage += 7 * player.upgradeLevels.clickDamage;
+  } else if (player.class === "Rogue") {
+    player.clickAttackDamage += 2 * player.upgradeLevels.clickDamage;
+  } else if (player.class === "Cleric") {
+    player.clickAttackDamage += 3 * player.upgradeLevels.clickDamage;
+  }
+}
 
 // DOM Elements for Player
 const playerName = document.querySelector(".player-name");
@@ -43,15 +85,94 @@ const upgradesCategoryButtons = document.querySelector(
 const upgradeOptionsContainer = document.querySelector(
   ".upgrade-options-container"
 );
-// TODO: Add event listeners for each upgrade button
+// DOM Elements for upgrades
+// Upgrade currency display
+const upgradeCurrencyDisplay = document.querySelector(
+  ".upgrade-player-currency"
+);
+
+// Attack upgrades button and container
 const attackUpgradeButton = document.querySelector(".attack-upgrade-button");
+const attackUpgradeContainer = document.querySelector(
+  ".disabled-attack-upgrades"
+);
+
+// Attack upgrades
+const attackUpgradeClickDamageButton = document.querySelector(
+  ".upgrade-click-damage-button"
+);
+const attackUpgradeSpeedButton = document.querySelector(
+  ".upgrade-click-speed-button"
+);
+
+// Attack upgrades back button
+const attackUpgradeBackButton = document.querySelector(".attack-upgrade-back");
+
+// Auto-attack upgrades button and container
 const autoAttackUpgradeButton = document.querySelector(
   ".auto-attack-upgrade-button"
 );
+const autoAttackUpgradeContainer = document.querySelector(
+  ".disabled-auto-attack-upgrades"
+);
+
+// Auto-attack upgrades
+const autoAttackUpgradeDamageButton = document.querySelector(
+  ".upgrade-auto-attack-damage-button"
+);
+const autoAttackUpgradeSpeedButton = document.querySelector(
+  ".upgrade-auto-attack-speed-button"
+);
+
+// Auto-attack upgrades back button
+const autoAttackUpgradeBackButton = document.querySelector(
+  ".auto-attack-upgrade-back"
+);
+
+// Defense upgrades button and container
 const defenseUpgradeButton = document.querySelector(".defense-upgrade-button");
+const defenseUpgradeContainer = document.querySelector(
+  ".disabled-defense-upgrades"
+);
+
+// Defense upgrades
+const defenseUpgradeTimerButton = document.querySelector(
+  ".upgrade-timer-button"
+);
+const defenseUpgradeTimerReductionButton = document.querySelector(
+  ".upgrade-timer-reduction-button"
+);
+
+// Defense upgrades back button
+const defenseUpgradeBackButton = document.querySelector(
+  ".defense-upgrade-back"
+);
+
+// Abilities upgrades button and container
+
 const abilitiesUpgradeButton = document.querySelector(
   ".abilities-upgrade-button"
 );
+const abilitiesUpgradeContainer = document.querySelector(
+  ".disabled-abilities-upgrades"
+);
+
+// Abilities upgrades
+const abilitiesUpgradeOneButton = document.querySelector(
+  ".upgrade-ability-1-button"
+);
+const abilitiesUpgradeTwoButton = document.querySelector(
+  ".upgrade-ability-2-button"
+);
+const abilitiesUpgradeThreeButton = document.querySelector(
+  ".upgrade-ability-3-button"
+);
+
+// Abilities upgrades back button
+const abilitiesUpgradeBackButton = document.querySelector(
+  ".abilities-upgrade-back"
+);
+
 const upgradesBackButton = document.querySelector(".upgrades-back-button");
 const backButton = document.querySelector(".back-button");
 
@@ -61,6 +182,7 @@ const upgradesChildren = [
   backButton,
 ];
 
+// Enemy object
 let enemy = {
   name: "",
   health: undefined,
@@ -258,7 +380,25 @@ function playerDeath() {
   setTimeout(spawnEnemy, 3000);
 }
 
+// Player upgrade functions
+// ------------------------
+
+function upgradeClickDamage() {
+  if (
+    player.currency >=
+    player.upgradeCosts.clickDamage * player.upgradeLevels.clickDamage
+  ) {
+    player.clickAttackDamage += 5;
+    player.currency -=
+      player.upgradeCosts.clickDamage * player.upgradeLevels.clickDamage;
+    player.upgradeLevels.clickDamage++;
+    updatePlayerUpgradeCurrency();
+    updatePlayerAttack();
+  }
+}
+
 // DOM functions (?)
+// -----------------
 // TODO: Handle this function better, need to find a more elegant solution as opposed to this global variable being passed around..
 function updateEnemyName() {
   const respawnNameList = [
@@ -332,6 +472,10 @@ function updatePlayerCurrency() {
   playerCurrency.textContent = `Currency: ${player.currency}`;
 }
 
+function updatePlayerUpgradeCurrency() {
+  upgradeCurrencyDisplay.textContent = `Currency: ${player.currency}`;
+}
+
 function updatePlayerAttack() {
   playerAttackDamage.textContent = `Attack: ${player.attackDamage}`;
 }
@@ -357,6 +501,22 @@ function hideUpgradesChildren() {
   });
 }
 
+function hideUpgradeSubCategories() {
+  hideElement(attackUpgradeButton);
+  hideElement(autoAttackUpgradeButton);
+  hideElement(defenseUpgradeButton);
+  hideElement(abilitiesUpgradeButton);
+  hideElement(playerUpgradesContainer);
+}
+
+function showUpgradeSubCategories() {
+  showElement(attackUpgradeButton);
+  showElement(autoAttackUpgradeButton);
+  showElement(defenseUpgradeButton);
+  showElement(abilitiesUpgradeButton);
+  showElement(playerUpgradesContainer);
+}
+
 function showUpgradesChildren() {
   upgradesChildren.forEach((child) => {
     child.removeAttribute("hidden");
@@ -375,6 +535,7 @@ function updateDOM() {
   updatePlayerAttackSpeed();
   updateEnemyContainer();
   updatePlayerTimer();
+  updatePlayerUpgradeCurrency();
 }
 
 // DOM animation functions (?)
@@ -515,7 +676,7 @@ const mainGameContainer = document.querySelector(".main-game-container");
 
 // - `hideElement(element)`: Hides the specified element by setting its `hidden` attribute to true.
 function hideElement(element) {
-  element.setAttribute("hidden", true);
+  element.setAttribute("hidden", "");
 }
 
 // - `hideDisplay(element)`: Hides the specified element by setting its `display` style to "none".
@@ -637,7 +798,143 @@ playerUpgradeButton.addEventListener("click", () => {
   showUpgradesChildren();
 });
 
-// Event listener for the back button click event
+// Event listener for upgrade sub options
+
+function hideUpgradeSubCategory(container) {
+  switch (container.getAttribute("data-category")) {
+    case "attack":
+      if (container.classList.contains("disabled-attack-upgrades")) {
+        container.classList.remove("disabled-attack-upgrades");
+        container.classList.add("attack-upgrades");
+      }
+      [...container.children].forEach((child) => {
+        child.removeAttribute("hidden");
+      });
+      break;
+    case "autoAttack":
+      if (container.classList.contains("disabled-auto-attack-upgrades")) {
+        container.classList.remove("disabled-auto-attack-upgrades");
+        container.classList.add("auto-attack-upgrades");
+      }
+      [...container.children].forEach((child) => {
+        child.removeAttribute("hidden");
+      });
+      break;
+    case "defense":
+      if (container.classList.contains("disabled-defense-upgrades")) {
+        container.classList.remove("disabled-defense-upgrades");
+        container.classList.add("defense-upgrades");
+      }
+      [...container.children].forEach((child) => {
+        child.removeAttribute("hidden");
+      });
+      break;
+    case "abilities":
+      if (container.classList.contains("disabled-abilities-upgrades")) {
+        container.classList.remove("disabled-abilities-upgrades");
+        container.classList.add("abilities-upgrades");
+      }
+      [...container.children].forEach((child) => {
+        child.removeAttribute("hidden");
+      });
+      break;
+    default:
+      break;
+  }
+}
+
+// Upgrade sub options
+
+// Click attack upgrades sub options
+
+attackUpgradeButton.addEventListener("click", () => {
+  upgradesCategoryButtons.style.display = "none";
+  hideUpgradeSubCategories();
+  hideUpgradeSubCategory(attackUpgradeContainer);
+});
+
+// Attack upgrades
+
+attackUpgradeClickDamageButton.addEventListener("click", () => {
+  let currentCost = setPlayerAttackUpgradeCosts();
+  if (player.currency >= currentCost) {
+    player.currency -= currentCost;
+    setPlayerAttackUpgradeValue();
+    player.upgradeLevels.clickDamage++;
+    updatePlayerCurrency();
+    updatePlayerAttack();
+  }
+});
+
+autoAttackUpgradeButton.addEventListener("click", () => {
+  upgradesCategoryButtons.style.display = "none";
+  hideUpgradeSubCategories();
+  hideUpgradeSubCategory(autoAttackUpgradeContainer);
+});
+
+defenseUpgradeButton.addEventListener("click", () => {
+  upgradesCategoryButtons.style.display = "none";
+  hideUpgradeSubCategories();
+  hideUpgradeSubCategory(defenseUpgradeContainer);
+});
+
+abilitiesUpgradeButton.addEventListener("click", () => {
+  upgradesCategoryButtons.style.display = "none";
+  hideUpgradeSubCategories();
+  hideUpgradeSubCategory(abilitiesUpgradeContainer);
+});
+
+// Sub options back buttons
+
+attackUpgradeBackButton.addEventListener("click", () => {
+  document
+    .querySelector(".attack-upgrades")
+    .classList.add("disabled-attack-upgrades");
+  document
+    .querySelector(".attack-upgrades")
+    .classList.remove("attack-upgrades");
+  showUpgradeSubCategories();
+  showElement(playerUpgradesContainer);
+  upgradesCategoryButtons.style.display = "grid";
+});
+
+autoAttackUpgradeBackButton.addEventListener("click", () => {
+  document
+    .querySelector(".auto-attack-upgrades")
+    .classList.add("disabled-auto-attack-upgrades");
+  document
+    .querySelector(".auto-attack-upgrades")
+    .classList.remove("auto-attack-upgrades");
+  showUpgradeSubCategories();
+  showElement(playerUpgradesContainer);
+  upgradesCategoryButtons.style.display = "grid";
+});
+
+defenseUpgradeBackButton.addEventListener("click", () => {
+  document
+    .querySelector(".defense-upgrades")
+    .classList.add("disabled-defense-upgrades");
+  document
+    .querySelector(".defense-upgrades")
+    .classList.remove("defense-upgrades");
+  showUpgradeSubCategories();
+  showElement(playerUpgradesContainer);
+  upgradesCategoryButtons.style.display = "grid";
+});
+
+abilitiesUpgradeBackButton.addEventListener("click", () => {
+  document
+    .querySelector(".abilities-upgrades")
+    .classList.add("disabled-abilities-upgrades");
+  document
+    .querySelector(".abilities-upgrades")
+    .classList.remove("abilities-upgrades");
+  showUpgradeSubCategories();
+  showElement(playerUpgradesContainer);
+  upgradesCategoryButtons.style.display = "grid";
+});
+
+// Event listener for the REGULAR back button click event
 backButton.addEventListener("click", () => {
   // Hide the player upgrades container
   playerUpgradesContainer.setAttribute("hidden", true);
@@ -701,6 +998,7 @@ classSelect.addEventListener("change", () => {
     player.attackSpeed = attackSpeed;
     player.clickAttackDamage = clickAttackDamage;
     player.clickAttackSpeed = clickAttackSpeed;
+    player.class = selectedClass;
 
     // Remove all blur classes from the womb image
     clearBlurClasses();
