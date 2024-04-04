@@ -39,6 +39,9 @@ let player = {
   upgradeCosts: {},
 };
 
+// Upgrade Functions for Player upgrades
+// --------------------------------------
+
 // Upgrade costs
 function setPlayerAttackUpgradeCosts() {
   let cost = 0;
@@ -55,6 +58,21 @@ function setPlayerAttackUpgradeCosts() {
   return cost;
 }
 
+function setPlayerAttackSpeedUpgradeCosts() {
+  let cost = 0;
+  if (player.class === "Warrior") {
+    cost = 20 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Magician") {
+    cost = 32 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Rogue") {
+    cost = 8 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Cleric") {
+    cost = 16 * player.upgradeLevels.clickSpeed;
+  }
+  player.upgradeCosts.clickSpeed = cost;
+  return cost;
+}
+
 // Upgrade values
 function setPlayerAttackUpgradeValue() {
   if (player.class === "Warrior") {
@@ -68,7 +86,20 @@ function setPlayerAttackUpgradeValue() {
   }
 }
 
+function setPlayerAttackSpeedUpgradeValue() {
+  if (player.class === "Warrior") {
+    player.clickAttackSpeed -= 0.01 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Magician") {
+    player.clickAttackSpeed -= 0.02 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Rogue") {
+    player.clickAttackSpeed -= 0.025 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Cleric") {
+    player.clickAttackSpeed -= 0.01 * player.upgradeLevels.clickSpeed;
+  }
+}
+
 // DOM Elements for Player
+// ------------------------
 const playerName = document.querySelector(".player-name");
 const playerClass = document.querySelector(".player-class");
 const playerAttackDamage = document.querySelector(".player-attack");
@@ -380,23 +411,6 @@ function playerDeath() {
   setTimeout(spawnEnemy, 3000);
 }
 
-// Player upgrade functions
-// ------------------------
-
-function upgradeClickDamage() {
-  if (
-    player.currency >=
-    player.upgradeCosts.clickDamage * player.upgradeLevels.clickDamage
-  ) {
-    player.clickAttackDamage += 5;
-    player.currency -=
-      player.upgradeCosts.clickDamage * player.upgradeLevels.clickDamage;
-    player.upgradeLevels.clickDamage++;
-    updatePlayerUpgradeCurrency();
-    updatePlayerAttack();
-  }
-}
-
 // DOM functions (?)
 // -----------------
 // TODO: Handle this function better, need to find a more elegant solution as opposed to this global variable being passed around..
@@ -639,7 +653,7 @@ const classProperties = {
   },
   Rogue: {
     name: "Doeg",
-    imagePath: "./assets/character-rogue.png",
+    imagePath: "./assets/character-scavenger (1).png",
     description: `Found as a newborn cradled in his mother's corpse, a dark omen hanging over him, he learned to survive in the bastion's underbelly. He mastered not knightly combat, but the dirty tactics of ambush and assassination with his scavenged daggers. His strikes are honed from a life spent exploiting any weakness. Each battle is not for glory, but a brutal bid to ensure there's always one more survivor - himself`,
     attackDamage: 7,
     attackSpeed: 0.5,
@@ -863,6 +877,17 @@ attackUpgradeClickDamageButton.addEventListener("click", () => {
     player.upgradeLevels.clickDamage++;
     updatePlayerCurrency();
     updatePlayerAttack();
+  }
+});
+
+attackUpgradeSpeedButton.addEventListener("click", () => {
+  let currentCost = setPlayerAttackSpeedUpgradeCosts();
+  if (player.currency >= currentCost) {
+    player.currency -= currentCost;
+    setPlayerAttackSpeedUpgradeValue();
+    player.upgradeLevels.clickSpeed++;
+    updatePlayerCurrency();
+    updatePlayerAttackSpeed();
   }
 });
 

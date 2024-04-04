@@ -31,11 +31,11 @@ The `enemy` object represents the enemy character and includes properties like n
 
 The JavaScript code selects various DOM elements using `querySelector` and assigns them to variables for easy access and manipulation. These elements include:
 
-- Player stats: `playerName`, `playerAttackDamage`, `playerAttackSpeed`, `playerCurrency`, `playerTimer`
-- Enemy stats: `enemyName`, `enemyHealth`, `enemyCurrency`
-- Buttons: `descendButton`, `startGameButton`, `enterWomb`, `ascendFloorButton`, `descendFloorButton`, `playerUpgradeButton`
-- Containers: `gameStart`, `characterSelectContainer`, `openingCinematicContainer`, `mainGameContainer`, `playerUpgradesContainer`
-- Images: `wombImage`, `characterSelectImage`, `playerImage`, `enemyImage`
+- Player stats: `playerName`, `playerAttackDamage`, `playerAttackSpeed`, `playerCurrency`, `playerTimer`, etc.
+- Enemy stats: `enemyName`, `enemyHealth`, `enemyCurrency`, etc.
+- Buttons: `descendButton`, `startGameButton`, `enterWomb`, `ascendFloorButton`, `descendFloorButton`, `playerUpgradeButton`, etc.
+- Containers: `gameStart`, `characterSelectContainer`, `openingCinematicContainer`, `mainGameContainer`, `playerUpgradesContainer`, etc.
+- Images: `wombImage`, `characterSelectImage`, `playerImage`, `enemyImage`, etc.
 
 ### Class Properties
 
