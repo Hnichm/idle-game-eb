@@ -71,6 +71,8 @@ function setPlayerAutoAttackSpeedUpgradeCosts() {
   } else if (player.class === "Cleric") {
     cost = 16 * player.upgradeLevels.autoSpeed;
   }
+
+  return cost;
 }
 
 // Upgrade values
@@ -93,6 +95,8 @@ function setPlayerAutoAttackSpeedUpgradeValue() {
     player.attackSpeed -= 0.02 * player.upgradeLevels.autoSpeed;
   } else if (player.class === "Rogue") {
     player.attackSpeed -= 0.025 * player.upgradeLevels.autoSpeed;
+  } else if (player.class === "Cleric") {
+    player.attackSpeed -= 0.01 * player.upgradeLevels.autoSpeed;
   }
 }
 
@@ -968,11 +972,14 @@ autoAttackUpgradeDamageButton.addEventListener("click", () => {
 
 autoAttackUpgradeSpeedButton.addEventListener("click", () => {
   let currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
+  console.log(`Current cost: ${currentCost}`);
+  console.log("Event should trigger");
   if (player.currency >= currentCost) {
     player.currency -= currentCost;
     setPlayerAutoAttackSpeedUpgradeValue();
     player.upgradeLevels.autoSpeed++;
     updatePlayerUpgradeCurrency();
+    updatePlayerAttackSpeed();
   }
 });
 
