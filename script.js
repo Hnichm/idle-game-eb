@@ -42,6 +42,62 @@ let player = {
 // Upgrade Functions for Player upgrades
 // --------------------------------------
 
+// Auto attack upgrades
+// ---------------------
+// Upgrade costs
+function setPlayerAutoAttackUpgradeCosts() {
+  let cost = 0;
+  if (player.class === "Warrior") {
+    cost = 12 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Magician") {
+    cost = 16 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Rogue") {
+    cost = 4 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Cleric") {
+    cost = 8 * player.upgradeLevels.autoDamage;
+  }
+  player.upgradeCosts.autoDamage = cost;
+  return cost;
+}
+
+function setPlayerAutoAttackSpeedUpgradeCosts() {
+  let cost = 0;
+  if (player.class === "Warrior") {
+    cost = 20 * player.upgradeLevels.autoSpeed;
+  } else if (player.class === "Magician") {
+    cost = 32 * player.upgradeLevels.autoSpeed;
+  } else if (player.class === "Rogue") {
+    cost = 8 * player.upgradeLevels.autoSpeed;
+  } else if (player.class === "Cleric") {
+    cost = 16 * player.upgradeLevels.autoSpeed;
+  }
+}
+
+// Upgrade values
+function setPlayerAutoAttackUpgradeValue() {
+  if (player.class === "Warrior") {
+    player.attackDamage += 5 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Magician") {
+    player.attackDamage += 7 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Rogue") {
+    player.attackDamage += 2 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Cleric") {
+    player.attackDamage += 3 * player.upgradeLevels.autoDamage;
+  }
+}
+
+function setPlayerAutoAttackSpeedUpgradeValue() {
+  if (player.class === "Warrior") {
+    player.attackSpeed -= 0.01 * player.upgradeLevels.autoSpeed;
+  } else if (player.class === "Magician") {
+    player.attackSpeed -= 0.02 * player.upgradeLevels.autoSpeed;
+  } else if (player.class === "Rogue") {
+    player.attackSpeed -= 0.025 * player.upgradeLevels.autoSpeed;
+  }
+}
+
+// Click attack upgrades
+// ----------------------
 // Upgrade costs
 function setPlayerAttackUpgradeCosts() {
   let cost = 0;
@@ -118,10 +174,15 @@ const upgradeOptionsContainer = document.querySelector(
 );
 // DOM Elements for upgrades
 // Upgrade currency display
-const upgradeCurrencyDisplay = document.querySelector(
+const upgradeCurrencyDisplay = document.querySelectorAll(
   ".upgrade-player-currency"
 );
 
+function updatePlayerUpgradeCurrency() {
+  upgradeCurrencyDisplay.forEach((element) => {
+    element.textContent = `Currency: ${player.currency}`;
+  });
+}
 // Attack upgrades button and container
 const attackUpgradeButton = document.querySelector(".attack-upgrade-button");
 const attackUpgradeContainer = document.querySelector(
@@ -484,10 +545,6 @@ function updatePlayerTimer() {
 
 function updatePlayerCurrency() {
   playerCurrency.textContent = `Currency: ${player.currency}`;
-}
-
-function updatePlayerUpgradeCurrency() {
-  upgradeCurrencyDisplay.textContent = `Currency: ${player.currency}`;
 }
 
 function updatePlayerAttack() {
@@ -859,7 +916,7 @@ function hideUpgradeSubCategory(container) {
 
 // Upgrade sub options
 
-// Click attack upgrades sub options
+// Click attack upgrades sub options button
 
 attackUpgradeButton.addEventListener("click", () => {
   upgradesCategoryButtons.style.display = "none";
@@ -867,7 +924,7 @@ attackUpgradeButton.addEventListener("click", () => {
   hideUpgradeSubCategory(attackUpgradeContainer);
 });
 
-// Attack upgrades
+// Attack upgrade buttons
 
 attackUpgradeClickDamageButton.addEventListener("click", () => {
   let currentCost = setPlayerAttackUpgradeCosts();
@@ -875,8 +932,7 @@ attackUpgradeClickDamageButton.addEventListener("click", () => {
     player.currency -= currentCost;
     setPlayerAttackUpgradeValue();
     player.upgradeLevels.clickDamage++;
-    updatePlayerCurrency();
-    updatePlayerAttack();
+    updatePlayerUpgradeCurrency();
   }
 });
 
@@ -886,15 +942,38 @@ attackUpgradeSpeedButton.addEventListener("click", () => {
     player.currency -= currentCost;
     setPlayerAttackSpeedUpgradeValue();
     player.upgradeLevels.clickSpeed++;
-    updatePlayerCurrency();
+    updatePlayerUpgradeCurrency();
     updatePlayerAttackSpeed();
   }
 });
 
+// Auto Attack upgrades sub options button
 autoAttackUpgradeButton.addEventListener("click", () => {
   upgradesCategoryButtons.style.display = "none";
   hideUpgradeSubCategories();
   hideUpgradeSubCategory(autoAttackUpgradeContainer);
+});
+
+// Auto attack upgrade buttons
+autoAttackUpgradeDamageButton.addEventListener("click", () => {
+  let currentCost = setPlayerAutoAttackUpgradeCosts();
+  if (player.currency >= currentCost) {
+    player.currency -= currentCost;
+    setPlayerAutoAttackUpgradeValue();
+    player.upgradeLevels.autoDamage++;
+    updatePlayerUpgradeCurrency();
+    updatePlayerAttack();
+  }
+});
+
+autoAttackUpgradeSpeedButton.addEventListener("click", () => {
+  let currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
+  if (player.currency >= currentCost) {
+    player.currency -= currentCost;
+    setPlayerAutoAttackSpeedUpgradeValue();
+    player.upgradeLevels.autoSpeed++;
+    updatePlayerUpgradeCurrency();
+  }
 });
 
 defenseUpgradeButton.addEventListener("click", () => {
