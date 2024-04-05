@@ -653,7 +653,7 @@ const classProperties = {
   },
   Rogue: {
     name: "Doeg",
-    imagePath: "./assets/character-scavenger (1).png",
+    imagePath: "./assets/character-rogue.png",
     description: `Found as a newborn cradled in his mother's corpse, a dark omen hanging over him, he learned to survive in the bastion's underbelly. He mastered not knightly combat, but the dirty tactics of ambush and assassination with his scavenged daggers. His strikes are honed from a life spent exploiting any weakness. Each battle is not for glory, but a brutal bid to ensure there's always one more survivor - himself`,
     attackDamage: 7,
     attackSpeed: 0.5,
