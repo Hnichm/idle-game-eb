@@ -275,7 +275,7 @@
   gap: 1rem;
   grid-template-areas:
     "attack-upgrade-button auto-attack-upgrade-button defense-upgrade-button"
-    "abilities-upgrade-button . ."
+    "abilities-upgrade-button currency-upgrade-button ."
     ". . ."
     ". back-button .";
 }
@@ -326,6 +326,10 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 1rem;
+}
+
+.currency-upgrade-button {
+  grid-area: currency-upgrade-button;
 }
 
 .upgrade-player-currency {
