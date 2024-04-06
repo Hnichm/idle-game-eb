@@ -300,6 +300,20 @@ const abilitiesUpgradeBackButton = document.querySelector(
   ".abilities-upgrade-back"
 );
 
+// Currency upgrades button and container
+const currencyUpgradeButton = document.querySelector(
+  ".currency-upgrade-button"
+);
+const currencyUpgradeContainer = document.querySelector(
+  ".disabled-currency-upgrades"
+);
+
+// Currency upgrades
+const currencyUpgradePassiveButton = document.querySelector(
+  ".upgrade-currency-passive-button"
+);
+// TODO: Add back button event listener further down, need to go to work at Publix. Finish this later tonight.
+
 const upgradesBackButton = document.querySelector(".upgrades-back-button");
 const backButton = document.querySelector(".back-button");
 
