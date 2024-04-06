@@ -158,6 +158,37 @@ function setPlayerAttackSpeedUpgradeValue() {
   }
 }
 
+// Defense (Timer) upgrades
+// ------------------------
+// Upgrade costs
+function setPlayerDefenseUpgradeCosts() {
+  let cost = 0;
+  if (player.class === "Warrior") {
+    cost = 20 * player.upgradeLevels.timer;
+  } else if (player.class === "Magician") {
+    cost = 30 * player.upgradeLevels.timer;
+  } else if (player.class === "Rogue") {
+    cost = 10 * player.upgradeLevels.timer;
+  } else if (player.class === "Cleric") {
+    cost = 15 * player.upgradeLevels.timer;
+  }
+  player.upgradeCosts.timer = cost;
+  return cost;
+}
+
+// Upgrade values
+function setPlayerDefenseUpgradeValue() {
+  if (player.class === "Warrior") {
+    player.maxTimer += 5 * player.upgradeLevels.timer;
+  } else if (player.class === "Magician") {
+    player.maxTimer += 7 * player.upgradeLevels.timer;
+  } else if (player.class === "Rogue") {
+    player.maxTimer += 2 * player.upgradeLevels.timer;
+  } else if (player.class === "Cleric") {
+    player.maxTimer += 3 * player.upgradeLevels.timer;
+  }
+}
+
 // DOM Elements for Player
 // ------------------------
 const playerName = document.querySelector(".player-name");
@@ -983,10 +1014,23 @@ autoAttackUpgradeSpeedButton.addEventListener("click", () => {
   }
 });
 
+// Defense upgrades sub options button
 defenseUpgradeButton.addEventListener("click", () => {
   upgradesCategoryButtons.style.display = "none";
   hideUpgradeSubCategories();
   hideUpgradeSubCategory(defenseUpgradeContainer);
+});
+
+// Defense upgrade buttons
+defenseUpgradeTimerButton.addEventListener("click", () => {
+  let currentCost = setPlayerDefenseUpgradeCosts();
+  if (player.currency >= currentCost) {
+    player.currency -= currentCost;
+    setPlayerDefenseUpgradeValue();
+    player.upgradeLevels.timer++;
+    updatePlayerUpgradeCurrency();
+    updatePlayerTimer();
+  }
 });
 
 abilitiesUpgradeButton.addEventListener("click", () => {
