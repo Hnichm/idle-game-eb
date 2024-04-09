@@ -1047,11 +1047,13 @@ defenseUpgradeTimerButton.addEventListener("click", () => {
   }
 });
 
-abilitiesUpgradeButton.addEventListener("click", () => {
-  upgradesCategoryButtons.style.display = "none";
-  hideUpgradeSubCategories();
-  hideUpgradeSubCategory(abilitiesUpgradeContainer);
-});
+// Maybe? Stopping self from adding too much.
+// // Currency upgrades sub options button
+// currencyUpgradeButton.addEventListener("click", () => {
+//   upgradesCategoryButtons.style.display = "none";
+//   hideUpgradeSubCategories();
+//   hideUpgradeSubCategory(currencyUpgradeContainer);
+// });
 
 // Sub options back buttons
 

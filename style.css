@@ -328,9 +328,9 @@
   gap: 1rem;
 }
 
-.currency-upgrade-button {
+/* .currency-upgrade-button {
   grid-area: currency-upgrade-button;
-}
+} */
 
 .upgrade-player-currency {
   align-self: center;
