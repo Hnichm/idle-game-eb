@@ -645,31 +645,31 @@ function showUpgradesChildren() {
 
 function updateAttackUpgradeInformation() {
   const currentCost = setPlayerAttackUpgradeCosts();
-  upgradeInformation.textContent = `Cost: ${currentCost}`;
+  upgradeInformation[0].textContent = `Cost: ${currentCost}`;
 }
 
 function updateAttackSpeedUpgradeInformation() {
   const currentCost = setPlayerAttackSpeedUpgradeCosts();
-  upgradeInformation.textContent = `Cost: ${currentCost}`;
+  upgradeInformation[0].textContent = `Cost: ${currentCost}`;
 }
 
 function updateAutoAttackUpgradeInformation() {
   const currentCost = setPlayerAutoAttackUpgradeCosts();
-  upgradeInformation.textContent = `Cost: ${currentCost}`;
+  upgradeInformation[1].textContent = `Cost: ${currentCost}`;
 }
 
 function updateAutoAttackSpeedUpgradeInformation() {
   const currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
-  upgradeInformation.textContent = `Cost: ${currentCost}`;
+  upgradeInformation[1].textContent = `Cost: ${currentCost}`;
 }
 
 function updateDefenseUpgradeInformation() {
   const currentCost = setPlayerDefenseUpgradeCosts();
-  upgradeInformation.textContent = `Cost: ${currentCost}`;
+  upgradeInformation[2].textContent = `Cost: ${currentCost}`;
 }
 
 function updateAbilityUpgradeInformation() {
-  upgradeInformation.textContent = `Cost: ${currentCost}`;
+  upgradeInformation[3].textContent = `Cost: ${currentCost}`;
 }
 
 // TODO: Add hideSelectedUpgrade function
@@ -996,7 +996,9 @@ function hideUpgradeSubCategory(container) {
 
 // Click attack upgrades sub options button
 
-const upgradeInformation = document.querySelector(".upgrade-information");
+const upgradeInformation = [
+  ...document.querySelectorAll(".upgrade-information"),
+];
 
 attackUpgradeButton.addEventListener("click", () => {
   upgradesCategoryButtons.style.display = "none";
@@ -1033,6 +1035,7 @@ attackUpgradeSpeedButton.addEventListener("click", () => {
     player.upgradeLevels.clickSpeed++;
     updatePlayerUpgradeCurrency();
     updatePlayerAttackSpeed();
+    updateAttackSpeedUpgradeInformation();
   }
 });
 
@@ -1062,6 +1065,7 @@ autoAttackUpgradeDamageButton.addEventListener("click", () => {
     player.upgradeLevels.autoDamage++;
     updatePlayerUpgradeCurrency();
     updatePlayerAttack();
+    updateAutoAttackUpgradeInformation();
   }
 });
 
@@ -1085,6 +1089,7 @@ autoAttackUpgradeSpeedButton.addEventListener("click", () => {
     player.upgradeLevels.autoSpeed++;
     updatePlayerUpgradeCurrency();
     updatePlayerAttackSpeed();
+    updateAutoAttackSpeedUpgradeInformation();
   }
 });
 
@@ -1114,6 +1119,7 @@ defenseUpgradeTimerButton.addEventListener("click", () => {
     player.upgradeLevels.timer++;
     updatePlayerUpgradeCurrency();
     updatePlayerTimer();
+    updateDefenseUpgradeInformation();
   }
 });
 
