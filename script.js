@@ -1024,7 +1024,7 @@ attackUpgradeClickDamageButton.addEventListener("mouseover", () => {
 
 // Mouseout event for click damage upgrade button, removes cost information
 attackUpgradeClickDamageButton.addEventListener("mouseout", () => {
-  upgradeInformation.textContent = "";
+  upgradeInformation[0].textContent = "";
 });
 
 attackUpgradeSpeedButton.addEventListener("click", () => {
@@ -1046,7 +1046,7 @@ attackUpgradeSpeedButton.addEventListener("mouseover", () => {
 
 // Mouseout event for click speed upgrade button, removes cost information
 attackUpgradeSpeedButton.addEventListener("mouseout", () => {
-  upgradeInformation.textContent = "";
+  upgradeInformation[0].textContent = "";
 });
 
 // Auto Attack upgrades sub options button
@@ -1076,7 +1076,7 @@ autoAttackUpgradeDamageButton.addEventListener("mouseover", () => {
 
 // Mouseout event for auto attack damage upgrade button, removes cost information
 autoAttackUpgradeDamageButton.addEventListener("mouseout", () => {
-  upgradeInformation.textContent = "";
+  upgradeInformation[1].textContent = "";
 });
 
 autoAttackUpgradeSpeedButton.addEventListener("click", () => {
@@ -1100,7 +1100,7 @@ autoAttackUpgradeSpeedButton.addEventListener("mouseover", () => {
 
 // Mouseout event for auto attack speed upgrade button, removes cost information
 autoAttackUpgradeSpeedButton.addEventListener("mouseout", () => {
-  upgradeInformation.textContent = "";
+  upgradeInformation[1].textContent = "";
 });
 
 // Defense upgrades sub options button
@@ -1130,7 +1130,29 @@ defenseUpgradeTimerButton.addEventListener("mouseover", () => {
 
 // Mouseout event for timer upgrade button, removes cost information
 defenseUpgradeTimerButton.addEventListener("mouseout", () => {
-  upgradeInformation.textContent = "";
+  upgradeInformation[2].textContent = "";
+});
+
+defenseUpgradeTimerReductionButton.addEventListener("click", () => {
+  let currentCost = setPlayerDefenseTimerReductionCosts();
+  if (player.currency >= currentCost) {
+    player.currency -= currentCost;
+    setPlayerDefenseTimerReductionValue();
+    player.upgradeLevels.timerReduction++;
+    updatePlayerUpgradeCurrency();
+    updatePlayerTimer();
+    updateDefenseUpgradeInformation();
+  }
+});
+
+// Hover event for timer reduction upgrade button, updates cost information
+defenseUpgradeTimerReductionButton.addEventListener("mouseover", () => {
+  updateDefenseUpgradeInformation();
+});
+
+// Mouseout event for timer reduction upgrade button, removes cost information
+defenseUpgradeTimerReductionButton.addEventListener("mouseout", () => {
+  upgradeInformation[2].textContent = "";
 });
 
 // Maybe? Stopping self from adding too much.
