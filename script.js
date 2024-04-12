@@ -643,6 +643,35 @@ function showUpgradesChildren() {
   });
 }
 
+function updateAttackUpgradeInformation() {
+  const currentCost = setPlayerAttackUpgradeCosts();
+  upgradeInformation.textContent = `Cost: ${currentCost}`;
+}
+
+function updateAttackSpeedUpgradeInformation() {
+  const currentCost = setPlayerAttackSpeedUpgradeCosts();
+  upgradeInformation.textContent = `Cost: ${currentCost}`;
+}
+
+function updateAutoAttackUpgradeInformation() {
+  const currentCost = setPlayerAutoAttackUpgradeCosts();
+  upgradeInformation.textContent = `Cost: ${currentCost}`;
+}
+
+function updateAutoAttackSpeedUpgradeInformation() {
+  const currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
+  upgradeInformation.textContent = `Cost: ${currentCost}`;
+}
+
+function updateDefenseUpgradeInformation() {
+  const currentCost = setPlayerDefenseUpgradeCosts();
+  upgradeInformation.textContent = `Cost: ${currentCost}`;
+}
+
+function updateAbilityUpgradeInformation() {
+  upgradeInformation.textContent = `Cost: ${currentCost}`;
+}
+
 // TODO: Add hideSelectedUpgrade function
 
 // TODO: Populate this function with all the DOM updates and call in game loop, for later.
@@ -967,13 +996,13 @@ function hideUpgradeSubCategory(container) {
 
 // Click attack upgrades sub options button
 
+const upgradeInformation = document.querySelector(".upgrade-information");
+
 attackUpgradeButton.addEventListener("click", () => {
   upgradesCategoryButtons.style.display = "none";
   hideUpgradeSubCategories();
   hideUpgradeSubCategory(attackUpgradeContainer);
 });
-
-// Attack upgrade buttons
 
 attackUpgradeClickDamageButton.addEventListener("click", () => {
   let currentCost = setPlayerAttackUpgradeCosts();
@@ -982,7 +1011,18 @@ attackUpgradeClickDamageButton.addEventListener("click", () => {
     setPlayerAttackUpgradeValue();
     player.upgradeLevels.clickDamage++;
     updatePlayerUpgradeCurrency();
+    updateAttackUpgradeInformation();
   }
+});
+
+// Hover event for click damage upgrade button, updates cost information
+attackUpgradeClickDamageButton.addEventListener("mouseover", () => {
+  updateAttackUpgradeInformation();
+});
+
+// Mouseout event for click damage upgrade button, removes cost information
+attackUpgradeClickDamageButton.addEventListener("mouseout", () => {
+  upgradeInformation.textContent = "";
 });
 
 attackUpgradeSpeedButton.addEventListener("click", () => {
@@ -994,6 +1034,16 @@ attackUpgradeSpeedButton.addEventListener("click", () => {
     updatePlayerUpgradeCurrency();
     updatePlayerAttackSpeed();
   }
+});
+
+// Hover event for click speed upgrade button, updates cost information
+attackUpgradeSpeedButton.addEventListener("mouseover", () => {
+  updateAttackSpeedUpgradeInformation();
+});
+
+// Mouseout event for click speed upgrade button, removes cost information
+attackUpgradeSpeedButton.addEventListener("mouseout", () => {
+  upgradeInformation.textContent = "";
 });
 
 // Auto Attack upgrades sub options button
@@ -1015,6 +1065,16 @@ autoAttackUpgradeDamageButton.addEventListener("click", () => {
   }
 });
 
+// Hover event for auto attack damage upgrade button, updates cost information
+autoAttackUpgradeDamageButton.addEventListener("mouseover", () => {
+  updateAutoAttackUpgradeInformation();
+});
+
+// Mouseout event for auto attack damage upgrade button, removes cost information
+autoAttackUpgradeDamageButton.addEventListener("mouseout", () => {
+  upgradeInformation.textContent = "";
+});
+
 autoAttackUpgradeSpeedButton.addEventListener("click", () => {
   let currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
   console.log(`Current cost: ${currentCost}`);
@@ -1026,6 +1086,16 @@ autoAttackUpgradeSpeedButton.addEventListener("click", () => {
     updatePlayerUpgradeCurrency();
     updatePlayerAttackSpeed();
   }
+});
+
+// Hover event for auto attack speed upgrade button, updates cost information
+autoAttackUpgradeSpeedButton.addEventListener("mouseover", () => {
+  updateAutoAttackSpeedUpgradeInformation();
+});
+
+// Mouseout event for auto attack speed upgrade button, removes cost information
+autoAttackUpgradeSpeedButton.addEventListener("mouseout", () => {
+  upgradeInformation.textContent = "";
 });
 
 // Defense upgrades sub options button
@@ -1045,6 +1115,16 @@ defenseUpgradeTimerButton.addEventListener("click", () => {
     updatePlayerUpgradeCurrency();
     updatePlayerTimer();
   }
+});
+
+// Hover event for timer upgrade button, updates cost information
+defenseUpgradeTimerButton.addEventListener("mouseover", () => {
+  updateDefenseUpgradeInformation();
+});
+
+// Mouseout event for timer upgrade button, removes cost information
+defenseUpgradeTimerButton.addEventListener("mouseout", () => {
+  upgradeInformation.textContent = "";
 });
 
 // Maybe? Stopping self from adding too much.
