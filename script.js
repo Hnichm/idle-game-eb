@@ -146,16 +146,46 @@ function setPlayerAttackUpgradeValue() {
   }
 }
 
-function setPlayerAttackSpeedUpgradeValue() {
+function getPlayerAttackUpgradeValue(upgradeLevels) {
+  let value = 0;
   if (player.class === "Warrior") {
-    player.clickAttackSpeed -= 0.01 * player.upgradeLevels.clickSpeed;
+    value = 5 * upgradeLevels;
   } else if (player.class === "Magician") {
-    player.clickAttackSpeed -= 0.02 * player.upgradeLevels.clickSpeed;
+    value = 7 * upgradeLevels;
   } else if (player.class === "Rogue") {
-    player.clickAttackSpeed -= 0.025 * player.upgradeLevels.clickSpeed;
+    value = 2 * upgradeLevels;
   } else if (player.class === "Cleric") {
-    player.clickAttackSpeed -= 0.01 * player.upgradeLevels.clickSpeed;
+    value = 3 * upgradeLevels;
   }
+  return value;
+}
+
+function setPlayerAttackSpeedUpgradeValue() {
+  let value = 0;
+  if (player.class === "Warrior") {
+    value = player.clickAttackSpeed -= 0.01 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Magician") {
+    value = player.clickAttackSpeed -= 0.02 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Rogue") {
+    value = player.clickAttackSpeed -= 0.025 * player.upgradeLevels.clickSpeed;
+  } else if (player.class === "Cleric") {
+    value = player.clickAttackSpeed -= 0.01 * player.upgradeLevels.clickSpeed;
+  }
+  return value;
+}
+
+function getPlayerAttackSpeedUpgradeValue(upgradeLevels) {
+  let value = 0;
+  if (player.class === "Warrior") {
+    value = 0.01 * upgradeLevels;
+  } else if (player.class === "Magician") {
+    value = 0.02 * upgradeLevels;
+  } else if (player.class === "Rogue") {
+    value = 0.025 * upgradeLevels;
+  } else if (player.class === "Cleric") {
+    value = 0.01 * upgradeLevels;
+  }
+  return value;
 }
 
 // Defense (Timer) upgrades
@@ -645,31 +675,48 @@ function showUpgradesChildren() {
 
 function updateAttackUpgradeInformation() {
   const currentCost = setPlayerAttackUpgradeCosts();
-  upgradeInformation[0].textContent = `Cost: ${currentCost}`;
+  const currentUpgradeValue = getPlayerAttackUpgradeValue(
+    player.upgradeLevels.clickDamage
+  );
+  domUpgradeCosts[0].textContent = `Cost: ${currentCost}`;
+  domUpgradeValues[0].textContent = `Attack Increase: ${currentUpgradeValue}`;
 }
 
 function updateAttackSpeedUpgradeInformation() {
   const currentCost = setPlayerAttackSpeedUpgradeCosts();
-  upgradeInformation[0].textContent = `Cost: ${currentCost}`;
+  const currentUpgradeValue = getPlayerAttackSpeedUpgradeValue(
+    player.upgradeLevels.clickSpeed
+  );
+  domUpgradeCosts[0].textContent = `Cost: ${currentCost}`;
+  domUpgradeValues[0].textContent += `Attack Speed Increase: ${currentUpgradeValue}`;
 }
 
 function updateAutoAttackUpgradeInformation() {
   const currentCost = setPlayerAutoAttackUpgradeCosts();
-  upgradeInformation[1].textContent = `Cost: ${currentCost}`;
+  const currentUpgradeValue = getPlayerAttackUpgradeValue(
+    player.upgradeLevels.autoDamage
+  );
+  domUpgradeCosts[1].textContent = `Cost: ${currentCost}`;
+  domUpgradeValues[1].textContent = `Auto Attack Increase: ${currentUpgradeValue}`;
 }
 
 function updateAutoAttackSpeedUpgradeInformation() {
   const currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
-  upgradeInformation[1].textContent = `Cost: ${currentCost}`;
+  const currentUpgradeValue = getPlayerAttackSpeedUpgradeValue(
+    player.upgradeLevels.autoSpeed
+  );
+  domUpgradeCosts[1].textContent = `Cost: ${currentCost}`;
+  domUpgradeValues[1].textContent = `Auto Attack Speed Increase: ${currentUpgradeValue}`;
 }
 
 function updateDefenseUpgradeInformation() {
   const currentCost = setPlayerDefenseUpgradeCosts();
-  upgradeInformation[2].textContent = `Cost: ${currentCost}`;
+  domUpgradeCosts[2].textContent = `Cost: ${currentCost}`;
+  domUpgradeValues[2].textContent = `Timer Increase: ${player.upgradeLevels.timer}`;
 }
 
 function updateAbilityUpgradeInformation() {
-  upgradeInformation[3].textContent = `Cost: ${currentCost}`;
+  domUpgradeCosts[3].textContent = `Cost: ${currentCost}`;
 }
 
 // TODO: Add hideSelectedUpgrade function
@@ -996,9 +1043,9 @@ function hideUpgradeSubCategory(container) {
 
 // Click attack upgrades sub options button
 
-const upgradeInformation = [
-  ...document.querySelectorAll(".upgrade-information"),
-];
+const domUpgradeCosts = [...document.querySelectorAll(".upgrade-cost")];
+
+const domUpgradeValues = [...document.querySelectorAll(".upgrade-value")];
 
 attackUpgradeButton.addEventListener("click", () => {
   upgradesCategoryButtons.style.display = "none";
@@ -1024,7 +1071,8 @@ attackUpgradeClickDamageButton.addEventListener("mouseover", () => {
 
 // Mouseout event for click damage upgrade button, removes cost information
 attackUpgradeClickDamageButton.addEventListener("mouseout", () => {
-  upgradeInformation[0].textContent = "";
+  domUpgradeCosts[0].textContent = "";
+  domUpgradeValues[0].textContent = "";
 });
 
 attackUpgradeSpeedButton.addEventListener("click", () => {
@@ -1046,7 +1094,8 @@ attackUpgradeSpeedButton.addEventListener("mouseover", () => {
 
 // Mouseout event for click speed upgrade button, removes cost information
 attackUpgradeSpeedButton.addEventListener("mouseout", () => {
-  upgradeInformation[0].textContent = "";
+  domUpgradeCosts[0].textContent = "";
+  domUpgradeValues[0].textContent = "";
 });
 
 // Auto Attack upgrades sub options button
@@ -1076,7 +1125,8 @@ autoAttackUpgradeDamageButton.addEventListener("mouseover", () => {
 
 // Mouseout event for auto attack damage upgrade button, removes cost information
 autoAttackUpgradeDamageButton.addEventListener("mouseout", () => {
-  upgradeInformation[1].textContent = "";
+  domUpgradeCosts[1].textContent = "";
+  domUpgradeValues[1].textContent = "";
 });
 
 autoAttackUpgradeSpeedButton.addEventListener("click", () => {
