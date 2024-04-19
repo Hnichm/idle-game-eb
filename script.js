@@ -378,12 +378,32 @@ function Monster(name, health, imagePath, currency) {
 
 const floorMonsters = [
   [
-    new Monster("Skin-flayer", 100, "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png", 5),
-    new Monster("Bone-Crusher", 200, "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/character-lancer.png", 10),
+    new Monster(
+      "Skin-flayer",
+      100,
+      "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png",
+      5
+    ),
+    new Monster(
+      "Bone-Crusher",
+      200,
+      "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/character-lancer.png",
+      10
+    ),
   ],
   [
-    new Monster("floor2Monster", 100, "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png", 25),
-    new Monster("floor2Monster2", 200, "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png", 50),
+    new Monster(
+      "floor2Monster",
+      100,
+      "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png",
+      25
+    ),
+    new Monster(
+      "floor2Monster2",
+      200,
+      "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png",
+      50
+    ),
   ],
 ];
 
@@ -908,17 +928,20 @@ function rngArrayLength(array) {
 // ---------------
 // - `descendButton` mouseover event: Changes the image source of the "descend" button on mouseover.
 descendButton.addEventListener("mouseover", () => {
-  descendButton.src = "/assets/descend-buttonR.png";
+  descendButton.src =
+    "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/descend-buttonR.png";
 });
 
 // - `descendButton` mouseout event: Changes the image source of the "descend" button back to its original state on mouseout.
 descendButton.addEventListener("mouseout", () => {
-  descendButton.src = "/assets/descend-button.png";
+  descendButton.src =
+    "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/descend-button.png";
 });
 
 // - `descendButton` click event: Hides the game start screen and shows the character select container after a delay of 1 second.
 descendButton.addEventListener("click", () => {
-  descendButton.src = "/assets/descend-buttonR.png";
+  descendButton.src =
+    "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/descend-buttonR.png";
   setTimeout(() => {
     hideDisplay(gameStart);
     showElement(characterSelectContainer);
