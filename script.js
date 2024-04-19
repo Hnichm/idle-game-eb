@@ -378,12 +378,12 @@ function Monster(name, health, imagePath, currency) {
 
 const floorMonsters = [
   [
-    new Monster("Skin-flayer", 100, "./assets/demon-skin-flayer.png", 5),
-    new Monster("Bone-Crusher", 200, "./assets/character-lancer.png", 10),
+    new Monster("Skin-flayer", 100, "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png", 5),
+    new Monster("Bone-Crusher", 200, "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/character-lancer.png", 10),
   ],
   [
-    new Monster("floor2Monster", 100, "./assets/demon-skin-flayer.png", 25),
-    new Monster("floor2Monster2", 200, "./assets/character-lancer.png", 50),
+    new Monster("floor2Monster", 100, "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png", 25),
+    new Monster("floor2Monster2", 200, "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png", 50),
   ],
 ];
 
