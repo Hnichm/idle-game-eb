@@ -693,6 +693,8 @@ function showUpgradesChildren() {
   });
 }
 
+
+//TODO : DRY these functions up
 function updateAttackUpgradeInformation() {
   const currentCost = setPlayerAttackUpgradeCosts();
   const currentUpgradeValue = getPlayerAttackUpgradeValue(
