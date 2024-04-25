@@ -708,7 +708,7 @@ function updateAttackSpeedUpgradeInformation() {
     player.upgradeLevels.clickSpeed
   );
   domUpgradeCosts[0].textContent = `Cost: ${currentCost}`;
-  domUpgradeValues[0].textContent += `Attack Speed Increase: ${currentUpgradeValue}`;
+  domUpgradeValues[0].textContent = `Attack Speed Increase: ${currentUpgradeValue}`;
 }
 
 function updateAutoAttackUpgradeInformation() {
@@ -720,14 +720,14 @@ function updateAutoAttackUpgradeInformation() {
   domUpgradeValues[1].textContent = `Auto Attack Increase: ${currentUpgradeValue}`;
 }
 
-function updateAutoAttackSpeedUpgradeInformation() {
-  const currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
-  const currentUpgradeValue = getPlayerAttackSpeedUpgradeValue(
-    player.upgradeLevels.autoSpeed
-  );
-  domUpgradeCosts[1].textContent = `Cost: ${currentCost}`;
-  domUpgradeValues[1].textContent = `Auto Attack Speed Increase: ${currentUpgradeValue}`;
-}
+// function updateAutoAttackSpeedUpgradeInformation() {
+//   const currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
+//   const currentUpgradeValue = getPlayerAttackSpeedUpgradeValue(
+//     player.upgradeLevels.autoSpeed
+//   );
+//   domUpgradeCosts[1].textContent = `Cost: ${currentCost}`;
+//   domUpgradeValues[1].textContent = `Auto Attack Speed Increase: ${currentUpgradeValue}`;
+// }
 
 function updateDefenseUpgradeInformation() {
   const currentCost = setPlayerDefenseUpgradeCosts();
