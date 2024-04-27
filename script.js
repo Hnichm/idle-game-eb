@@ -206,6 +206,20 @@ function setPlayerDefenseUpgradeCosts() {
   return cost;
 }
 
+function getPlayerDefenseUpgradeCosts(upgradeLevels) {
+  let cost = 0;
+  if (player.class === "Warrior") {
+    cost = 20 * upgradeLevels;
+  } else if (player.class === "Magician") {
+    cost = 30 * upgradeLevels;
+  } else if (player.class === "Rogue") {
+    cost = 10 * upgradeLevels;
+  } else if (player.class === "Cleric") {
+    cost = 15 * upgradeLevels;
+  }
+  return cost;
+}
+
 // Upgrade values
 function setPlayerDefenseUpgradeValue() {
   if (player.class === "Warrior") {
@@ -217,6 +231,20 @@ function setPlayerDefenseUpgradeValue() {
   } else if (player.class === "Cleric") {
     player.maxTimer += 3 * player.upgradeLevels.timer;
   }
+}
+
+function getPlayerDefenseUpgradeValue(upgradeLevels) {
+  let value = 0;
+  if (player.class === "Warrior") {
+    value = 5 * upgradeLevels;
+  } else if (player.class === "Magician") {
+    value = 7 * upgradeLevels;
+  } else if (player.class === "Rogue") {
+    value = 2 * upgradeLevels;
+  } else if (player.class === "Cleric") {
+    value = 3 * upgradeLevels;
+  }
+  return value;
 }
 
 // DOM Elements for Player
@@ -735,8 +763,11 @@ function updateAutoAttackSpeedUpgradeInformation() {
 
 function updateDefenseUpgradeInformation() {
   const currentCost = setPlayerDefenseUpgradeCosts();
+  const currentUpgradeValue = getPlayerDefenseUpgradeValue(
+    player.upgradeLevels.timer
+  );
   domUpgradeCosts[2].textContent = `Cost: ${currentCost}`;
-  domUpgradeValues[2].textContent = `Timer Increase: ${player.upgradeLevels.timer}`;
+  domUpgradeValues[2].textContent = `Timer Increase: ${currentUpgradeValue}`;
 }
 
 function updateAbilityUpgradeInformation() {
@@ -1177,7 +1208,8 @@ autoAttackUpgradeSpeedButton.addEventListener("mouseover", () => {
 
 // Mouseout event for auto attack speed upgrade button, removes cost information
 autoAttackUpgradeSpeedButton.addEventListener("mouseout", () => {
-  upgradeInformation[1].textContent = "";
+  domUpgradeCosts[1].textContent = "";
+  domUpgradeValues[1].textContent = "";
 });
 
 // Defense upgrades sub options button
@@ -1207,7 +1239,8 @@ defenseUpgradeTimerButton.addEventListener("mouseover", () => {
 
 // Mouseout event for timer upgrade button, removes cost information
 defenseUpgradeTimerButton.addEventListener("mouseout", () => {
-  upgradeInformation[2].textContent = "";
+  domUpgradeCosts[2].textContent = "";
+  domUpgradeValues[2].textContent = "";
 });
 
 defenseUpgradeTimerReductionButton.addEventListener("click", () => {
@@ -1229,7 +1262,8 @@ defenseUpgradeTimerReductionButton.addEventListener("mouseover", () => {
 
 // Mouseout event for timer reduction upgrade button, removes cost information
 defenseUpgradeTimerReductionButton.addEventListener("mouseout", () => {
-  upgradeInformation[2].textContent = "";
+  domUpgradeCosts[2].textContent = "";
+  domUpgradeValues[2].textContent = "";
 });
 
 // Maybe? Stopping self from adding too much.
