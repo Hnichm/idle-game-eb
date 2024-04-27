@@ -699,10 +699,11 @@ const monsterNames = [
   "Zephaniah",
 ];
 
-function getMonsterName(names) {}
+function getMonsterName(names) {
+  return names[Math.floor(Math.random() * names.length)];
+}
 
-function Monster(name, health, imagePath, currency) {
-  this.name = name;
+function Monster(health, imagePath, currency) {
   this.health = health;
   this.imagePath = imagePath;
   this.currency = currency;
@@ -711,13 +712,13 @@ function Monster(name, health, imagePath, currency) {
 const floorMonsters = [
   [
     new Monster(
-      "Achan, Undead Warrior",
+      `${getMonsterName(monsterNames)}, Undead Warrior`,
       100,
       "./assets/undead-warrior (1).png",
       5
     ),
     new Monster(
-      "Abimelech, Undead Warrior",
+      `${getMonsterName(monsterNames)}, Undead Warrior`,
       150,
       "./assets/undead-warrior (2).png",
       7
