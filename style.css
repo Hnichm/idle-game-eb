@@ -6,6 +6,14 @@
   overflow: hidden;
 }
 
+/* Pointer */
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+/* Pointer */
+
 .start-background {
   background-position: center;
   height: 100vh;
@@ -268,6 +276,10 @@
   justify-content: center;
 }
 
+.player-upgrades-toggle:hover {
+  cursor: pointer;
+}
+
 .upgrade-category-buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -282,6 +294,10 @@
 
 .attack-upgrade-button {
   grid-area: attack-upgrade-button;
+}
+
+.attack-upgrade-button:hover {
+  cursor: pointer;
 }
 
 .disabled-attack-upgrades {
@@ -387,17 +403,6 @@
   height: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.15rem 0.05rem black;
-}
-
-.player-skill:hover {
-  cursor: pointer;
-  box-shadow: 0rem 0.25rem 0.1rem black;
-  background: linear-gradient(
-    to bottom,
-    rgba(254, 254, 254, 0.366) 0%,
-    rgba(0, 0, 0, 0.384) 100%
-  );
-  color: white;
 }
 
 .combat-area-container {
