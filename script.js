@@ -651,7 +651,10 @@ function updatePlayerAttack() {
 }
 
 function updatePlayerAttackSpeed() {
-  playerAttackSpeed.textContent = `Attack Speed: ${player.attackSpeed}`;
+  playerAttackSpeed.textContent = `Attack Speed: ${parseFloat(
+    player.attackSpeed,
+    10
+  ).toFixed(2)}`;
 }
 
 function updateEnemyContainer() {
@@ -693,7 +696,6 @@ function showUpgradesChildren() {
   });
 }
 
-
 //TODO : DRY these functions up
 function updateAttackUpgradeInformation() {
   const currentCost = setPlayerAttackUpgradeCosts();
@@ -722,14 +724,14 @@ function updateAutoAttackUpgradeInformation() {
   domUpgradeValues[1].textContent = `Auto Attack Increase: ${currentUpgradeValue}`;
 }
 
-// function updateAutoAttackSpeedUpgradeInformation() {
-//   const currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
-//   const currentUpgradeValue = getPlayerAttackSpeedUpgradeValue(
-//     player.upgradeLevels.autoSpeed
-//   );
-//   domUpgradeCosts[1].textContent = `Cost: ${currentCost}`;
-//   domUpgradeValues[1].textContent = `Auto Attack Speed Increase: ${currentUpgradeValue}`;
-// }
+function updateAutoAttackSpeedUpgradeInformation() {
+  const currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
+  const currentUpgradeValue = getPlayerAttackSpeedUpgradeValue(
+    player.upgradeLevels.autoSpeed
+  );
+  domUpgradeCosts[1].textContent = `Cost: ${currentCost}`;
+  domUpgradeValues[1].textContent = `Auto Attack Speed Increase: ${currentUpgradeValue}`;
+}
 
 function updateDefenseUpgradeInformation() {
   const currentCost = setPlayerDefenseUpgradeCosts();
