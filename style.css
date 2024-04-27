@@ -293,10 +293,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-template-rows:
-    ". . ."
-    ". . ."
-    ". . .";
   gap: 1rem;
 }
 
@@ -633,7 +629,7 @@
   transform-origin: center;
   left: 50%;
   top: 50%;
-  
+
   /*
   --------------------
   |        NOTE      |
