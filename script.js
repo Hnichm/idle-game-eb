@@ -406,18 +406,8 @@ function Monster(name, health, imagePath, currency) {
 
 const floorMonsters = [
   [
-    new Monster(
-      "Skin-flayer",
-      100,
-      "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png",
-      5
-    ),
-    new Monster(
-      "Bone-Crusher",
-      200,
-      "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/character-lancer.png",
-      10
-    ),
+    new Monster("Undead Warrior", 100, "./assets/undead-warrior (1).png", 5),
+    new Monster("Undead Warrior", 150, "./assets/undead-warrior (2).png", 7),
   ],
   [
     new Monster(
