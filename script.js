@@ -703,26 +703,21 @@ function getMonsterName(names) {
   return names[Math.floor(Math.random() * names.length)];
 }
 
-function Monster(health, imagePath, currency) {
+function Monster(name, health, imagePath, currency, isBoss) {
+  this.name = name; // Initialize with the provided name
   this.health = health;
   this.imagePath = imagePath;
   this.currency = currency;
+  this.isBoss = isBoss;
 }
 
+// Floor monsters
+// Array containing monsters for each floor
+// Leave name empty for random name generation
 const floorMonsters = [
   [
-    new Monster(
-      `${getMonsterName(monsterNames)}, Undead Warrior`,
-      100,
-      "./assets/undead-warrior (1).png",
-      5
-    ),
-    new Monster(
-      `${getMonsterName(monsterNames)}, Undead Warrior`,
-      150,
-      "./assets/undead-warrior (2).png",
-      7
-    ),
+    new Monster(`Boss Man`, 100, "./assets/undead-warrior (1).png", 5, true),
+    new Monster(``, 150, "./assets/undead-warrior (2).png", 7),
   ],
   [
     new Monster(
@@ -740,18 +735,22 @@ const floorMonsters = [
   ],
 ];
 
+// Generate a new monster for the current floor to pass to the spawnEnemy function
 function getRandomMonster(floor) {
   if (!player.inCombat) {
     const monsters = floorMonsters[floor];
     if (monsters) {
       const randomIndex = Math.floor(Math.random() * monsters.length);
       console.log(`Random index: ${randomIndex}`);
-      const selectedMonster = monsters[randomIndex];
+      const selectedMonster = monsters[randomIndex]; // Select a random monster from the array
       return new Monster(
-        selectedMonster.name,
-        selectedMonster.health,
-        selectedMonster.imagePath,
-        selectedMonster.currency
+        selectedMonster.isBoss // Use the provided name if it's a boss
+          ? selectedMonster.name // Provided name
+          : getMonsterName(monsterNames), // Generate a new name if not a boss
+        selectedMonster.health, // Use the provided health
+        selectedMonster.imagePath, // Use the provided image path
+        selectedMonster.currency, // Use the provided currency
+        selectedMonster.isBoss // Use the provided boss status
       );
     } else {
       console.error(`No monsters defined for floor ${floor}`);
@@ -761,6 +760,7 @@ function getRandomMonster(floor) {
   return null;
 }
 
+// Receives the value from getRandomMonster and assigns it to the enemy object
 function spawnEnemy() {
   // Check if the player is not in combat
   if (!player.inCombat) {
@@ -781,6 +781,7 @@ function spawnEnemy() {
 }
 
 // TODO: Complete function
+// This function checks if the player is in combat and if the enemy is not null, if so, they may ascend or descend
 function changeFloor(direction) {
   if (player.inCombat) {
     return;
@@ -821,6 +822,7 @@ function attackEnemy(attacker, target) {
   }
 }
 
+// Used to check enemy health and calls enemyDeath function if health is 0 or less
 function checkEnemyHealth() {
   if (enemy.health) {
     if (enemy.health <= 0) {
@@ -833,6 +835,7 @@ function checkEnemyHealth() {
   }
 }
 
+// Function to handle enemy death
 function enemyDeath() {
   if (enemy.health <= 0) {
     enemyImage.setAttribute("hidden", true);
@@ -841,6 +844,7 @@ function enemyDeath() {
   }
 }
 
+// Function to handle player currency
 function addCurrency() {
   player.currency += enemy.currency;
 }
