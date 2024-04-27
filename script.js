@@ -406,8 +406,18 @@ function Monster(name, health, imagePath, currency) {
 
 const floorMonsters = [
   [
-    new Monster("Undead Warrior", 100, "./assets/undead-warrior (1).png", 5),
-    new Monster("Undead Warrior", 150, "./assets/undead-warrior (2).png", 7),
+    new Monster(
+      "Achan, Undead Warrior",
+      100,
+      "./assets/undead-warrior (1).png",
+      5
+    ),
+    new Monster(
+      "Abimelech, Undead Warrior",
+      150,
+      "./assets/undead-warrior (2).png",
+      7
+    ),
   ],
   [
     new Monster(
