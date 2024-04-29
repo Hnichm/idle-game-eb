@@ -1,4 +1,4 @@
-// script.js
+// TODO: 4/29/2024 - Create variable and function to update dom element for .player-attack-ready class when player can click attack
 
 // Player and Enemy Objects
 // -------------------------
