@@ -120,6 +120,7 @@ The code includes animation functions to enhance the visual feedback of the game
 - `playerAutoAttackDash`: Adds the `auto-attack-dash` class to the player image to trigger the auto-attack animation.
 - `enemyAutoAttacked`: Adds the `auto-attack-hit` and `enemy-image-take-damage` classes to the enemy image container and enemy image respectively to trigger the enemy hit animation.
 - `showFloatingDamageNumber`: Creates a floating damage number element and appends it to the specified container, animating it using CSS animations.
+- `updateDOM`: This function is a centralized place to call all the individual DOM update functions. It is currently called in the game loop to update the UI with the latest game state. As the game grows, more DOM update functions can be added to this function to keep the UI in sync with the game state.
 
 ### Game Loop
 
@@ -133,10 +134,11 @@ When the player clicks on the `playerUpgradeButton`, the player upgrades contain
 
 The `backButton` allows the player to return to the main game screen, hiding the upgrades container and showing the player stats elements.
 
+The upgrade system also includes functions to update the upgrade information displayed to the player, such as the upgrade costs and values. These functions, like `updateAttackUpgradeInformation`, `updateAttackSpeedUpgradeInformation`, `updateAutoAttackUpgradeInformation`, `updateAutoAttackSpeedUpgradeInformation`, and `updateDefenseUpgradeInformation`, are called when the player hovers over the corresponding upgrade buttons to display the relevant information.
+
 ## Interaction and Game Flow
 
-The game starts with the game start screen, where the player can click the "descend" button on the game start screen, the game checks for a saved game. If a saved game exists, the player is presented with a modal offering the choice to start a new game or load the saved game. If the player chooses to load the saved game, they will skip the character select and opening cinematic screens and be taken directly to the main game, resuming from where they left off. Else it proceeds to the character select screen. On the character select screen, the player chooses their desired class, which updates the description, image, and player stats accordingly. 
-
+The game starts with the game start screen, where the player can click the "descend" button on the game start screen, the game checks for a saved game. If a saved game exists, the player is presented with a modal offering the choice to start a new game or load the saved game. If the player chooses to load the saved game, they will skip the character select and opening cinematic screens and be taken directly to the main game, resuming from where they left off. Else it proceeds to the character select screen. On the character select screen, the player chooses their desired class, which updates the description, image, and player stats accordingly.
 
 After selecting a class, the player clicks the "Forward" button to start the opening cinematic. Once the cinematic is complete, the player can click the "enter womb" (the entrance to the cavernous structure) button to begin the main game.
 
