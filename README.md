@@ -25,17 +25,31 @@ The JavaScript file (`script.js`) handles the game logic and interactivity. It i
 
 The `player` object represents the player character and contains properties such as name, attack damage, attack speed, currency, floor, image path, and various game states like `inCombat` and `canAttack`. It also includes properties for the game timer, such as `timer`, `maxTimer`, `timerPaused`, and `timerRemainingTime`.
 
+The `player` object also includes properties for upgrade levels (`upgradeLevels`) and upgrade costs (`upgradeCosts`) for various player stats and abilities.
+
 The `enemy` object represents the enemy character and includes properties like name, health, image path, and currency.
+
+### Upgrade Functions
+
+The code includes several functions that handle the logic for player upgrades:
+
+- `setPlayerAutoAttackUpgradeCosts` and `setPlayerAutoAttackSpeedUpgradeCosts`: Calculate the upgrade costs for auto-attack damage and speed based on the player's class and upgrade level.
+- `setPlayerAutoAttackUpgradeValue` and `setPlayerAutoAttackSpeedUpgradeValue`: Update the player's auto-attack damage and speed based on the upgrade level.
+- `setPlayerAttackUpgradeCosts` and `setPlayerAttackSpeedUpgradeCosts`: Calculate the upgrade costs for click attack damage and speed based on the player's class and upgrade level.
+- `setPlayerAttackUpgradeValue` and `setPlayerAttackSpeedUpgradeValue`: Update the player's click attack damage and speed based on the upgrade level.
+- `setPlayerDefenseUpgradeCosts`: Calculate the upgrade cost for the player's defense (timer) based on the player's class and upgrade level.
+- `setPlayerDefenseUpgradeValue`: Update the player's defense (timer) based on the upgrade level.
 
 ### DOM Elements
 
-The JavaScript code selects various DOM elements using `querySelector` and assigns them to variables for easy access and manipulation. These elements include:
+The code selects various DOM elements using `querySelector` and assigns them to variables for easy access and manipulation. These elements include:
 
 - Player stats: `playerName`, `playerAttackDamage`, `playerAttackSpeed`, `playerCurrency`, `playerTimer`, etc.
 - Enemy stats: `enemyName`, `enemyHealth`, `enemyCurrency`, etc.
 - Buttons: `descendButton`, `startGameButton`, `enterWomb`, `ascendFloorButton`, `descendFloorButton`, `playerUpgradeButton`, etc.
 - Containers: `gameStart`, `characterSelectContainer`, `openingCinematicContainer`, `mainGameContainer`, `playerUpgradesContainer`, etc.
 - Images: `wombImage`, `characterSelectImage`, `playerImage`, `enemyImage`, etc.
+- Upgrade elements: `upgradeCurrencyDisplay`, `attackUpgradeButton`, `autoAttackUpgradeButton`, `defenseUpgradeButton`, `abilitiesUpgradeButton`, etc.
 
 ### Class Properties
 
@@ -63,6 +77,7 @@ Event listeners are set up to handle user interactions:
 - `enemyImage`: Triggers the `clickAttackEnemy` function when clicked, allowing the player to perform a click attack on the enemy.
 - `playerUpgradeButton`: Shows the player upgrades container and hides other player stats elements.
 - `backButton`: Hides the player upgrades container and shows the player stats elements.
+- `Upgrade buttons`: Event listeners are set up for various upgrade buttons (`attackUpgradeClickDamageButton`, `attackUpgradeSpeedButton`, `autoAttackUpgradeDamageButton`, `autoAttackUpgradeSpeedButton`, `defenseUpgradeTimerButton`, etc.) to handle the upgrade functionality and update the corresponding player stats and UI elements.
 
 ### Game Logic
 
