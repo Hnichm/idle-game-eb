@@ -281,7 +281,7 @@
 .player-stats-container {
   grid-area: player-stats;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   align-content: center;
   justify-content: center;
 }
