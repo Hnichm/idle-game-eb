@@ -358,19 +358,15 @@ const abilitiesUpgradeBackButton = document.querySelector(
   ".abilities-upgrade-back"
 );
 
-// Currency upgrades button and container
-const currencyUpgradeButton = document.querySelector(
-  ".currency-upgrade-button"
-);
-const currencyUpgradeContainer = document.querySelector(
-  ".disabled-currency-upgrades"
-);
+// Save game modal
+// Used to display new game and load game buttons
+const saveGameModal = document.querySelector(".save-game-modal");
 
-// Currency upgrades
-const currencyUpgradePassiveButton = document.querySelector(
-  ".upgrade-currency-passive-button"
-);
-// TODO: Add back button event listener further down, need to go to work at Publix. Finish this later tonight.
+// New game button
+const newGameButton = document.querySelector(".new-game-button");
+
+// Load game button
+const loadGameButton = document.querySelector(".load-game-button");
 
 const upgradesBackButton = document.querySelector(".upgrades-back-button");
 const backButton = document.querySelector(".back-button");
@@ -888,6 +884,26 @@ function extendPlayerTimer(seconds) {
   player.timer += seconds;
 }
 
+// ! SAVE TESTING
+function hasSavedGame() {
+  return localStorage.getItem("playerData") !== null;
+}
+
+function savePlayerData() {
+  const playerData = JSON.stringify(player);
+  localStorage.setItem("playerData", playerData);
+}
+
+function loadPlayerData() {
+  const playerData = localStorage.getItem("playerData");
+  if (playerData) {
+    const parsedPlayerData = JSON.parse(playerData);
+    Object.assign(player, parsedPlayerData);
+    playerImage.src = player.imagePath;
+    console.log("Loaded player image path:", player.imagePath);
+  }
+}
+
 function playerDeath() {
   // Handle player death logic
   console.log("Player died!");
@@ -1249,6 +1265,12 @@ function showElement(element) {
   element.removeAttribute("hidden");
 }
 
+// Show any other elements that should be visible when starting the game
+function showGameElements() {
+  showElement(mainGameContainer);
+  showElement(playerImageContainer);
+}
+
 // Blur womb image for character select
 const blurClasses = [
   "blurred-Warrior",
@@ -1286,10 +1308,37 @@ descendButton.addEventListener("mouseout", () => {
 descendButton.addEventListener("click", () => {
   descendButton.src =
     "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/descend-buttonR.png";
-  setTimeout(() => {
-    hideDisplay(gameStart);
-    showElement(characterSelectContainer);
-  }, 1000);
+
+  if (hasSavedGame()) {
+    // Show a prompt asking the user if they want to start a new game or continue
+    showElement(saveGameModal);
+
+    newGameButton.addEventListener("click", function () {
+      // User chose to start a new game
+      localStorage.removeItem("playerData"); // Remove the saved game data
+      setTimeout(() => {
+        hideDisplay(gameStart);
+        showElement(characterSelectContainer);
+      }, 1000);
+    });
+
+    loadGameButton.addEventListener("click", function () {
+      loadPlayerData();
+      hideDisplay(saveGameModal);
+      hideDisplay(gameStart);
+      hideDisplay(characterSelectContainer);
+      hideDisplay(openingCinematicContainer);
+      gameStarted = true;
+      showGameElements(); // Show the necessary elements
+      startGameLoop();
+    });
+  } else {
+    // No saved game exists, start a new game
+    setTimeout(() => {
+      hideDisplay(gameStart);
+      showElement(characterSelectContainer);
+    }, 1000);
+  }
 });
 
 // - `ascendFloorButton` click event: Calls the changeFloor function with "ascend" direction
@@ -1698,6 +1747,7 @@ classSelect.addEventListener("change", () => {
     player.clickAttackDamage = clickAttackDamage;
     player.clickAttackSpeed = clickAttackSpeed;
     player.class = selectedClass;
+    player.imagePath = imagePath;
 
     // Remove all blur classes from the womb image
     clearBlurClasses();
@@ -1718,6 +1768,7 @@ startGameButton.addEventListener("click", () => {
 
     // Update player stats;
     updatePlayerStats();
+    savePlayerData(); // Save the player data after selecting a class
     enterWombElement();
   } else {
     hideDisplay(characterSelectContainer);
@@ -1748,6 +1799,7 @@ function gameLoop() {
       checkEnemyHealth();
     }
     if (enemy === null) {
+      savePlayerData();
       updateDOM();
       resetPlayerTimer(); // Reset the player's timer to its maximum value
     }
@@ -1759,6 +1811,8 @@ function startGameLoop() {
     console.log("Starting game loop");
     hideUpgradesChildren();
     spawnEnemy();
+    loadPlayerData();
+    showGameElements();
     gameLoopInterval = setInterval(gameLoop, 10);
   }
 }
