@@ -30,6 +30,16 @@
   left: 32.5rem;
 }
 
+.save-game-modal {
+  position: absolute;
+  width: 500px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  top: 25rem;
+  left: 35.5rem;
+}
+
 .descend-button:hover {
   cursor: pointer;
 }
