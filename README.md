@@ -2,6 +2,8 @@
 
 This is an idle game where the player selects a character class, battles enemies, and progresses through different floors. The game is built using HTML, CSS, and JavaScript.
 
+# [Click to play](https://hnichm.github.io/idle-game-eb/)
+
 ## HTML Structure
 
 The HTML file (`index.html`) defines the structure of the game's user interface. It includes the following main sections:
