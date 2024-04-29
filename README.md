@@ -94,8 +94,20 @@ The core game logic is implemented through various functions:
 - `updateTimer`: Updates the game timer and checks for player death.
 - `pauseTimer` and `resumeTimer`: Implements the pause and resume functionality for the game timer.
 - `playerDeath`: Handles the player death logic, resetting the timer, decreasing the floor, and spawning a new enemy after a delay.
+- `savePlayerData`: Saves the player's data to local storage, allowing the game to be resumed later.
+- `loadPlayerData`: Loads the player's data from local storage, restoring the game state.
+- `hasSavedGame`: Checks if there is a saved game available in local storage.
 
 These functions work together to create the game flow, handle player actions, update game states, and trigger appropriate UI updates.
+
+### Save and Load System
+
+The game includes a save and load system that allows the player to resume their progress. When the player clicks the "descend" button on the game start screen, the game checks if there is a saved game available using the `hasSavedGame` function. If a saved game exists, a modal is displayed with options to start a new game or load the saved game.
+
+- If the player chooses to start a new game, the saved game data is removed from local storage, and the game proceeds to the character select screen.
+- If the player chooses to load the saved game, the `loadPlayerData` function is called, which retrieves the saved player data from local storage and assigns it to the `player` object. The game then skips the character select and opening cinematic screens and starts the main game loop.
+
+The `savePlayerData` function is called at various points throughout the game, such as when the player selects a class and when the enemy is defeated, to save the current game state to local storage.
 
 ### DOM Updates
 
@@ -123,7 +135,8 @@ The `backButton` allows the player to return to the main game screen, hiding the
 
 ## Interaction and Game Flow
 
-The game starts with the game start screen, where the player can click the "descend" button to proceed to the character select screen. On the character select screen, the player chooses their desired class, which updates the description, image, and player stats accordingly.
+The game starts with the game start screen, where the player can click the "descend" button on the game start screen, the game checks for a saved game. If a saved game exists, the player is presented with a modal offering the choice to start a new game or load the saved game. If the player chooses to load the saved game, they will skip the character select and opening cinematic screens and be taken directly to the main game, resuming from where they left off. Else it proceeds to the character select screen. On the character select screen, the player chooses their desired class, which updates the description, image, and player stats accordingly. 
+
 
 After selecting a class, the player clicks the "Forward" button to start the opening cinematic. Once the cinematic is complete, the player can click the "enter womb" (the entrance to the cavernous structure) button to begin the main game.
 
