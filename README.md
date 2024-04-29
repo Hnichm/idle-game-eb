@@ -145,3 +145,14 @@ After selecting a class, the player clicks the "Forward" button to start the ope
 In the main game, the player battles enemies, uses skills, and upgrades their stats. The game loop continuously updates the UI, checks for enemy health, and handles player attacks and timer updates. The player can ascend or descend floors to face different enemies and progress through the game.
 
 The game also includes an upgrade system, where the player can allocate currency earned from defeating enemies to enhance their attack, auto-attack, defense, and abilities.
+
+## Future Improvements and Features
+
+- More enemy variety: Adding diverse enemies with unique abilities and behaviors, some affecting the player's timer.
+
+- Sound effects: Atmospheric ambience, attack sounds, and audio feedback for ui elements.
+
+- Visual effects: Skill effects, and other visual elements to enhance the 'feel' of the game.
+
+- Skill system: Skills for each class, attempting to offer a differing playstyle.
+
