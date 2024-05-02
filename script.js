@@ -252,10 +252,12 @@ function getPlayerDefenseUpgradeValue(upgradeLevels) {
 const playerName = document.querySelector(".player-name");
 const playerClass = document.querySelector(".player-class");
 const playerAttackDamage = document.querySelector(".player-attack");
+const playerAttackReady = document.querySelector(".player-attack-ready");
 const playerAttackSpeed = document.querySelector(".player-attack-speed");
 const playerCurrency = document.querySelector(".player-currency");
 const playerTimer = document.querySelector(".player-timer");
 const playerUpgrades = document.querySelector(".player-upgrades");
+const playerUpgradesToggle = document.querySelector(".player-upgrades-toggle");
 const playerUpgradesContainer = document.querySelector(
   ".player-upgrades-container"
 );
@@ -1399,6 +1401,7 @@ playerUpgradeButton.addEventListener("click", () => {
   hideElement(playerName);
   hideElement(playerAttackDamage);
   hideElement(playerAttackSpeed);
+  hideElement(playerAttackReady);
   hideElement(playerCurrency);
   hideElement(playerUpgradeButton);
   hideElement(playerUpgrades);
@@ -1693,6 +1696,7 @@ backButton.addEventListener("click", () => {
   showElement(playerAttackSpeed);
   showElement(playerCurrency);
   showElement(playerUpgradeButton);
+  showElement(playerAttackReady);
   showElement(playerUpgrades);
 });
 
