@@ -1369,7 +1369,7 @@ descendFloorButton.addEventListener("click", () => {
   spawnEnemy();
 });
 
-let remainingTime = player.clickAttackSpeed;
+let remainingTime = 0;
 let attackTimerInterval;
 
 function updateAttackTimer() {
@@ -1377,15 +1377,16 @@ function updateAttackTimer() {
 
   if (remainingTime <= 0) {
     playerAttackReady.textContent = "Click Attack Ready!";
+    clearInterval(attackTimerInterval);
   } else {
     playerAttackReady.textContent = `Attack in: ${remainingTime.toFixed(2)}`;
   }
 }
 
-// Performs a click attack on the target enemy using the attacker's click attack damage.
 function startAttackTimer() {
-  remainingTime = player.clickAttackSpeed;
-  attackTimerInterval = setInterval(updateAttackTimer, 10);
+  clearInterval(attackTimerInterval); // Clear any existing interval
+  remainingTime = player.clickAttackSpeed; // Reset the remaining time to the player's click attack speed
+  attackTimerInterval = setInterval(updateAttackTimer, 10); // Call updateAttackTimer every 10ms
 }
 
 function clickAttackEnemy(attacker, target) {
@@ -1409,7 +1410,6 @@ function clickAttackEnemy(attacker, target) {
     attacker.canClickAttack = false;
     updateEnemyContainer();
 
-    // Reset the attack bar and button immediately after the click attack
     const attackBar = document.querySelector(".player-attack-bar");
     const attackButton = document.querySelector(".player-attack-button");
 
@@ -1427,7 +1427,6 @@ function clickAttackEnemy(attacker, target) {
     setTimeout(() => {
       attacker.canClickAttack = true;
       updateEnemyContainer();
-      clearInterval(attackTimerInterval);
     }, attacker.clickAttackSpeed * 1000);
   }
 }
@@ -1436,9 +1435,15 @@ function showPlayerAttackReady() {
   if (player.canClickAttack) {
     playerAttackReady.textContent = "Click Attack Ready!";
   } else {
-    playerAttackReady.textContent = `Attack in: ${player.clickAttackSpeed.toFixed(
-      2
-    )}`;
+    playerAttackReady.textContent = `Attack in: ${remainingTime.toFixed(2)}`;
+  }
+}
+
+function showPlayerAttackReady() {
+  if (player.canClickAttack) {
+    playerAttackReady.textContent = "Click Attack Ready!";
+  } else {
+    playerAttackReady.textContent = `Attack in: ${remainingTime.toFixed(2)}`;
   }
 }
 
