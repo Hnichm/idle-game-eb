@@ -984,6 +984,20 @@ function showFloatingDamageNumber(damage, container, isClickAttack = false) {
   }, 1000);
 }
 
+function showPlayerAttackReady() {
+  let playerClickAttackSpeed = player.clickAttackSpeed;
+  let currentClickAttackSpeed = playerClickAttackSpeed.toFixed(2);
+  if (player.canClickAttack) {
+    playerAttackReady.textContent = "Click Attack Ready!";
+  } else {
+    setTimeout(() => {
+      playerAttackReady.textContent = `Attack in: ${
+        player.clickAttackSpeed.toFixed(2) - 0.1
+      }`;
+    }, 10);
+  }
+}
+
 function updateEnemyCurrency() {
   if (enemy && enemy.currency !== undefined) {
     enemyCurrency.textContent = `Currency: ${enemy.currency}`;
@@ -1114,8 +1128,8 @@ function updateDOM() {
   updateEnemyContainer();
   updatePlayerTimer();
   updatePlayerUpgradeCurrency();
+  showPlayerAttackReady();
 }
-
 // DOM animation functions (?)
 function playerAutoAttackDash() {
   playerImage.classList.add("auto-attack-dash");
@@ -1355,7 +1369,25 @@ descendFloorButton.addEventListener("click", () => {
   spawnEnemy();
 });
 
+let remainingTime = player.clickAttackSpeed;
+let attackTimerInterval;
+
+function updateAttackTimer() {
+  remainingTime -= 0.01;
+
+  if (remainingTime <= 0) {
+    playerAttackReady.textContent = "Click Attack Ready!";
+  } else {
+    playerAttackReady.textContent = `Attack in: ${remainingTime.toFixed(2)}`;
+  }
+}
+
 // Performs a click attack on the target enemy using the attacker's click attack damage.
+function startAttackTimer() {
+  remainingTime = player.clickAttackSpeed;
+  attackTimerInterval = setInterval(updateAttackTimer, 10);
+}
+
 function clickAttackEnemy(attacker, target) {
   // Check if the attacker has defined click attack damage and if a click attack is currently allowed
   if (attacker.clickAttackDamage !== undefined && attacker.canClickAttack) {
@@ -1369,18 +1401,44 @@ function clickAttackEnemy(attacker, target) {
     );
     // Show the damage on the target's image
     console.log(
-      `Player click attack: ${attacker.clickAttackDamage} for ${player.clickAttackDamage} danage.`
+      `Player click attack: ${attacker.clickAttackDamage} for ${player.clickAttackDamage} damage.`
     );
     // Log the target's remaining health
     console.log(`${target.name} health: ${target.health}`);
     // Disable click attacks
     attacker.canClickAttack = false;
     updateEnemyContainer();
-    // Re-enable click attacks after a delay based on the attacker's click attack speed
+
+    // Reset the attack bar and button immediately after the click attack
+    const attackBar = document.querySelector(".player-attack-bar");
+    const attackButton = document.querySelector(".player-attack-button");
+
+    if (attackBar && attackButton) {
+      attackBar.style.width = "0";
+      attackBar.style.display = "block";
+      attackButton.setAttribute("hidden", true);
+
+      // Start filling the attack bar immediately after the click attack
+      updateAttackBar();
+    }
+
+    startAttackTimer();
+
     setTimeout(() => {
       attacker.canClickAttack = true;
       updateEnemyContainer();
+      clearInterval(attackTimerInterval);
     }, attacker.clickAttackSpeed * 1000);
+  }
+}
+
+function showPlayerAttackReady() {
+  if (player.canClickAttack) {
+    playerAttackReady.textContent = "Click Attack Ready!";
+  } else {
+    playerAttackReady.textContent = `Attack in: ${player.clickAttackSpeed.toFixed(
+      2
+    )}`;
   }
 }
 
@@ -1800,10 +1858,12 @@ function gameLoop() {
       updateDOM();
       updateTimer();
       attackEnemy(player, enemy);
+      showPlayerAttackReady();
       checkEnemyHealth();
     }
     if (enemy === null) {
       savePlayerData();
+      showPlayerAttackReady();
       updateDOM();
       resetPlayerTimer(); // Reset the player's timer to its maximum value
     }

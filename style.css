@@ -284,6 +284,21 @@
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   align-content: center;
   justify-content: center;
+  grid-template-areas: "."
+  "."
+  "player-click-attack"
+  "."
+  "."
+  ".";
+}
+
+.player-click-attack {
+  /* make it so this doesn't resize all other grid cells when it's text changes */
+  grid-area: player-click-attack;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  
 }
 
 .player-upgrades-toggle:hover {
