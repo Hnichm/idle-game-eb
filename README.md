@@ -81,6 +81,28 @@ Event listeners are set up to handle user interactions:
 - `backButton`: Hides the player upgrades container and shows the player stats elements.
 - `Upgrade buttons`: Event listeners are set up for various upgrade buttons (`attackUpgradeClickDamageButton`, `attackUpgradeSpeedButton`, `autoAttackUpgradeDamageButton`, `autoAttackUpgradeSpeedButton`, `defenseUpgradeTimerButton`, etc.) to handle the upgrade functionality and update the corresponding player stats and UI elements.
 
+### Click Attack
+
+The code includes functions to handle the player's click attack on the enemy:
+
+- `clickAttackEnemy(attacker, target)`: Performs a click attack on the enemy when the player clicks on the enemy image. It reduces the enemy's health, shows floating damage numbers, and disables click attacks temporarily.
+- `startAttackTimer()`: Starts the timer for the player's click attack cooldown.
+- `updateAttackTimer()`: Updates the remaining time for the player's click attack cooldown and displays it on the UI.
+- `showPlayerAttackReady()`: Updates the UI to show when the player's click attack is ready.
+- `updateAttackBar()`: Updates the attack bar UI element to visually represent the click attack cooldown.
+
+### Upgrade System
+
+The upgrade system includes the following function:
+
+- `hideUpgradeSubCategory(container)`: Hides the upgrade sub-categories based on the clicked category button.
+
+### DOM Updates
+
+The code includes a centralized function for updating the DOM:
+
+- `updateDOM()`: This function is a centralized place to call all the individual DOM update functions. It is currently called in the game loop to update the UI with the latest game state. As the game grows, more DOM update functions can be added to this function to keep the UI in sync with the game state.
+
 ### Game Logic
 
 The core game logic is implemented through various functions:
@@ -157,4 +179,3 @@ The game also includes an upgrade system, where the player can allocate currency
 - Visual effects: Skill effects, and other visual elements to enhance the 'feel' of the game.
 
 - Skill system: Skills for each class, attempting to offer a differing playstyle.
-
