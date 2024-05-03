@@ -1,5 +1,3 @@
-// TODO: 4/29/2024 - Create variable and function to update dom element for .player-attack-ready class when player can click attack
-
 // Player and Enemy Objects
 // -------------------------
 // The code defines two objects: `player` and `enemy`, which represent the player and enemy characters in the game.
