@@ -284,12 +284,13 @@
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   align-content: center;
   justify-content: center;
-  grid-template-areas: "."
-  "."
-  "player-click-attack"
-  "."
-  "."
-  ".";
+  grid-template-areas:
+    "."
+    "."
+    "player-click-attack"
+    "."
+    "."
+    ".";
 }
 
 .player-click-attack {
@@ -298,7 +299,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  
 }
 
 .player-upgrades-toggle:hover {
@@ -370,14 +370,15 @@
   gap: 1rem;
 }
 
-/* .currency-upgrade-button {
-  grid-area: currency-upgrade-button;
-} */
+.upgrade-value {
+  overflow: visible;
+}
 
 .upgrade-player-currency {
   align-self: center;
   justify-self: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  overflow: visible;
 }
 
 .back-button {
