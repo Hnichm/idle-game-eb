@@ -710,24 +710,17 @@ function Monster(name, health, imagePath, currency, isBoss) {
 // Floor monsters
 // Array containing monsters for each floor
 // Leave name empty for random name generation
+
 const floorMonsters = [
   [
-    new Monster(`Boss Man`, 100, "./assets/undead-warrior (1).png", 5, true),
-    new Monster(``, 150, "./assets/undead-warrior (2).png", 7),
+    new Monster(``, 50, "./assets/undead-warrior (1).png", 5),
+    new Monster(``, 75, "./assets/undead-warrior (2).png", 10),
+    new Monster(``, 100, "./assets/undead-warrior (3).png", 15),
   ],
   [
-    new Monster(
-      "floor2Monster",
-      100,
-      "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png",
-      25
-    ),
-    new Monster(
-      "floor2Monster2",
-      200,
-      "https://raw.githubusercontent.com/Hnichm/idle-game-eb/main/assets/demon-skin-flayer.png",
-      50
-    ),
+    new Monster("", 150, "./assets/undead-warrior (4).png", 20),
+    new Monster("", 300, "./assets/undead-warrior (5).png", 30),
+    new Monster("", 450, "./assets/undead-warrior (6).png", 40),
   ],
 ];
 
@@ -1344,7 +1337,7 @@ descendButton.addEventListener("click", () => {
       hideDisplay(openingCinematicContainer);
       gameStarted = true;
       showGameElements(); // Show the necessary elements
-      startGameLoop();
+      setTimeout(startGameLoop, 100); // Start the game loop after a short delay
     });
   } else {
     // No saved game exists, start a new game
@@ -1868,7 +1861,7 @@ function gameLoop() {
       savePlayerData();
       showPlayerAttackReady();
       updateDOM();
-      resetPlayerTimer(); // Reset the player's timer to its maximum value
+      resetPlayerTimer();
     }
   }
 }
@@ -1877,8 +1870,8 @@ function startGameLoop() {
   if (gameStarted) {
     console.log("Starting game loop");
     hideUpgradesChildren();
-    spawnEnemy();
     loadPlayerData();
+    spawnEnemy();
     showGameElements();
     gameLoopInterval = setInterval(gameLoop, 10);
   }
