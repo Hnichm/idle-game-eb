@@ -722,6 +722,39 @@ const floorMonsters = [
     new Monster("", 300, "./assets/undead-warrior (5).png", 30),
     new Monster("", 450, "./assets/undead-warrior (6).png", 40),
   ],
+  [
+    new Monster("", 750, "./assets/undead-warrior (7).png", 65),
+    new Monster("", 1000, "./assets/undead-warrior (8).png", 80),
+    new Monster("", 1500, "./assets/undead-warrior (9).png", 100),
+  ],
+  [
+    new Monster("", 2000, "./assets/undead-warrior (10).png", 150),
+    new Monster("", 3000, "./assets/undead-warrior (11).png", 200),
+    new Monster("", 4000, "./assets/undead-warrior (12).png", 250),
+  ],
+  [
+    new Monster("", 5000, "./assets/undead-warrior (13).png", 300),
+    new Monster("", 6000, "./assets/undead-warrior (14).png", 350),
+    new Monster("", 7000, "./assets/undead-warrior (15).png", 400),
+  ],
+  // double health of monters
+  [
+    new Monster("", 10000, "./assets/undead-warrior (16).png", 500),
+    new Monster("", 12000, "./assets/undead-warrior (17).png", 600),
+    new Monster("", 14000, "./assets/undead-warrior (18).png", 700),
+  ],
+  // 4x health of monsters
+  [
+    new Monster("", 20000, "./assets/undead-warrior (19).png", 1000),
+    new Monster("", 24000, "./assets/undead-warrior (20).png", 1200),
+    new Monster("", 28000, "./assets/undead-warrior (21).png", 1400),
+  ],
+  // 8x health of monsters
+  [
+    new Monster("", 40000, "./assets/undead-warrior (22).png", 2000),
+    new Monster("", 48000, "./assets/undead-warrior (23).png", 2400),
+    new Monster("", 56000, "./assets/undead-warrior (24).png", 2800),
+  ],
 ];
 
 // Generate a new monster for the current floor to pass to the spawnEnemy function
