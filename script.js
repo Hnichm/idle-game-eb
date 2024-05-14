@@ -76,25 +76,25 @@ function setPlayerAutoAttackSpeedUpgradeCosts() {
 // Upgrade values
 function setPlayerAutoAttackUpgradeValue() {
   if (player.class === "Warrior") {
-    player.attackDamage += 5 * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Magician") {
-    player.attackDamage += 7 * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Rogue") {
-    player.attackDamage += 2 * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Cleric") {
     player.attackDamage += 3 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Magician") {
+    player.attackDamage += 2 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Rogue") {
+    player.attackDamage += 0.5 * player.upgradeLevels.autoDamage;
+  } else if (player.class === "Cleric") {
+    player.attackDamage += 1 * player.upgradeLevels.autoDamage;
   }
 }
 
 function setPlayerAutoAttackSpeedUpgradeValue() {
   if (player.class === "Warrior") {
-    player.attackSpeed -= 0.01 * player.upgradeLevels.autoSpeed;
+    player.attackSpeed -= 0.005 * player.upgradeLevels.autoSpeed;
   } else if (player.class === "Magician") {
-    player.attackSpeed -= 0.02 * player.upgradeLevels.autoSpeed;
+    player.attackSpeed -= 0.0035 * player.upgradeLevels.autoSpeed;
   } else if (player.class === "Rogue") {
-    player.attackSpeed -= 0.025 * player.upgradeLevels.autoSpeed;
+    player.attackSpeed -= 0.0095 * player.upgradeLevels.autoSpeed;
   } else if (player.class === "Cleric") {
-    player.attackSpeed -= 0.01 * player.upgradeLevels.autoSpeed;
+    player.attackSpeed -= 0.0055 * player.upgradeLevels.autoSpeed;
   }
 }
 
@@ -754,6 +754,27 @@ const floorMonsters = [
     new Monster("", 40000, "./assets/undead-warrior (22).png", 2000),
     new Monster("", 48000, "./assets/undead-warrior (23).png", 2400),
     new Monster("", 56000, "./assets/undead-warrior (24).png", 2800),
+  ],
+
+  // 32x health of monsters
+  [
+    new Monster("", 80000, "./assets/undead-warrior (25).png", 4000),
+    new Monster("", 96000, "./assets/undead-warrior (26).png", 4800),
+    new Monster("", 112000, "./assets/undead-warrior (27).png", 5600),
+  ],
+
+  // 128x health of monsters
+  [
+    new Monster("", 160000, "./assets/undead-warrior (28).png", 8000),
+    new Monster("", 192000, "./assets/undead-warrior (29).png", 9600),
+    new Monster("", 224000, "./assets/undead-warrior (30).png", 11200),
+  ],
+
+  // 512x health of monsters
+  [
+    new Monster("", 320000, "./assets/undead-warrior (31).png", 16000),
+    new Monster("", 384000, "./assets/undead-warrior (32).png", 19200),
+    new Monster("", 448000, "./assets/undead-warrior (33).png", 22400),
   ],
 ];
 
