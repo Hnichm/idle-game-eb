@@ -37,6 +37,13 @@ let player = {
   upgradeCosts: {},
 };
 
+//
+
+const playerWarriorAutoAttackSpeedValue = 0.005;
+const playerMagicianAutoAttackSpeedValue = 0.0035;
+const playerRogueAutoAttackSpeedValue = 0.0095;
+const playerClericAutoAttackSpeedValue = 0.0055;
+
 // Upgrade Functions for Player upgrades
 // --------------------------------------
 
@@ -88,13 +95,17 @@ function setPlayerAutoAttackUpgradeValue() {
 
 function setPlayerAutoAttackSpeedUpgradeValue() {
   if (player.class === "Warrior") {
-    player.attackSpeed -= 0.005 * player.upgradeLevels.autoSpeed;
+    player.attackSpeed -=
+      playerWarriorAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
   } else if (player.class === "Magician") {
-    player.attackSpeed -= 0.0035 * player.upgradeLevels.autoSpeed;
+    player.attackSpeed -=
+      playerMagicianAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
   } else if (player.class === "Rogue") {
-    player.attackSpeed -= 0.0095 * player.upgradeLevels.autoSpeed;
+    player.attackSpeed -=
+      playerRogueAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
   } else if (player.class === "Cleric") {
-    player.attackSpeed -= 0.0055 * player.upgradeLevels.autoSpeed;
+    player.attackSpeed -=
+      playerClericAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
   }
 }
 
@@ -161,29 +172,30 @@ function getPlayerAttackUpgradeValue(upgradeLevels) {
 function setPlayerAttackSpeedUpgradeValue() {
   let value = 0;
   if (player.class === "Warrior") {
-    value = player.clickAttackSpeed -= 0.01 * player.upgradeLevels.clickSpeed;
+    value = player.clickAttackSpeed -= playerWarriorAutoAttackSpeedValue;
   } else if (player.class === "Magician") {
-    value = player.clickAttackSpeed -= 0.02 * player.upgradeLevels.clickSpeed;
+    value = player.clickAttackSpeed -= playerMagicianAutoAttackSpeedValue;
   } else if (player.class === "Rogue") {
-    value = player.clickAttackSpeed -= 0.025 * player.upgradeLevels.clickSpeed;
+    value = player.clickAttackSpeed -= playerRogueAutoAttackSpeedValue;
   } else if (player.class === "Cleric") {
-    value = player.clickAttackSpeed -= 0.01 * player.upgradeLevels.clickSpeed;
+    value = player.clickAttackSpeed -= playerClericAutoAttackSpeedValue;
   }
   return value;
 }
 
+// used to display auto attack speed
 function getPlayerAttackSpeedUpgradeValue(upgradeLevels) {
   let value = 0;
   if (player.class === "Warrior") {
-    value = 0.01 * upgradeLevels;
+    value = playerWarriorAutoAttackSpeedValue;
   } else if (player.class === "Magician") {
-    value = 0.02 * upgradeLevels;
+    value = playerMagicianAutoAttackSpeedValue;
   } else if (player.class === "Rogue") {
-    value = 0.025 * upgradeLevels;
+    value = playerRogueAutoAttackSpeedValue;
   } else if (player.class === "Cleric") {
-    value = 0.01 * upgradeLevels;
+    value = playerClericAutoAttackSpeedValue;
   }
-  return value;
+  return value.toFixed(4);
 }
 
 // Defense (Timer) upgrades
