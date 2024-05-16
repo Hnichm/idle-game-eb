@@ -37,7 +37,22 @@ let player = {
   upgradeCosts: {},
 };
 
-//
+// Player upgrade vars
+
+const playerWarriorClickAttackkDamageValue = 5;
+const playerMagicianClickAttackDamageValue = 7;
+const playerRogueClickAttackDamageValue = 2;
+const playerClericClickAttackDamageValue = 3;
+
+const playerWarriorClickAttackSpeedValue = 0.05;
+const playerMagicianClickAttackSpeedValue = 0.035;
+const playerRogueClickAttackSpeedValue = 0.095;
+const playerClericClickAttackSpeedValue = 0.055;
+
+const playerWarriorAutoAttackDamageValue = 3;
+const playerMagicianAutoAttackDamageValue = 2;
+const playerRogueAutoAttackDamageValue = 0.5;
+const playerClericAutoAttackDamageValue = 1;
 
 const playerWarriorAutoAttackSpeedValue = 0.005;
 const playerMagicianAutoAttackSpeedValue = 0.0035;
@@ -83,13 +98,17 @@ function setPlayerAutoAttackSpeedUpgradeCosts() {
 // Upgrade values
 function setPlayerAutoAttackUpgradeValue() {
   if (player.class === "Warrior") {
-    player.attackDamage += 3 * player.upgradeLevels.autoDamage;
+    player.attackDamage +=
+      playerWarriorAutoAttackDamageValue * player.upgradeLevels.autoDamage;
   } else if (player.class === "Magician") {
-    player.attackDamage += 2 * player.upgradeLevels.autoDamage;
+    player.attackDamage +=
+      playerMagicianAutoAttackDamageValue * player.upgradeLevels.autoDamage;
   } else if (player.class === "Rogue") {
-    player.attackDamage += 0.5 * player.upgradeLevels.autoDamage;
+    player.attackDamage +=
+      playerRogueAutoAttackDamageValue * player.upgradeLevels.autoDamage;
   } else if (player.class === "Cleric") {
-    player.attackDamage += 1 * player.upgradeLevels.autoDamage;
+    player.attackDamage +=
+      playerClericAutoAttackDamageValue * player.upgradeLevels.autoDamage;
   }
 }
 
@@ -145,26 +164,30 @@ function setPlayerAttackSpeedUpgradeCosts() {
 // Upgrade values
 function setPlayerAttackUpgradeValue() {
   if (player.class === "Warrior") {
-    player.clickAttackDamage += 5 * player.upgradeLevels.clickDamage;
+    player.clickAttackDamage +=
+      playerWarriorClickAttackkDamageValue * player.upgradeLevels.clickDamage;
   } else if (player.class === "Magician") {
-    player.clickAttackDamage += 7 * player.upgradeLevels.clickDamage;
+    player.clickAttackDamage +=
+      playerMagicianClickAttackDamageValue * player.upgradeLevels.clickDamage;
   } else if (player.class === "Rogue") {
-    player.clickAttackDamage += 2 * player.upgradeLevels.clickDamage;
+    player.clickAttackDamage +=
+      playerRogueClickAttackDamageValue * player.upgradeLevels.clickDamage;
   } else if (player.class === "Cleric") {
-    player.clickAttackDamage += 3 * player.upgradeLevels.clickDamage;
+    player.clickAttackDamage +=
+      playerClericClickAttackDamageValue * player.upgradeLevels.clickDamage;
   }
 }
 
 function getPlayerAttackUpgradeValue(upgradeLevels) {
   let value = 0;
   if (player.class === "Warrior") {
-    value = 5 * upgradeLevels;
+    value = playerWarriorClickAttackkDamageValue * upgradeLevels;
   } else if (player.class === "Magician") {
-    value = 7 * upgradeLevels;
+    value = playerMagicianClickAttackDamageValue * upgradeLevels;
   } else if (player.class === "Rogue") {
-    value = 2 * upgradeLevels;
+    value = playerRogueClickAttackDamageValue * upgradeLevels;
   } else if (player.class === "Cleric") {
-    value = 3 * upgradeLevels;
+    value = playerClericClickAttackDamageValue * upgradeLevels;
   }
   return value;
 }
@@ -172,28 +195,28 @@ function getPlayerAttackUpgradeValue(upgradeLevels) {
 function setPlayerAttackSpeedUpgradeValue() {
   let value = 0;
   if (player.class === "Warrior") {
-    value = player.clickAttackSpeed -= playerWarriorAutoAttackSpeedValue;
+    value = player.clickAttackSpeed -= playerWarriorClickAttackSpeedValue;
   } else if (player.class === "Magician") {
-    value = player.clickAttackSpeed -= playerMagicianAutoAttackSpeedValue;
+    value = player.clickAttackSpeed -= playerMagicianClickAttackSpeedValue;
   } else if (player.class === "Rogue") {
-    value = player.clickAttackSpeed -= playerRogueAutoAttackSpeedValue;
+    value = player.clickAttackSpeed -= playerRogueClickAttackSpeedValue;
   } else if (player.class === "Cleric") {
-    value = player.clickAttackSpeed -= playerClericAutoAttackSpeedValue;
+    value = player.clickAttackSpeed -= playerClericClickAttackSpeedValue;
   }
   return value;
 }
 
-// used to display auto attack speed
-function getPlayerAttackSpeedUpgradeValue(upgradeLevels) {
+// used to display auto attack speed, as it and click share same values sans the hundreds and thousands place
+function getPlayerAttackSpeedUpgradeValue() {
   let value = 0;
   if (player.class === "Warrior") {
-    value = playerWarriorAutoAttackSpeedValue;
+    value = playerWarriorClickAttackSpeedValue;
   } else if (player.class === "Magician") {
-    value = playerMagicianAutoAttackSpeedValue;
+    value = playerMagicianClickAttackSpeedValue;
   } else if (player.class === "Rogue") {
-    value = playerRogueAutoAttackSpeedValue;
+    value = playerRogueClickAttackSpeedValue;
   } else if (player.class === "Cleric") {
-    value = playerClericAutoAttackSpeedValue;
+    value = playerClericClickAttackSpeedValue;
   }
   return value.toFixed(4);
 }
@@ -1049,7 +1072,7 @@ function showPlayerAttackReady() {
   } else {
     setTimeout(() => {
       playerAttackReady.textContent = `Attack in: ${
-        player.clickAttackSpeed.toFixed(2) - 0.1
+        currentClickAttackSpeed - 0.1
       }`;
     }, 10);
   }
