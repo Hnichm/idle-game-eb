@@ -54,7 +54,7 @@ const playerMagicianAutoAttackDamageValue = 2;
 const playerRogueAutoAttackDamageValue = 0.5;
 const playerClericAutoAttackDamageValue = 1;
 
-const playerWarriorAutoAttackSpeedValue = 0.005;
+const playerWarriorAutoAttackSpeedValue = 0.0045;
 const playerMagicianAutoAttackSpeedValue = 0.0035;
 const playerRogueAutoAttackSpeedValue = 0.0095;
 const playerClericAutoAttackSpeedValue = 0.0055;
@@ -126,6 +126,20 @@ function setPlayerAutoAttackSpeedUpgradeValue() {
     player.attackSpeed -=
       playerClericAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
   }
+}
+
+function getPlayerAutoAttackSpeedUpgradeValue() {
+  let value = 0;
+  if (player.class === "Warrior") {
+    value = playerWarriorAutoAttackSpeedValue;
+  } else if (player.class === "Magician") {
+    value = playerMagicianAutoAttackSpeedValue;
+  } else if (player.class === "Rogue") {
+    value = playerRogueAutoAttackSpeedValue;
+  } else if (player.class === "Cleric") {
+    value = playerClericAutoAttackSpeedValue;
+  }
+  return value.toFixed(4);
 }
 
 // Click attack upgrades
@@ -206,7 +220,7 @@ function setPlayerAttackSpeedUpgradeValue() {
   return value;
 }
 
-// used to display auto attack speed, as it and click share same values sans the hundreds and thousands place
+// used to display click attack speed
 function getPlayerAttackSpeedUpgradeValue() {
   let value = 0;
   if (player.class === "Warrior") {
@@ -218,7 +232,7 @@ function getPlayerAttackSpeedUpgradeValue() {
   } else if (player.class === "Cleric") {
     value = playerClericClickAttackSpeedValue;
   }
-  return value.toFixed(4);
+  return value.toFixed(2);
 }
 
 // Defense (Timer) upgrades
@@ -1175,7 +1189,7 @@ function updateAutoAttackUpgradeInformation() {
 
 function updateAutoAttackSpeedUpgradeInformation() {
   const currentCost = setPlayerAutoAttackSpeedUpgradeCosts();
-  const currentUpgradeValue = getPlayerAttackSpeedUpgradeValue(
+  const currentUpgradeValue = getPlayerAutoAttackSpeedUpgradeValue(
     player.upgradeLevels.autoSpeed
   );
   domUpgradeCosts[1].textContent = `Cost: ${currentCost}`;
