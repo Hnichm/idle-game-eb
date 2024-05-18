@@ -38,298 +38,271 @@ let player = {
 };
 
 // Player upgrade values and costs
-// Click attack damage upgrades
-// cost
-const playerWarriorClickAttackDamageCost = 12;
-const playerMagicianClickAttackDamageCost = 16;
-const playerRogueClickAttackDamageCost = 4;
-const playerClericClickAttackDamageCost = 8;
 
-// value
-const playerWarriorClickAttackkDamageValue = 5;
-const playerMagicianClickAttackDamageValue = 7;
-const playerRogueClickAttackDamageValue = 2;
-const playerClericClickAttackDamageValue = 3;
-
-// Click attack speed upgrades
-// cost
-const playerWarriorClickAttackSpeedCost = 20;
-const playerMagicianClickAttackSpeedCost = 30;
-const playerRogueClickAttackSpeedCost = 10;
-const playerClericClickAttackSpeedCost = 15;
-
-// value
-const playerWarriorClickAttackSpeedValue = 0.05;
-const playerMagicianClickAttackSpeedValue = 0.035;
-const playerRogueClickAttackSpeedValue = 0.095;
-const playerClericClickAttackSpeedValue = 0.055;
-
-// Auto attack damage upgrades
-// cost
-const playerWarriorAutoAttackDamageCost = 20;
-const playerMagicianAutoAttackDamageCost = 32;
-const playerRogueAutoAttackDamageCost = 8;
-const playerClericAutoAttackDamageCost = 16;
-
-// value
-const playerWarriorAutoAttackDamageValue = 3;
-const playerMagicianAutoAttackDamageValue = 2;
-const playerRogueAutoAttackDamageValue = 0.5;
-const playerClericAutoAttackDamageValue = 1;
-
-// Auto attack speed upgrades
-// cost
-const playerWarriorAutoAttackSpeedCost = 20;
-const playerMagicianAutoAttackSpeedCost = 30;
-const playerRogueAutoAttackSpeedCost = 10;
-const playerClericAutoAttackSpeedCost = 15;
-
-// value
-const playerWarriorAutoAttackSpeedValue = 0.0045;
-const playerMagicianAutoAttackSpeedValue = 0.0035;
-const playerRogueAutoAttackSpeedValue = 0.0095;
-const playerClericAutoAttackSpeedValue = 0.0055;
+const playerUpgradeConfig = {
+  Warrior: {
+    clickAttackDamage: {
+      cost: 12,
+      value: 5,
+    },
+    clickAttackSpeed: {
+      cost: 20,
+      value: 0.05,
+    },
+    autoAttackDamage: {
+      cost: 20,
+      value: 3,
+    },
+    autoAttackSpeed: {
+      cost: 20,
+      value: 0.0045,
+    },
+  },
+  Magician: {
+    clickAttackDamage: {
+      cost: 16,
+      value: 7,
+    },
+    clickAttackSpeed: {
+      cost: 30,
+      value: 0.035,
+    },
+    autoAttackDamage: {
+      cost: 32,
+      value: 2,
+    },
+    autoAttackSpeed: {
+      cost: 30,
+      value: 0.0035,
+    },
+  },
+  Rogue: {
+    clickAttackDamage: {
+      cost: 4,
+      value: 2,
+    },
+    clickAttackSpeed: {
+      cost: 10,
+      value: 0.095,
+    },
+    autoAttackDamage: {
+      cost: 8,
+      value: 0.5,
+    },
+    autoAttackSpeed: {
+      cost: 10,
+      value: 0.0095,
+    },
+  },
+  Cleric: {
+    clickAttackDamage: {
+      cost: 8,
+      value: 3,
+    },
+    clickAttackSpeed: {
+      cost: 15,
+      value: 0.055,
+    },
+    autoAttackDamage: {
+      cost: 16,
+      value: 1,
+    },
+    autoAttackSpeed: {
+      cost: 15,
+      value: 0.0055,
+    },
+  },
+};
 
 // Upgrade Functions for Player upgrades
-// --------------------------------------
+function getUpgradeValue(upgradeType, playerClass) {
+  return playerUpgradeConfig[playerClass][upgradeType].value;
+}
+
+function getUpgradeCost(upgradeType, playerClass, upgradeLevel) {
+  return playerUpgradeConfig[playerClass][upgradeType].cost * upgradeLevel;
+}
 
 // Auto attack upgrades
-// ---------------------
-// Upgrade costs
 function setPlayerAutoAttackUpgradeCosts() {
-  let cost = 0;
-  if (player.class === "Warrior") {
-    cost = playerWarriorClickAttackDamageCost * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Magician") {
-    cost =
-      playerMagicianClickAttackDamageCost * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Rogue") {
-    cost = playerRogueClickAttackDamageCost * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Cleric") {
-    cost = playerClericClickAttackDamageCost * player.upgradeLevels.autoDamage;
-  }
+  const cost = getUpgradeCost(
+    "autoAttackDamage",
+    player.class,
+    player.upgradeLevels.autoDamage
+  );
   player.upgradeCosts.autoDamage = cost;
   return cost;
 }
 
 function setPlayerAutoAttackSpeedUpgradeCosts() {
-  let cost = 0;
-  if (player.class === "Warrior") {
-    cost = playerWarriorAutoAttackSpeedCost * player.upgradeLevels.autoSpeed;
-  } else if (player.class === "Magician") {
-    cost = playerMagicianAutoAttackSpeedCost * player.upgradeLevels.autoSpeed;
-  } else if (player.class === "Rogue") {
-    cost = playerRogueAutoAttackSpeedCost * player.upgradeLevels.autoSpeed;
-  } else if (player.class === "Cleric") {
-    cost = playerClericAutoAttackSpeedCost * player.upgradeLevels.autoSpeed;
-  }
-
+  const cost = getUpgradeCost(
+    "autoAttackSpeed",
+    player.class,
+    player.upgradeLevels.autoSpeed
+  );
   return cost;
 }
 
-// Upgrade values
 function setPlayerAutoAttackUpgradeValue() {
-  if (player.class === "Warrior") {
-    player.attackDamage +=
-      playerWarriorAutoAttackDamageValue * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Magician") {
-    player.attackDamage +=
-      playerMagicianAutoAttackDamageValue * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Rogue") {
-    player.attackDamage +=
-      playerRogueAutoAttackDamageValue * player.upgradeLevels.autoDamage;
-  } else if (player.class === "Cleric") {
-    player.attackDamage +=
-      playerClericAutoAttackDamageValue * player.upgradeLevels.autoDamage;
+  switch (player.class) {
+    case "Warrior":
+    case "Magician":
+    case "Rogue":
+    case "Cleric":
+      player.attackDamage +=
+        getUpgradeValue("autoAttackDamage", player.class) *
+        player.upgradeLevels.autoDamage;
+      break;
   }
 }
 
 function setPlayerAutoAttackSpeedUpgradeValue() {
-  if (player.class === "Warrior") {
-    player.attackSpeed -=
-      playerWarriorAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
-  } else if (player.class === "Magician") {
-    player.attackSpeed -=
-      playerMagicianAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
-  } else if (player.class === "Rogue") {
-    player.attackSpeed -=
-      playerRogueAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
-  } else if (player.class === "Cleric") {
-    player.attackSpeed -=
-      playerClericAutoAttackSpeedValue * player.upgradeLevels.autoSpeed;
+  switch (player.class) {
+    case "Warrior":
+    case "Magician":
+    case "Rogue":
+    case "Cleric":
+      player.attackSpeed -=
+        getUpgradeValue("autoAttackSpeed", player.class) *
+        player.upgradeLevels.autoSpeed;
+      break;
   }
 }
 
+function getPlayerAutoAttackUpgradeValue(upgradeLevels) {
+  const value =
+    getUpgradeValue("autoAttackDamage", player.class) * upgradeLevels;
+  return value;
+}
+
 function getPlayerAutoAttackSpeedUpgradeValue() {
-  let value = 0;
-  if (player.class === "Warrior") {
-    value = playerWarriorAutoAttackSpeedValue;
-  } else if (player.class === "Magician") {
-    value = playerMagicianAutoAttackSpeedValue;
-  } else if (player.class === "Rogue") {
-    value = playerRogueAutoAttackSpeedValue;
-  } else if (player.class === "Cleric") {
-    value = playerClericAutoAttackSpeedValue;
-  }
+  const value = getUpgradeValue("autoAttackSpeed", player.class);
   return value.toFixed(4);
 }
 
 // Click attack upgrades
-// ----------------------
-// Upgrade costs
 function setPlayerAttackUpgradeCosts() {
-  let cost = 0;
-  if (player.class === "Warrior") {
-    cost =
-      playerWarriorClickAttackDamageCost * player.upgradeLevels.clickDamage;
-  } else if (player.class === "Magician") {
-    cost =
-      playerMagicianClickAttackDamageCost * player.upgradeLevels.clickDamage;
-  } else if (player.class === "Rogue") {
-    cost = playerRogueClickAttackDamageCost * player.upgradeLevels.clickDamage;
-  } else if (player.class === "Cleric") {
-    cost = playerClericClickAttackDamageCost * player.upgradeLevels.clickDamage;
-  }
+  const cost = getUpgradeCost(
+    "clickAttackDamage",
+    player.class,
+    player.upgradeLevels.clickDamage
+  );
   player.upgradeCosts.clickDamage = cost;
   return cost;
 }
 
 function setPlayerAttackSpeedUpgradeCosts() {
-  let cost = 0;
-  if (player.class === "Warrior") {
-    cost = playerWarriorClickAttackSpeedCost * player.upgradeLevels.clickSpeed;
-  } else if (player.class === "Magician") {
-    cost = playerMagicianClickAttackSpeedCost * player.upgradeLevels.clickSpeed;
-  } else if (player.class === "Rogue") {
-    cost = playerRogueClickAttackSpeedCost * player.upgradeLevels.clickSpeed;
-  } else if (player.class === "Cleric") {
-    cost = playerClericClickAttackSpeedCost * player.upgradeLevels.clickSpeed;
-  }
+  const cost = getUpgradeCost(
+    "clickAttackSpeed",
+    player.class,
+    player.upgradeLevels.clickSpeed
+  );
   player.upgradeCosts.clickSpeed = cost;
   return cost;
 }
 
-// Upgrade values
 function setPlayerAttackUpgradeValue() {
-  if (player.class === "Warrior") {
-    player.clickAttackDamage +=
-      playerWarriorClickAttackkDamageValue * player.upgradeLevels.clickDamage;
-  } else if (player.class === "Magician") {
-    player.clickAttackDamage +=
-      playerMagicianClickAttackDamageValue * player.upgradeLevels.clickDamage;
-  } else if (player.class === "Rogue") {
-    player.clickAttackDamage +=
-      playerRogueClickAttackDamageValue * player.upgradeLevels.clickDamage;
-  } else if (player.class === "Cleric") {
-    player.clickAttackDamage +=
-      playerClericClickAttackDamageValue * player.upgradeLevels.clickDamage;
+  switch (player.class) {
+    case "Warrior":
+    case "Magician":
+    case "Rogue":
+    case "Cleric":
+      player.clickAttackDamage +=
+        getUpgradeValue("clickAttackDamage", player.class) *
+        player.upgradeLevels.clickDamage;
+      break;
   }
 }
 
-function getPlayerAttackUpgradeValue(upgradeLevels) {
-  let value = 0;
-  if (player.class === "Warrior") {
-    value = playerWarriorClickAttackkDamageValue * upgradeLevels;
-  } else if (player.class === "Magician") {
-    value = playerMagicianClickAttackDamageValue * upgradeLevels;
-  } else if (player.class === "Rogue") {
-    value = playerRogueClickAttackDamageValue * upgradeLevels;
-  } else if (player.class === "Cleric") {
-    value = playerClericClickAttackDamageValue * upgradeLevels;
-  }
+function getPlayerClickAttackUpgradeValue(upgradeLevels) {
+  const value =
+    getUpgradeValue("clickAttackDamage", player.class) * upgradeLevels;
   return value;
 }
 
 function setPlayerAttackSpeedUpgradeValue() {
-  let value = 0;
-  if (player.class === "Warrior") {
-    value = player.clickAttackSpeed -= playerWarriorClickAttackSpeedValue;
-  } else if (player.class === "Magician") {
-    value = player.clickAttackSpeed -= playerMagicianClickAttackSpeedValue;
-  } else if (player.class === "Rogue") {
-    value = player.clickAttackSpeed -= playerRogueClickAttackSpeedValue;
-  } else if (player.class === "Cleric") {
-    value = player.clickAttackSpeed -= playerClericClickAttackSpeedValue;
+  switch (player.class) {
+    case "Warrior":
+    case "Magician":
+    case "Rogue":
+    case "Cleric":
+      player.clickAttackSpeed -= getUpgradeValue(
+        "clickAttackSpeed",
+        player.class
+      );
+      break;
   }
-  return value;
 }
 
-// used to display click attack speed
 function getPlayerAttackSpeedUpgradeValue() {
-  let value = 0;
-  if (player.class === "Warrior") {
-    value = playerWarriorClickAttackSpeedValue;
-  } else if (player.class === "Magician") {
-    value = playerMagicianClickAttackSpeedValue;
-  } else if (player.class === "Rogue") {
-    value = playerRogueClickAttackSpeedValue;
-  } else if (player.class === "Cleric") {
-    value = playerClericClickAttackSpeedValue;
-  }
+  const value = getUpgradeValue("clickAttackSpeed", player.class);
   return value.toFixed(2);
 }
+
+// TODO Refactor to use the new upgrade functions
 
 // Defense (Timer) upgrades
 // ------------------------
 // Upgrade costs
-function setPlayerDefenseUpgradeCosts() {
-  let cost = 0;
-  if (player.class === "Warrior") {
-    cost = 20 * player.upgradeLevels.timer;
-  } else if (player.class === "Magician") {
-    cost = 30 * player.upgradeLevels.timer;
-  } else if (player.class === "Rogue") {
-    cost = 10 * player.upgradeLevels.timer;
-  } else if (player.class === "Cleric") {
-    cost = 15 * player.upgradeLevels.timer;
-  }
-  player.upgradeCosts.timer = cost;
-  return cost;
-}
+// function setPlayerDefenseUpgradeCosts() {
+//   let cost = 0;
+//   if (player.class === "Warrior") {
+//     cost = 20 * player.upgradeLevels.timer;
+//   } else if (player.class === "Magician") {
+//     cost = 30 * player.upgradeLevels.timer;
+//   } else if (player.class === "Rogue") {
+//     cost = 10 * player.upgradeLevels.timer;
+//   } else if (player.class === "Cleric") {
+//     cost = 15 * player.upgradeLevels.timer;
+//   }
+//   player.upgradeCosts.timer = cost;
+//   return cost;
+// }
 
-function getPlayerDefenseUpgradeCosts(upgradeLevels) {
-  let cost = 0;
-  if (player.class === "Warrior") {
-    cost = 20 * upgradeLevels;
-  } else if (player.class === "Magician") {
-    cost = 30 * upgradeLevels;
-  } else if (player.class === "Rogue") {
-    cost = 10 * upgradeLevels;
-  } else if (player.class === "Cleric") {
-    cost = 15 * upgradeLevels;
-  }
-  return cost;
-}
+// function getPlayerDefenseUpgradeCosts(upgradeLevels) {
+//   let cost = 0;
+//   if (player.class === "Warrior") {
+//     cost = 20 * upgradeLevels;
+//   } else if (player.class === "Magician") {
+//     cost = 30 * upgradeLevels;
+//   } else if (player.class === "Rogue") {
+//     cost = 10 * upgradeLevels;
+//   } else if (player.class === "Cleric") {
+//     cost = 15 * upgradeLevels;
+//   }
+//   return cost;
+// }
 
-// Upgrade values
-function setPlayerDefenseUpgradeValue() {
-  if (player.class === "Warrior") {
-    player.maxTimer += 5 * player.upgradeLevels.timer;
-  } else if (player.class === "Magician") {
-    player.maxTimer += 7 * player.upgradeLevels.timer;
-  } else if (player.class === "Rogue") {
-    player.maxTimer += 2 * player.upgradeLevels.timer;
-  } else if (player.class === "Cleric") {
-    player.maxTimer += 3 * player.upgradeLevels.timer;
-  }
-}
+// // Upgrade values
+// function setPlayerDefenseUpgradeValue() {
+//   if (player.class === "Warrior") {
+//     player.maxTimer += 5 * player.upgradeLevels.timer;
+//   } else if (player.class === "Magician") {
+//     player.maxTimer += 7 * player.upgradeLevels.timer;
+//   } else if (player.class === "Rogue") {
+//     player.maxTimer += 2 * player.upgradeLevels.timer;
+//   } else if (player.class === "Cleric") {
+//     player.maxTimer += 3 * player.upgradeLevels.timer;
+//   }
+// }
 
-function getPlayerDefenseUpgradeValue(upgradeLevels) {
-  let value = 0;
-  if (player.class === "Warrior") {
-    value = 5 * upgradeLevels;
-  } else if (player.class === "Magician") {
-    value = 7 * upgradeLevels;
-  } else if (player.class === "Rogue") {
-    value = 2 * upgradeLevels;
-  } else if (player.class === "Cleric") {
-    value = 3 * upgradeLevels;
-  }
-  return value;
-}
+// function getPlayerDefenseUpgradeValue(upgradeLevels) {
+//   let value = 0;
+//   if (player.class === "Warrior") {
+//     value = 5 * upgradeLevels;
+//   } else if (player.class === "Magician") {
+//     value = 7 * upgradeLevels;
+//   } else if (player.class === "Rogue") {
+//     value = 2 * upgradeLevels;
+//   } else if (player.class === "Cleric") {
+//     value = 3 * upgradeLevels;
+//   }
+//   return value;
+// }
 
 // DOM Elements for Player
 // ------------------------
+
 const playerName = document.querySelector(".player-name");
 const playerClass = document.querySelector(".player-class");
 const playerAttackDamage = document.querySelector(".player-attack");
@@ -1196,7 +1169,7 @@ function showUpgradesChildren() {
 //TODO : DRY these functions up
 function updateAttackUpgradeInformation() {
   const currentCost = setPlayerAttackUpgradeCosts();
-  const currentUpgradeValue = getPlayerAttackUpgradeValue(
+  const currentUpgradeValue = getPlayerClickAttackUpgradeValue(
     player.upgradeLevels.clickDamage
   );
   domUpgradeCosts[0].textContent = `Cost: ${currentCost}`;
@@ -1214,7 +1187,7 @@ function updateAttackSpeedUpgradeInformation() {
 
 function updateAutoAttackUpgradeInformation() {
   const currentCost = setPlayerAutoAttackUpgradeCosts();
-  const currentUpgradeValue = getPlayerAttackUpgradeValue(
+  const currentUpgradeValue = getPlayerAutoAttackUpgradeValue(
     player.upgradeLevels.autoDamage
   );
   domUpgradeCosts[1].textContent = `Cost: ${currentCost}`;
