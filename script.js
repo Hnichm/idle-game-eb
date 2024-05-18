@@ -40,6 +40,7 @@ let player = {
 // Player upgrade values and costs
 
 const playerUpgradeConfig = {
+  // Warrior class upgrades
   Warrior: {
     clickAttackDamage: {
       cost: 12,
@@ -58,6 +59,7 @@ const playerUpgradeConfig = {
       value: 0.0045,
     },
   },
+  // Magician class upgrades
   Magician: {
     clickAttackDamage: {
       cost: 16,
@@ -76,6 +78,7 @@ const playerUpgradeConfig = {
       value: 0.0035,
     },
   },
+  // Rogue class upgrades
   Rogue: {
     clickAttackDamage: {
       cost: 4,
@@ -94,6 +97,7 @@ const playerUpgradeConfig = {
       value: 0.0095,
     },
   },
+  // Cleric class upgrades
   Cleric: {
     clickAttackDamage: {
       cost: 8,
@@ -115,16 +119,22 @@ const playerUpgradeConfig = {
 };
 
 // Upgrade Functions for Player upgrades
+
+// Get the value of the upgrade based on the player's class and the upgrade type
 function getUpgradeValue(upgradeType, playerClass) {
+  // Return the value of the upgrade based on the player's class and the upgrade type
   return playerUpgradeConfig[playerClass][upgradeType].value;
 }
 
+// Get the cost of the upgrade based on the player's class, upgrade type, and the current level of the upgrade
 function getUpgradeCost(upgradeType, playerClass, upgradeLevel) {
+  // Return the cost of the upgrade based on the player's class, upgrade type, and the current level of the upgrade
   return playerUpgradeConfig[playerClass][upgradeType].cost * upgradeLevel;
 }
 
 // Auto attack upgrades
 function setPlayerAutoAttackUpgradeCosts() {
+  // Set the cost of the auto attack damage upgrade
   const cost = getUpgradeCost(
     "autoAttackDamage",
     player.class,
@@ -134,7 +144,9 @@ function setPlayerAutoAttackUpgradeCosts() {
   return cost;
 }
 
+// Set the cost of the auto attack speed upgrade
 function setPlayerAutoAttackSpeedUpgradeCosts() {
+  // Set the cost of the auto attack speed upgrade
   const cost = getUpgradeCost(
     "autoAttackSpeed",
     player.class,
@@ -143,7 +155,9 @@ function setPlayerAutoAttackSpeedUpgradeCosts() {
   return cost;
 }
 
+// Set the value of the auto attack upgrade
 function setPlayerAutoAttackUpgradeValue() {
+  // Set the value of the auto attack upgrade based on the player's class and the current level of the upgrade
   switch (player.class) {
     case "Warrior":
     case "Magician":
@@ -156,7 +170,9 @@ function setPlayerAutoAttackUpgradeValue() {
   }
 }
 
+// Set the value of the auto attack speed upgrade
 function setPlayerAutoAttackSpeedUpgradeValue() {
+  // Set the value of the auto attack speed upgrade based on the player's class and the current level of the upgrade
   switch (player.class) {
     case "Warrior":
     case "Magician":
@@ -169,19 +185,26 @@ function setPlayerAutoAttackSpeedUpgradeValue() {
   }
 }
 
+// Get the value of the auto attack upgrade
 function getPlayerAutoAttackUpgradeValue(upgradeLevels) {
+  // Get the value of the auto attack upgrade based on the player's class and the current level of the upgrade
   const value =
     getUpgradeValue("autoAttackDamage", player.class) * upgradeLevels;
   return value;
 }
 
+// Get the value of the auto attack speed upgrade
 function getPlayerAutoAttackSpeedUpgradeValue() {
+  // Get the value of the auto attack speed upgrade based on the player's class
   const value = getUpgradeValue("autoAttackSpeed", player.class);
   return value.toFixed(4);
 }
 
 // Click attack upgrades
+
+// Set the cost of the click attack damage upgrade
 function setPlayerAttackUpgradeCosts() {
+  // Set the cost of the click attack damage upgrade based on the player's class and the current level of the upgrade
   const cost = getUpgradeCost(
     "clickAttackDamage",
     player.class,
@@ -191,7 +214,9 @@ function setPlayerAttackUpgradeCosts() {
   return cost;
 }
 
+// Set the cost of the click attack speed upgrade
 function setPlayerAttackSpeedUpgradeCosts() {
+  // Set the cost of the click attack speed upgrade based on the player's class and the current level of the upgrade
   const cost = getUpgradeCost(
     "clickAttackSpeed",
     player.class,
@@ -201,7 +226,9 @@ function setPlayerAttackSpeedUpgradeCosts() {
   return cost;
 }
 
+// Set the value of the click attack upgrade
 function setPlayerAttackUpgradeValue() {
+  // Set the value of the click attack upgrade based on the player's class and the current level of the upgrade
   switch (player.class) {
     case "Warrior":
     case "Magician":
@@ -214,13 +241,17 @@ function setPlayerAttackUpgradeValue() {
   }
 }
 
+// Get the value of the click attack upgrade 
 function getPlayerClickAttackUpgradeValue(upgradeLevels) {
+  // Get the value of the click attack upgrade based on the player's class and the current level of the upgrade
   const value =
     getUpgradeValue("clickAttackDamage", player.class) * upgradeLevels;
   return value;
 }
 
+// Set the value of the click attack speed upgrade
 function setPlayerAttackSpeedUpgradeValue() {
+  // Set the value of the click attack speed upgrade based on the player's class and the current level of the upgrade
   switch (player.class) {
     case "Warrior":
     case "Magician":
@@ -234,7 +265,9 @@ function setPlayerAttackSpeedUpgradeValue() {
   }
 }
 
+// Get the value of the click attack upgrade
 function getPlayerAttackSpeedUpgradeValue() {
+  // Get the value of the click attack speed upgrade based on the player's class
   const value = getUpgradeValue("clickAttackSpeed", player.class);
   return value.toFixed(2);
 }
