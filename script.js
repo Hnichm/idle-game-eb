@@ -241,7 +241,7 @@ function setPlayerAttackUpgradeValue() {
   }
 }
 
-// Get the value of the click attack upgrade 
+// Get the value of the click attack upgrade
 function getPlayerClickAttackUpgradeValue(upgradeLevels) {
   // Get the value of the click attack upgrade based on the player's class and the current level of the upgrade
   const value =
@@ -864,6 +864,34 @@ const floorMonsters = [
     new Monster("", 320000, "./assets/undead-warrior (31).png", 16000),
     new Monster("", 384000, "./assets/undead-warrior (32).png", 19200),
     new Monster("", 448000, "./assets/undead-warrior (33).png", 22400),
+  ],
+
+  // 2048x health of monsters
+  [
+    new Monster("", 640000, "./assets/undead-warrior (34).png", 32000),
+    new Monster("", 768000, "./assets/undead-warrior (35).png", 38400),
+    new Monster("", 896000, "./assets/undead-warrior (36).png", 44800),
+  ],
+
+  // 8192x health of monsters
+  [
+    new Monster("", 1280000, "./assets/undead-warrior (37).png", 64000),
+    new Monster("", 1536000, "./assets/undead-warrior (38).png", 76800),
+    new Monster("", 1792000, "./assets/undead-warrior (39).png", 89600),
+  ],
+
+  // 32768x health of monsters
+  [
+    new Monster("", 2560000, "./assets/undead-warrior (40).png", 128000),
+    new Monster("", 3072000, "./assets/undead-warrior (41).png", 153600),
+    new Monster("", 3584000, "./assets/demon-warrior (1).png", 179200),
+  ],
+
+  //  131072x health of monsters
+  [
+    new Monster("", 12800000, "./assets/demon-warrior (2).png", 640000),
+    new Monster("", 15360000, "./assets/demon-warrior (3).png", 768000),
+    new Monster("", 17920000, "./assets/demon-warrior (4).png", 896000),
   ],
 ];
 
