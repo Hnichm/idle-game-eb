@@ -1381,6 +1381,11 @@ const classProperties = {
     attackSpeed: 0.1,
     clickAttackDamage: 20,
     clickAttackSpeed: 4,
+    skills: [
+      { name: "Slash", damage: 20, cooldown: 5 },
+      { name: "Bash", damage: 15, cooldown: 3 },
+      { name: "Charge", damage: 30, cooldown: 10 },
+    ],
   },
   Magician: {
     name: "Balaam",
@@ -1390,6 +1395,11 @@ const classProperties = {
     attackSpeed: 1.0,
     clickAttackDamage: 20,
     clickAttackSpeed: 4,
+    skills: [
+      { name: "Fireball", damage: 30, cooldown: 5 },
+      { name: "Ice Bolt", damage: 20, cooldown: 3 },
+      { name: "Arcane Blast", damage: 40, cooldown: 10 },
+    ],
   },
   Rogue: {
     name: "Doeg",
@@ -1399,6 +1409,11 @@ const classProperties = {
     attackSpeed: 0.5,
     clickAttackDamage: 14,
     clickAttackSpeed: 2,
+    skills: [
+      { name: "Backstab", damage: 14, cooldown: 5 },
+      { name: "Poison", damage: 10, cooldown: 3 },
+      { name: "Garrotte", damage: 20, cooldown: 10 },
+    ],
   },
   Cleric: {
     name: "Urijah",
@@ -1408,6 +1423,11 @@ const classProperties = {
     attackSpeed: 1.0,
     clickAttackDamage: 4,
     clickAttackSpeed: 2,
+    skills: [
+      { name: "Smite", damage: 16, cooldown: 5 },
+      { name: "Fountain of Light", damage: 12, cooldown: 3 },
+      { name: "Exorcism", damage: 24, cooldown: 10 },
+    ],
   },
 };
 
