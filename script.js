@@ -1952,7 +1952,6 @@ classSelect.value = "";
 startGameButton.disabled = true;
 
 // - `classSelect` change event: Updates the character select image, description, and player stats based on the selected class.
-// TODO: Comment this or refactor it to be more readable.
 // Add an event listener to the class selection dropdown
 classSelect.addEventListener("change", () => {
   // Get the selected class from the dropdown
@@ -1982,6 +1981,8 @@ classSelect.addEventListener("change", () => {
       clickAttackDamage,
       clickAttackSpeed,
     } = classProperties[selectedClass];
+
+    player.skills = classProperties[selectedClass].skills;
 
     // Set the description text to the selected class's description
     description.textContent = classProperties[selectedClass]["description"];
