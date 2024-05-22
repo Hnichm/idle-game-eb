@@ -1148,14 +1148,22 @@ function updateEnemyHealth() {
   }
 }
 
-function showFloatingDamageNumber(damage, container, isClickAttack = false, skillName = "") {
+function showFloatingDamageNumber(
+  damage,
+  container,
+  isClickAttack = false,
+  skillName = ""
+) {
   const floatingDamageNumber = document.createElement("span");
   floatingDamageNumber.textContent = damage;
 
   if (isClickAttack) {
     floatingDamageNumber.classList.add("floating-click-damage-number");
   } else if (skillName) {
-    floatingDamageNumber.classList.add("floating-skill-damage-number", `skill-${skillName}`);
+    floatingDamageNumber.classList.add(
+      "floating-skill-damage-number",
+      `skill-${skillName}`
+    );
   } else {
     floatingDamageNumber.classList.add("floating-damage-number");
   }
@@ -1422,9 +1430,9 @@ const classProperties = {
     clickAttackDamage: 20,
     clickAttackSpeed: 4,
     skills: [
-      { name: "Fireball", damage: 30, cooldown: 5 },
-      { name: "Ice Bolt", damage: 20, cooldown: 3 },
-      { name: "Arcane Blast", damage: 40, cooldown: 10 },
+      { name: "Fire", damage: 30, cooldown: 5 },
+      { name: "Ice", damage: 20, cooldown: 3 },
+      { name: "Arcane", damage: 40, cooldown: 10 },
     ],
   },
   Rogue: {
@@ -1451,7 +1459,7 @@ const classProperties = {
     clickAttackSpeed: 2,
     skills: [
       { name: "Smite", damage: 16, cooldown: 5 },
-      { name: "Fountain of Light", damage: 12, cooldown: 3 },
+      { name: "Wrath", damage: 12, cooldown: 3 },
       { name: "Exorcism", damage: 24, cooldown: 10 },
     ],
   },
