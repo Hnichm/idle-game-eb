@@ -709,15 +709,15 @@
 }
 
 /* Magician skills */
-.skill-Fireball {
+.skill-Fire {
   color: #ff6347;
 }
 
-.skill-IceBolt {
+.skill-Ice {
   color: #00ffff;
 }
 
-.skill-ArcaneBlast {
+.skill-Arcane {
   color: #9932cc;
 }
 
@@ -739,7 +739,7 @@
   color: #ffd700;
 }
 
-.skill-FountainofLight {
+.skill-Wrath {
   color: #ffffe0;
 }
 
