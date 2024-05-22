@@ -464,7 +464,7 @@
   animation: player-dash-shadow 0.2s normal;
 }
 
-/* TODO: Make an actual animation for when click attack is ready. */
+/* TODO Make it animate */
 @keyframes click-attack {
   0% {
     filter: drop-shadow(0 0 2px rgba(255, 255, 255, 1));
@@ -650,25 +650,30 @@
   grid-area: descend-button;
 }
 
-.floating-damage-number {
+/* Floating damage numbers */
+.floating-damage-number,
+.floating-click-damage-number,
+.floating-skill-damage-number {
   position: absolute;
   font-size: 25px;
-  color: red;
   pointer-events: none;
   z-index: 20;
   animation: damageNumberAnimation 1.5s ease-out forwards;
   transform-origin: center;
   left: 50%;
   top: 50%;
-
-  /*
-  --------------------
-  |        NOTE      |
-  --------------------
-  The following two variables are used to animate the floating damage number. They are set in the JavaScript file.
-   */
   --float-x: 0;
   --float-y: 0;
+}
+
+.floating-damage-number {
+  font-size: 30px;
+  color: red;
+}
+
+.floating-click-damage-number {
+  font-size: 30px;
+  color: blue;
 }
 
 @keyframes damageNumberAnimation {
@@ -688,33 +693,56 @@
   }
 }
 
-.floating-click-damage-number {
-  position: absolute;
-  font-size: 30px;
-  color: blue;
-  pointer-events: none;
-  z-index: 20;
-  animation: clickDamageNumberAnimation 1.5s ease-out forwards;
-  transform-origin: center;
-  left: 50%;
-  top: 50%;
-  --float-x: 0;
-  --float-y: 0;
+/* Colors for floating damage number text */
+
+/* Warrior skills */
+.skill-Slash {
+  color: #ff4500;
 }
 
-@keyframes clickDamageNumberAnimation {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translateY(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(calc(-50% + var(--float-x)), -50%)
-      translateY(var(--float-y));
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + var(--float-x)), -50%)
-      translateY(calc(var(--float-y) * 0.5));
-  }
+.skill-Bash {
+  color: #8b0000;
+}
+
+.skill-Charge {
+  color: #b22222;
+}
+
+/* Magician skills */
+.skill-Fireball {
+  color: #ff6347;
+}
+
+.skill-IceBolt {
+  color: #00ffff;
+}
+
+.skill-ArcaneBlast {
+  color: #9932cc;
+}
+
+/* Rogue skills */
+.skill-Backstab {
+  color: #006400;
+}
+
+.skill-Poison {
+  color: #9acd32;
+}
+
+.skill-Garrotte {
+  color: #228b22;
+}
+
+/* Cleric skills */
+.skill-Smite {
+  color: #ffd700;
+}
+
+.skill-FountainofLight {
+  color: #ffffe0;
+}
+
+.skill-Exorcism {
+  color: #fffacd;
 }
