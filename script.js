@@ -2014,7 +2014,7 @@ classSelect.addEventListener("change", () => {
   }
 });
 
-// Skill Functions
+// TODO: Skill Functions
 // ---------------
 // - `updateSkillButtons()`: Updates the text content of the skill buttons based on the player's current skills.
 function updateSkillButtons() {
