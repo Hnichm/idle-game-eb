@@ -354,7 +354,7 @@ const upgradesCategoryButtons = document.querySelector(
 const upgradeOptionsContainer = document.querySelector(
   ".upgrade-options-container"
 );
-const playerSkillButtons = document.querySelectorAll(".player-skill")
+const playerSkillButtons = document.querySelectorAll(".player-skill");
 
 // DOM Elements for upgrades
 // Upgrade currency display
@@ -2001,6 +2001,8 @@ classSelect.addEventListener("change", () => {
     player.class = selectedClass;
     player.imagePath = imagePath;
 
+    // Update the skill buttons based on the selected class
+    updateSkillButtons();
     // Remove all blur classes from the womb image
     clearBlurClasses();
     // Add a blur class to the womb image based on the selected class
@@ -2011,6 +2013,18 @@ classSelect.addEventListener("change", () => {
     previousClass = selectedClass;
   }
 });
+
+// Skill Functions
+// ---------------
+// - `updateSkillButtons()`: Updates the text content of the skill buttons based on the player's current skills.
+function updateSkillButtons() {
+  playerSkillButtons.forEach((button, index) => {
+    const skill = player.skills[index];
+    if (skill) {
+      button.textContent = skill.name;
+    }
+  });
+}
 
 // - `startGameButton` click event: Hides the character select container and shows the opening 'cinematic'
 startGameButton.addEventListener("click", () => {
@@ -2067,6 +2081,7 @@ function startGameLoop() {
     loadPlayerData();
     spawnEnemy();
     showGameElements();
+    updateSkillButtons();
     gameLoopInterval = setInterval(gameLoop, 10);
   }
 }
