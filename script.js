@@ -984,13 +984,32 @@ function attackEnemy(attacker, target) {
   }
 }
 
+function useSkill(skill, button) {
+  if (enemy) {
+    enemy.health -= skill.damage;
+    showFloatingDamageNumber(
+      skill.damage,
+      enemyImageContainer,
+      false,
+      skill.name
+    );
+    console.log(`Player used ${skill.name} for ${skill.damage} damage.`);
+    console.log(`${enemy.name} health: ${enemy.health}`);
+    button.disabled = true;
+    setTimeout(() => {
+      button.disabled = false;
+    }, skill.cooldown * 1000);
+    updateEnemyHealth();
+    checkEnemyHealth();
+  }
+}
+
 // Used to check enemy health and calls enemyDeath function if health is 0 or less
 function checkEnemyHealth() {
   if (enemy.health) {
     if (enemy.health <= 0) {
       addCurrency();
       enemyDeath();
-      // TODO: Interlinked with updateEnemyName, need to find a better solution
       enemyNamePopulated = false; // Reset enemyNamePopulated when the enemy is defeated
       setTimeout(spawnEnemy, 3000);
     }
@@ -1129,12 +1148,17 @@ function updateEnemyHealth() {
   }
 }
 
-function showFloatingDamageNumber(damage, container, isClickAttack = false) {
+function showFloatingDamageNumber(damage, container, isClickAttack = false, skillName = "") {
   const floatingDamageNumber = document.createElement("span");
   floatingDamageNumber.textContent = damage;
-  floatingDamageNumber.classList.add(
-    isClickAttack ? "floating-click-damage-number" : "floating-damage-number"
-  );
+
+  if (isClickAttack) {
+    floatingDamageNumber.classList.add("floating-click-damage-number");
+  } else if (skillName) {
+    floatingDamageNumber.classList.add("floating-skill-damage-number", `skill-${skillName}`);
+  } else {
+    floatingDamageNumber.classList.add("floating-damage-number");
+  }
 
   const randomX = (Math.random() - 0.5) * 50;
   const randomY = Math.random() * -100 - 50;
@@ -1882,6 +1906,17 @@ defenseUpgradeTimerReductionButton.addEventListener("mouseout", () => {
 //   hideUpgradeSubCategory(currencyUpgradeContainer);
 // });
 
+// Skill buttons
+playerSkillButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const skillIndex = parseInt(button.getAttribute("data-index"));
+    const skill = player.skills[skillIndex];
+    if (skill && !button.disabled) {
+      useSkill(skill, button);
+    }
+  });
+});
+
 // Sub options back buttons
 
 attackUpgradeBackButton.addEventListener("click", () => {
@@ -2022,6 +2057,9 @@ function updateSkillButtons() {
     const skill = player.skills[index];
     if (skill) {
       button.textContent = skill.name;
+      if (button.disabled) {
+        button.textContent += " (Cooldown)";
+      }
     }
   });
 }
