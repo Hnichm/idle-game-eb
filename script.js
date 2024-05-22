@@ -354,6 +354,8 @@ const upgradesCategoryButtons = document.querySelector(
 const upgradeOptionsContainer = document.querySelector(
   ".upgrade-options-container"
 );
+const playerSkillButtons = document.querySelectorAll(".player-skill")
+
 // DOM Elements for upgrades
 // Upgrade currency display
 const upgradeCurrencyDisplay = document.querySelectorAll(
